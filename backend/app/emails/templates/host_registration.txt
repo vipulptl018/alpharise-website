@@ -1,0 +1,4 @@
+﻿Host registration received
+Hello {{ registration.full_name }},
+We received your Social Voice host registration and will review your details.
+Email: {{ registration.email }}

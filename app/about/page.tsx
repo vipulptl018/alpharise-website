@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 
 import { PageHero } from "@/components/shared/PageHero";
 import { PageCTA } from "@/components/shared/PageCTA";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { LastUpdated } from "@/components/shared/LastUpdated";
 import {
   IconCardGrid,
   SectionShell,
@@ -15,141 +17,172 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import { COMPANY_NAME, SITE_NAME } from "@/lib/constants";
+import { BUSINESS_DIVISIONS, COMPANY_NAME, SITE_NAME } from "@/lib/constants";
+import {
+  companyOverview,
+  customerSupport,
+  platformSafety,
+  technologyExpertise,
+} from "@/lib/content/company";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About Us",
-  description: `Learn about ${COMPANY_NAME} — our mission, vision, values, leadership, and technology-first approach to digital products.`,
-};
+  description: "About ALPHARISE INNOVATION PRIVATE LIMITED — company overview, business divisions, technology expertise, platform safety, and customer support.",
+  path: "/about",
+});
 
 const values: IconCardItem[] = [
   {
     title: "Innovation",
-    description: "We build with curiosity and ship future-ready solutions.",
+    description:
+      "We apply modern engineering and practical AI to solve real business problems.",
     icon: "Lightbulb",
   },
   {
     title: "Integrity",
-    description: "Transparent communication and accountable delivery.",
+    description:
+      "Clear commercial terms, honest timelines, and accountable delivery.",
     icon: "Shield",
   },
   {
     title: "Excellence",
-    description: "Engineering quality without compromise.",
+    description:
+      "Quality architecture, testing, and operations without cutting corners.",
     icon: "Target",
   },
   {
     title: "Partnership",
-    description: "We succeed when our clients and students succeed.",
+    description:
+      "We succeed when clients, learners, and platform communities succeed.",
     icon: "HeartHandshake",
   },
   {
     title: "Scalability",
-    description: "Architecture designed for growth from day one.",
+    description:
+      "Systems and products designed to grow with demand and complexity.",
     icon: "Layers3",
   },
   {
-    title: "People First",
-    description: "Teams, mentors, and learners at the center of everything.",
+    title: "Responsibility",
+    description:
+      "Published safety, support, and monetization policies for trustworthy products.",
     icon: "Users",
   },
 ];
 
 const timeline = [
   {
-    year: "2022",
-    title: "Foundation",
-    description: "Alpharise began with a vision to bridge software and skills.",
+    year: "2026",
+    title: "Company Incorporation",
+    description:
+      "ALPHARISE INNOVATION PRIVATE LIMITED was incorporated in India (CIN U62091PN2026PTC253412) with registered office in Chikhali, Haveli, Pune, Maharashtra.",
   },
   {
-    year: "2023",
-    title: "Product Expansion",
-    description: "Launched enterprise platforms and TechRise Academy programs.",
+    year: "2026",
+    title: "Services & Products Published",
+    description:
+      "Public offerings cover software development, websites, Android mobile applications, AI solutions, cloud solutions, enterprise software, and TechRise Academy training.",
   },
   {
-    year: "2024",
-    title: "AI Acceleration",
-    description: "Integrated AI solutions into client products and training.",
+    year: "2026",
+    title: "Social Voice Platform Documentation",
+    description:
+      "Feature documentation and platform policies were published for the Social Voice Communication Platform, which is preparing for public release on Android, including wallets, virtual coins, host and creator programs, and safety tooling.",
   },
   {
-    year: "2025",
-    title: "Scale & Impact",
-    description: "Expanded delivery across startups, SMEs, and enterprises.",
+    year: "2026",
+    title: "Support & Commercial Transparency",
+    description:
+      "Contact channels, business hours, pricing structures, refund rules, and legal policies were published for customer review before purchase.",
   },
 ];
 
 const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "100+", label: "Students Trained" },
-  { value: "15+", label: "Enterprise Clients" },
-  { value: "98%", label: "Client Satisfaction" },
-];
-
-const leaders: IconCardItem[] = [
-  {
-    title: "Leadership Team",
-    description:
-      "Engineering & Strategy — Cross-functional leaders guiding architecture, delivery, and growth.",
-    icon: "Building2",
-  },
-  {
-    title: "Academy Mentors",
-    description:
-      "Industry Experts — Practitioners who mentor students with real-world project experience.",
-    icon: "Building2",
-  },
-  {
-    title: "Delivery Leads",
-    description:
-      "Client Success — Program managers ensuring quality, timelines, and clear communication.",
-    icon: "Building2",
-  },
+  { value: "2026", label: "Incorporation Year" },
+  { value: "Pune", label: "Registered Office" },
+  { value: "Android", label: "Voice Platform" },
+  { value: "IST", label: "Business Hours Zone" },
 ];
 
 export default function AboutPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: "About" }]} />
+      <LastUpdated date="August 4, 2026" />
       <PageHero
         eyebrow={`About ${SITE_NAME}`}
-        title="Building Intelligent Products and Careers"
-        description={`${COMPANY_NAME} combines enterprise software engineering, AI innovation, and industry-ready training to help businesses and students grow.`}
+        title="A Professional Technology Company"
+        description={`${COMPANY_NAME} provides software development, website development, Android mobile applications, AI solutions, cloud solutions, and IT training through TechRise Academy, and is developing a Social Voice Communication Platform for Android that is preparing for public release.`}
         primaryCta={{ label: "Work With Us", href: "/contact" }}
-        secondaryCta={{ label: "Our Services", href: "/services" }}
+        secondaryCta={{ label: "View Services", href: "/services" }}
       />
 
       <SectionShell
-        id="story"
-        title="Company Story"
-        description="We started with a simple belief: technology should create measurable business value and meaningful career opportunities."
+        id="company-overview"
+        title={companyOverview.title}
+        description={companyOverview.description}
       >
-        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-slate-200/90 bg-white/80 p-6 text-base leading-8 text-slate-600 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:mt-12 sm:p-8">
-          <p>
-            From early consulting engagements to full-scale product platforms,
-            Alpharise has grown into a trusted partner for digital
-            transformation. Today we design software, deploy cloud systems,
-            build AI capabilities, and train the next generation of engineers
-            through TechRise Academy.
-          </p>
+        <div
+          className={cn(
+            "mx-auto mt-12 max-w-3xl space-y-4 text-base leading-8 text-slate-600",
+            ds.surface,
+            ds.surfacePad
+          )}
+        >
+          {companyOverview.body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
+      </SectionShell>
+
+      <SectionShell
+        id="business-divisions"
+        title="Business Divisions"
+        description="Our work is organized around the capabilities that matter most to customers and learners."
+        muted
+      >
+        <IconCardGrid
+          items={BUSINESS_DIVISIONS.map((division) => ({
+            title: division.title,
+            description: division.description,
+            icon:
+              division.title === "Software Development"
+                ? "Code2"
+                : division.title === "AI Solutions"
+                  ? "Lightbulb"
+                  : division.title === "Cloud Solutions"
+                    ? "Layers3"
+                    : division.title === "API Development"
+                      ? "Code2"
+                      : division.title === "Social Voice Communication Platform"
+                        ? "Users"
+                        : division.title === "TechRise Academy"
+                          ? "GraduationCap"
+                          : division.title === "Website Development"
+                            ? "Laptop"
+                            : "Smartphone",
+          }))}
+        />
       </SectionShell>
 
       <SectionShell
         id="mission-vision"
         title="Mission & Vision"
-        description="Our purpose guides every product, engagement, and learning program."
-        muted
+        description="A clear purpose guides every engagement, product release, and training cohort."
       >
-        <div className={cn(ds.grid, "grid-cols-1 md:grid-cols-2")}>
+        <div className={cn("mt-12", ds.grid2)}>
           <Card className={ds.card}>
             <CardHeader className={ds.cardHeader}>
               <CardTitle className={ds.cardTitle}>Mission</CardTitle>
             </CardHeader>
             <CardContent className={ds.cardContent}>
               <CardDescription className={ds.cardDescription}>
-                Deliver secure, scalable digital products and practical IT
-                education that accelerate growth for businesses and careers.
+                Help organizations and professionals grow through secure
+                software, responsible AI, reliable cloud systems, and practical
+                education.
               </CardDescription>
             </CardContent>
           </Card>
@@ -159,8 +192,8 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className={ds.cardContent}>
               <CardDescription className={ds.cardDescription}>
-                Become a leading technology partner known for engineering
-                excellence, AI innovation, and transformative learning outcomes.
+                Be a trusted technology partner known for engineering quality,
+                transparent operations, and products people can rely on.
               </CardDescription>
             </CardContent>
           </Card>
@@ -170,30 +203,56 @@ export default function AboutPage() {
       <SectionShell
         id="values"
         title="Core Values"
-        description="Principles that shape how we design, build, and collaborate."
+        description="Principles that shape how we design, build, operate, and support."
+        muted
       >
         <IconCardGrid items={values} />
       </SectionShell>
 
       <SectionShell
-        id="leadership"
-        title="Leadership"
-        description="Experienced teams driving strategy, mentorship, and delivery excellence."
+        id="technology-expertise"
+        title="Technology Expertise"
+        description="We invest in proven stacks and delivery practices for production systems."
+      >
+        <IconCardGrid items={technologyExpertise} />
+      </SectionShell>
+
+      <SectionShell
+        id="platform-safety"
+        title="Platform Safety"
+        description="Safety and fairness are built into how we operate the Social Voice Communication Platform. See documentation for feature-level safety, reporting, and fraud-prevention guidance."
         muted
       >
-        <IconCardGrid columns="3" items={leaders} />
+        <IconCardGrid columns="2" items={platformSafety} />
+        <div className="mt-8 flex justify-center">
+          <Link
+            href="/social-voice#fraud-prevention"
+            className="text-sm font-medium text-sky-700 underline underline-offset-2"
+          >
+            Open Social Voice safety documentation
+          </Link>
+        </div>
+      </SectionShell>
+
+      <SectionShell
+        id="customer-support"
+        title="Customer Support"
+        description="Professional support channels keep customers informed and issues resolved."
+      >
+        <IconCardGrid columns="2" items={customerSupport} />
       </SectionShell>
 
       <SectionShell
         id="timeline"
-        title="Timeline"
-        description="Key milestones in our journey of building products and people."
+        title="Company Timeline"
+        description="Key milestones in building products, services, and learning programs."
+        muted
       >
         <ol className="mx-auto mt-12 max-w-3xl space-y-5">
           {timeline.map((item) => (
             <li
-              key={item.year}
-              className="rounded-2xl border border-slate-200/90 bg-white/80 p-5 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-6"
+              key={item.title}
+              className={cn(ds.surface, ds.surfacePadSm)}
             >
               <p className="text-sm font-semibold text-sky-700">{item.year}</p>
               <h3 className="font-heading mt-1 text-lg font-semibold text-slate-950">
@@ -205,34 +264,6 @@ export default function AboutPage() {
             </li>
           ))}
         </ol>
-      </SectionShell>
-
-      <SectionShell
-        id="technology-focus"
-        title="Technology Focus"
-        description="We invest in modern stacks that power reliable products and practical learning."
-        muted
-      >
-        <IconCardGrid
-          columns="3"
-          items={[
-            {
-              title: "Modern Web",
-              description: "Next.js, React, TypeScript, and Tailwind CSS.",
-              icon: "Layers3",
-            },
-            {
-              title: "Backend & APIs",
-              description: "Python, FastAPI, Django, and Node.js services.",
-              icon: "Target",
-            },
-            {
-              title: "Cloud & AI",
-              description: "AWS, Docker, OpenAI, LangChain, and automation.",
-              icon: "Lightbulb",
-            },
-          ]}
-        />
       </SectionShell>
 
       <section
@@ -248,7 +279,7 @@ export default function AboutPage() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-slate-200/90 bg-white/80 p-6 text-center shadow-[0_12px_40px_-28px_rgba(15,23,42,0.2)] backdrop-blur-xl"
+                className={cn(ds.surface, "p-6 text-center")}
               >
                 <p className="font-heading text-3xl font-semibold tracking-tight text-slate-950">
                   {stat.value}
@@ -261,12 +292,12 @@ export default function AboutPage() {
       </section>
 
       <PageCTA
-        title="Let's build the next chapter together"
-        description="Partner with Alpharise for software, AI, cloud, or academy programs."
-        primaryLabel="Start a Conversation"
+        title="Partner with ALPHARISE"
+        description="Discuss software development, AI, cloud solutions, or TechRise Academy."
+        primaryLabel="Contact Sales"
         primaryHref="/contact"
-        secondaryLabel="Explore Products"
-        secondaryHref="/products"
+        secondaryLabel="Visit Support"
+        secondaryHref="/support"
       />
     </>
   );

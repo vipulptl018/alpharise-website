@@ -1,19 +1,20 @@
-import type { Metadata } from "next";
 
 import { LegalPage } from "@/components/shared/LegalPage";
-import { COMPANY_NAME } from "@/lib/constants";
+import { COMPANY_NAME, CONTACT } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Cookie Policy",
-  description: `Cookie Policy explaining how ${COMPANY_NAME} uses cookies and similar technologies.`,
-};
+  description: "Cookie Policy explaining how ALPHARISE INNOVATION PRIVATE LIMITED uses cookies and similar technologies.",
+  path: "/cookie-policy",
+});
 
 export default function CookiePolicyPage() {
   return (
     <LegalPage
       title="Cookie Policy"
-      description="Learn how we use cookies and similar technologies on the Alpharise website."
-      lastUpdated="March 1, 2026"
+      description="How ALPHARISE uses cookies and similar technologies on alphariseinnovation.com."
+      lastUpdated="August 4, 2026"
       sections={[
         {
           heading: "1. What Are Cookies?",
@@ -29,9 +30,10 @@ export default function CookiePolicyPage() {
           heading: "2. How We Use Cookies",
           body: (
             <p>
-              We may use essential cookies for site functionality, analytics
-              cookies to improve experience, and preference cookies to remember
-              settings.
+              We may use essential cookies required for site functionality,
+              analytics cookies to understand aggregate traffic, and preference
+              cookies to remember settings. Payment pages operated by gateways
+              may set additional security cookies.
             </p>
           ),
         },
@@ -40,7 +42,8 @@ export default function CookiePolicyPage() {
           body: (
             <p>
               You can control cookies through your browser settings. Disabling
-              certain cookies may affect website functionality.
+              certain cookies may affect website functionality or login/session
+              features.
             </p>
           ),
         },
@@ -48,8 +51,9 @@ export default function CookiePolicyPage() {
           heading: "4. Third-Party Cookies",
           body: (
             <p>
-              Some analytics or embedded services may set their own cookies.
-              Those providers are responsible for their own privacy practices.
+              Analytics, embedded maps, or payment providers may set their own
+              cookies. Those providers are responsible for their own privacy
+              practices.
             </p>
           ),
         },
@@ -58,7 +62,7 @@ export default function CookiePolicyPage() {
           body: (
             <p>
               We may update this Cookie Policy periodically. Questions can be
-              sent to hello@alpharise.in ({COMPANY_NAME}).
+              sent to {CONTACT.email} ({COMPANY_NAME}).
             </p>
           ),
         },

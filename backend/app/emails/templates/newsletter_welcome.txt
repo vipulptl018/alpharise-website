@@ -1,0 +1,4 @@
+﻿Welcome to ALPHARISE updates
+
+Thanks for subscribing with {{ email }}.
+Visit {{ site }} for news and product updates.

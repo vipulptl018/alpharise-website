@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
 
 import { PageHero } from "@/components/shared/PageHero";
 import { BlogContent } from "@/components/shared/BlogContent";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Blog",
-  description:
-    "Engineering, AI, cloud, product, and career insights from ALPHARISE Innovation Private Limited.",
-};
+  description: "Engineering, AI, cloud, product, and career insights from ALPHARISE INNOVATION PRIVATE LIMITED.",
+  path: "/blog",
+});
 
 export default function BlogPage() {
   return (

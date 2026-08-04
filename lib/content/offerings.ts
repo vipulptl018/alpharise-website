@@ -1,9 +1,183 @@
+/**
+ * Unified catalog for Products page — capabilities and platforms offered by ALPHARISE.
+ */
+export const productsPageContent = [
+  {
+    id: "software-development",
+    title: "Software Development",
+    overview:
+      "Custom software engineered for security, performance, maintainability, and long-term business fit. Engagements cover requirements, architecture, build, testing, and handover.",
+    features: [
+      "Requirement workshops and solution architecture",
+      "Modular backend and frontend codebases",
+      "Role-based access control and audit trails",
+      "Third-party and payment integrations where required",
+      "Automated testing, code review, and CI/CD",
+      "Documentation and knowledge transfer",
+    ],
+    benefits: [
+      "Systems aligned to real operating processes",
+      "Lower long-term maintenance cost",
+      "Clear ownership of source and deployments",
+      "Room to extend without full rewrites",
+    ],
+    technologies: ["Python", "FastAPI", "Next.js", "TypeScript", "PostgreSQL", "AWS"],
+  },
+  {
+    id: "website-development",
+    title: "Website Development",
+    overview:
+      "Professional corporate and product websites designed for credibility, search visibility, accessibility, and lead generation—typically delivered with Next.js and a maintainable content structure.",
+    features: [
+      "Responsive UI aligned to brand guidelines",
+      "SEO foundations (metadata, structure, performance)",
+      "Lead capture and contact workflows",
+      "Blog or resource modules when needed",
+      "Analytics and conversion tracking setup",
+      "Secure hosting and release process",
+    ],
+    benefits: [
+      "Stronger first impression for buyers and partners",
+      "Faster page experience on mobile and desktop",
+      "Easier content updates for marketing teams",
+      "Measurable inbound inquiry paths",
+    ],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+  },
+  {
+    id: "mobile-apps",
+    title: "Mobile Application Development",
+    overview:
+      "Android applications developed with Flutter and a Node.js backend for secure APIs, scalable services, and production-ready delivery.",
+    features: [
+      "Flutter-based Android client applications",
+      "Node.js backend APIs and business logic",
+      "Secure authentication and session handling",
+      "Push notifications and offline-friendly flows",
+      "API integration, validation, and error handling",
+      "Google Play submission support for client apps",
+    ],
+    benefits: [
+      "Faster Android delivery with a modern UI framework",
+      "Consistent experience across Android devices",
+      "Scalable Node.js backend connectivity",
+      "Clear path from MVP to production releases",
+    ],
+    technologies: ["Flutter", "Dart", "Node.js", "REST APIs"],
+  },
+  {
+    id: "ai-solutions",
+    title: "AI Solutions",
+    overview:
+      "Applied AI for business workflows—assistants, document intelligence, automation, and retrieval-augmented systems—with monitoring and responsible deployment practices.",
+    features: [
+      "Custom LLM-powered assistants and tools",
+      "Document parsing and knowledge retrieval",
+      "Workflow automation and human-in-the-loop design",
+      "Evaluation, logging, and usage controls",
+      "Integration with existing business systems",
+      "Operational runbooks for production use",
+    ],
+    benefits: [
+      "Reduced repetitive manual work",
+      "Faster internal information access",
+      "Differentiated product experiences",
+      "Controlled rollout with measurable outcomes",
+    ],
+    technologies: ["OpenAI", "LangChain", "Python", "Vector Databases"],
+  },
+  {
+    id: "cloud-solutions",
+    title: "Cloud Solutions",
+    overview:
+      "Cloud architecture and operations focused on AWS—covering design, deployment, observability, security hardening, and cost-aware scaling for production workloads.",
+    features: [
+      "Architecture design and environment strategy",
+      "Infrastructure as code and repeatable releases",
+      "Auto-scaling, load balancing, and networking",
+      "Monitoring, alerting, and incident response basics",
+      "Backup and recovery planning",
+      "Cost reviews and optimization recommendations",
+    ],
+    benefits: [
+      "Higher availability for customer-facing systems",
+      "Predictable deployments across environments",
+      "Improved security posture",
+      "Clearer control of cloud spend",
+    ],
+    technologies: ["AWS", "Docker", "Cloudflare", "CI/CD"],
+  },
+  {
+    id: "api-development",
+    title: "API Development",
+    overview:
+      "High-performance REST APIs using FastAPI and Python, designed for reliability, documentation, and scale.",
+    features: [
+      "Clean REST architecture",
+      "Authentication and rate limiting",
+      "OpenAPI documentation",
+      "Versioning strategy",
+      "Caching and performance tuning",
+      "Integration-ready contracts",
+    ],
+    benefits: [
+      "Reliable integrations",
+      "Faster frontend delivery",
+      "Clear developer experience",
+      "Production-ready security",
+    ],
+    technologies: ["FastAPI", "Python", "PostgreSQL", "Redis"],
+  },
+  {
+    id: "techrise-academy",
+    title: "TechRise Academy",
+    overview:
+      "TechRise Academy is ALPHARISE’s professional IT training division. Programs emphasize live projects, mentorship, interview readiness, and placement assistance. Placement assistance does not guarantee employment.",
+    features: [
+      "Full-stack, mobile, testing, data, and AI tracks",
+      "Live project assignments with review",
+      "Industry mentor sessions",
+      "Resume, portfolio, and mock interview support",
+      "Placement assistance processes",
+      "Progress tracking and counselor guidance",
+    ],
+    benefits: [
+      "Job-oriented skill development",
+      "Practical exposure beyond theory",
+      "Clearer interview preparation",
+      "Support through the early career transition",
+    ],
+    technologies: ["Python", "Java", "React", "Next.js", "Flutter", "SQL"],
+  },
+  {
+    id: "voice-platform",
+    title: "Social Voice Communication Platform",
+    overview:
+      "ALPHARISE’s Social Voice Communication Platform for real-time rooms, community interaction, host/creator tools, wallets, virtual coins, rankings, and moderation—built for Android and preparing for public release under published community and monetization policies. Our Android application is currently preparing for public release. Availability will be announced through our official website and Instagram. Full feature documentation is at /social-voice.",
+    features: [
+      "OTP login and user registration",
+      "Profile verification and user profiles",
+      "Voice calling in live rooms",
+      "Coin wallet, coin purchase, and gifting system",
+      "Leaderboard, host dashboard, and creator dashboard",
+      "Withdrawal request, report user, block user, privacy controls",
+    ],
+    benefits: [
+      "Structured community interaction designed for Android",
+      "Transparent virtual economy rules",
+      "Clear host, creator, and user responsibilities",
+      "Documented support paths for account and billing issues",
+    ],
+    technologies: ["Flutter", "Node.js", "Real-time audio", "Cloud infrastructure"],
+  },
+] as const;
+
 export const servicesContent = [
   {
     id: "software-development",
     title: "Software Development",
     overview:
-      "Custom enterprise software engineered for performance, security, and long-term scalability — tailored to your business processes.",
+      "Custom software engineered for performance, security, and long-term scalability — tailored to your business processes.",
     features: [
       "Requirement analysis and architecture design",
       "Modular, maintainable codebase",
@@ -14,7 +188,7 @@ export const servicesContent = [
     benefits: [
       "Faster operational workflows",
       "Lower total cost of ownership",
-      "Secure and compliant systems",
+      "Secure and reliable systems",
       "Easy future enhancements",
     ],
     technologies: ["Python", "FastAPI", "Next.js", "PostgreSQL", "AWS"],
@@ -43,21 +217,21 @@ export const servicesContent = [
     id: "mobile-apps",
     title: "Mobile App Development",
     overview:
-      "Cross-platform Android and iOS applications using Flutter, backed by robust APIs and cloud infrastructure.",
+      "Android applications developed with Flutter and a Node.js backend for secure APIs and scalable production services.",
     features: [
-      "Native-quality UI/UX",
-      "Offline-first capabilities",
+      "Flutter Android UI development",
+      "Node.js backend services",
       "Push notifications",
       "Secure authentication",
-      "App store deployment support",
+      "Google Play deployment support for client apps",
     ],
     benefits: [
-      "One codebase for Android and iOS",
-      "Faster time-to-market",
-      "Consistent user experience",
+      "Modern Android user experience",
+      "Faster time-to-market for Android apps",
       "Scalable backend APIs",
+      "Maintainable Flutter + Node.js stack",
     ],
-    technologies: ["Flutter", "Dart", "Firebase", "FastAPI"],
+    technologies: ["Flutter", "Dart", "Node.js", "REST APIs"],
   },
   {
     id: "ai-solutions",
@@ -74,7 +248,7 @@ export const servicesContent = [
     benefits: [
       "Reduced operational cost",
       "Faster decision making",
-      "24×7 intelligent assistants",
+      "Practical intelligent assistants",
       "Competitive product differentiation",
     ],
     technologies: ["OpenAI", "LangChain", "Python", "Vector Databases"],
@@ -123,7 +297,7 @@ export const servicesContent = [
     id: "ui-ux-design",
     title: "UI/UX Design",
     overview:
-      "Premium interfaces and intuitive digital experiences that balance aesthetics, usability, and conversion goals.",
+      "Interfaces and digital experiences that balance aesthetics, usability, and conversion goals.",
     features: [
       "User research and flows",
       "Wireframes and prototypes",
@@ -161,119 +335,107 @@ export const servicesContent = [
   },
 ] as const;
 
-export const productsContent = [
+export const homeServices = [
   {
-    id: "techrise-academy",
+    id: "software-development",
+    title: "Software Development",
+    description: "Custom software tailored to business requirements.",
+  },
+  {
+    id: "website-development",
+    title: "Website Development",
+    description: "Modern, SEO-friendly websites built with Next.js.",
+  },
+  {
+    id: "mobile-apps",
+    title: "Mobile App Development",
+    description:
+      "Android applications developed with Flutter and a Node.js backend.",
+  },
+  {
+    id: "ai-solutions",
+    title: "AI Solutions",
+    description:
+      "Generative AI, chatbots, automation, and intelligent business systems.",
+  },
+  {
+    id: "cloud-solutions",
+    title: "Cloud Solutions",
+    description: "AWS cloud architecture, deployment, DevOps and monitoring.",
+  },
+  {
+    id: "api-development",
+    title: "API Development",
+    description: "High-performance REST APIs using FastAPI and Python.",
+  },
+  {
+    id: "ui-ux-design",
+    title: "UI/UX Design",
+    description: "User interfaces and intuitive digital experiences.",
+  },
+  {
+    id: "maintenance",
+    title: "Maintenance & Support",
+    description:
+      "Continuous monitoring, maintenance, and technical support.",
+  },
+] as const;
+
+export const homeProducts = [
+  {
+    title: "Software Development",
+    description:
+      "Custom software engineered for security, performance, and maintainability.",
+    cta: "View Details",
+    href: "/products#software-development",
+  },
+  {
+    title: "Website Development",
+    description:
+      "Corporate and product websites built for performance and SEO foundations.",
+    cta: "View Details",
+    href: "/products#website-development",
+  },
+  {
+    title: "Mobile Application Development",
+    description:
+      "Android applications developed with Flutter and a Node.js backend.",
+    cta: "View Details",
+    href: "/products#mobile-apps",
+  },
+  {
+    title: "AI Solutions",
+    description:
+      "Applied AI for assistants, automation, document intelligence, and workflow optimization.",
+    cta: "View Details",
+    href: "/products#ai-solutions",
+  },
+  {
+    title: "Cloud Solutions",
+    description:
+      "AWS architecture, deployment, monitoring, and cost-aware cloud operations.",
+    cta: "View Details",
+    href: "/products#cloud-solutions",
+  },
+  {
+    title: "API Development",
+    description:
+      "REST APIs designed for reliability, documentation, and integration.",
+    cta: "View Details",
+    href: "/products#api-development",
+  },
+  {
     title: "TechRise Academy",
-    overview:
-      "Industry-ready IT training with live projects, mentors, mock interviews, and placement assistance.",
-    features: [
-      "Live project-based learning",
-      "Industry mentor sessions",
-      "Mock interviews",
-      "Resume and portfolio support",
-      "Placement assistance",
-    ],
-    benefits: [
-      "Job-ready skills",
-      "Real-world experience",
-      "Career guidance",
-      "Strong hiring outcomes",
-    ],
+    description:
+      "Industry-ready IT training with live projects, mentorship, mock interviews, and placement assistance.",
+    cta: "Explore Academy",
+    href: "/academy",
   },
   {
-    id: "voice-platform",
-    title: "Voice Communication Platform",
-    overview:
-      "Real-time voice communication with coins, wallets, rankings, and live interaction features.",
-    features: [
-      "Real-time voice rooms",
-      "Coins and wallet system",
-      "Leaderboards and rankings",
-      "Moderation tools",
-      "Analytics dashboard",
-    ],
-    benefits: [
-      "Engaging community experiences",
-      "Monetization readiness",
-      "Scalable live infrastructure",
-      "Actionable growth insights",
-    ],
-  },
-  {
-    id: "erp",
-    title: "ERP Solution",
-    overview:
-      "Unify HR, Finance, Inventory, and Operations in one scalable enterprise platform.",
-    features: [
-      "Finance and accounting modules",
-      "Inventory management",
-      "Operations workflows",
-      "Role-based dashboards",
-      "Reporting and exports",
-    ],
-    benefits: [
-      "Centralized operations",
-      "Better visibility",
-      "Reduced manual errors",
-      "Faster decision cycles",
-    ],
-  },
-  {
-    id: "crm",
-    title: "CRM Platform",
-    overview:
-      "Customer relationship management with automation and analytics for sales and support teams.",
-    features: [
-      "Lead and pipeline tracking",
-      "Automation workflows",
-      "Customer 360 views",
-      "Email and task management",
-      "Sales analytics",
-    ],
-    benefits: [
-      "Higher conversion rates",
-      "Improved follow-ups",
-      "Team productivity gains",
-      "Data-driven forecasting",
-    ],
-  },
-  {
-    id: "hrms",
-    title: "HRMS",
-    overview:
-      "Employee management, payroll, attendance, and performance tracking in one HR suite.",
-    features: [
-      "Employee records",
-      "Attendance and leave",
-      "Payroll processing",
-      "Performance reviews",
-      "HR analytics",
-    ],
-    benefits: [
-      "Streamlined HR operations",
-      "Accurate payroll",
-      "Better employee experience",
-      "Compliance readiness",
-    ],
-  },
-  {
-    id: "business-websites",
-    title: "Business Websites",
-    overview:
-      "Premium corporate websites built with Next.js and modern UI for brands that need credibility and growth.",
-    features: [
-      "Custom brand design",
-      "SEO foundations",
-      "Lead capture flows",
-      "Blog and content modules",
-      "Analytics setup",
-    ],
-    benefits: [
-      "Professional digital presence",
-      "Improved inbound leads",
-      "Fast and secure delivery",
-      "Easy content updates",
-    ],
+    title: "Social Voice Communication Platform",
+    description:
+      "Live social voice rooms for Android with wallets, virtual coins, rankings, hosts, creators, and moderation — preparing for public release.",
+    cta: "Read Documentation",
+    href: "/social-voice",
   },
 ] as const;

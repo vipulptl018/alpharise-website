@@ -1,0 +1,4 @@
+﻿Creator registration received
+Hello {{ registration.full_name }},
+Category: {{ registration.category }}
+We will review your registration and respond at {{ registration.email }}.

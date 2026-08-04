@@ -1,24 +1,22 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
 
+import { FadeIn, Stagger, StaggerItem } from "@/components/common/motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
-import { ds, fadeUp, staggerItem, staggerList } from "@/lib/design-system";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
 const categories = [
@@ -64,10 +62,10 @@ const articles = [
     date: "Feb 5, 2026",
   },
   {
-    title: "From MVP to ERP: Product Lessons We Learned",
+    title: "From MVP to Production: Product Lessons We Learned",
     category: "Product",
     excerpt:
-      "How modular design helps enterprise platforms evolve without rewrites.",
+      "How modular design helps software platforms evolve without rewrites.",
     featured: false,
     date: "Jan 22, 2026",
   },
@@ -85,15 +83,20 @@ export function BlogContent() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<(typeof categories)[number]>("All");
   const [subscribed, setSubscribed] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [feedback, setFeedback] = useState("");
 
   const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
     return articles.filter((article) => {
       const matchesCategory =
         category === "All" || article.category === category;
       const matchesQuery =
-        !query ||
-        article.title.toLowerCase().includes(query.toLowerCase()) ||
-        article.excerpt.toLowerCase().includes(query.toLowerCase());
+        !q ||
+        article.title.toLowerCase().includes(q) ||
+        article.excerpt.toLowerCase().includes(q);
       return matchesCategory && matchesQuery;
     });
   }, [category, query]);
@@ -105,24 +108,19 @@ export function BlogContent() {
       <section className={cn(ds.section, ds.sectionWhite)}>
         <div aria-hidden className={ds.divider} />
         <Container>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
+          <FadeIn>
             <SectionTitle
               title="Featured Blog"
-              description="Insights on engineering, AI, cloud, product, and careers from the Alpharise team."
+              description="Topic summaries on engineering, AI, cloud, product, and careers from the Alpharise team."
             />
-          </motion.div>
+          </FadeIn>
 
           {featured ? (
             <Card className={cn(ds.card, "mt-12")}>
               <CardHeader className={ds.cardHeader}>
-                <Badge className="w-fit rounded-lg" variant="secondary">
+                <span className="inline-flex h-5 w-fit items-center rounded-lg border border-transparent bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
                   Featured · {featured.category}
-                </Badge>
+                </span>
                 <CardTitle className="font-heading text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
                   {featured.title}
                 </CardTitle>
@@ -133,12 +131,6 @@ export function BlogContent() {
                 </CardDescription>
                 <p className="mt-4 text-xs text-slate-500">{featured.date}</p>
               </CardContent>
-              <CardFooter className={ds.cardFooter}>
-                <Button variant="outline" className={ds.btnPrimary}>
-                  Read Article
-                  <ArrowRight data-icon="inline-end" className="size-4" />
-                </Button>
-              </CardFooter>
             </Card>
           ) : null}
         </Container>
@@ -181,20 +173,16 @@ export function BlogContent() {
             ))}
           </div>
 
-          <motion.ul
-            className={cn(ds.grid, "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}
-            variants={staggerList}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+          <Stagger
+            className={cn("mt-12", ds.grid3)}
           >
             {filtered.map((article) => (
-              <motion.li key={article.title} variants={staggerItem}>
+              <StaggerItem key={article.title}>
                 <Card className={ds.card}>
                   <CardHeader className={ds.cardHeader}>
-                    <Badge variant="outline" className="w-fit rounded-lg">
+                    <span className="inline-flex h-5 w-fit items-center rounded-lg border border-border bg-background px-2 py-0.5 text-xs font-medium">
                       {article.category}
-                    </Badge>
+                    </span>
                     <CardTitle className={ds.cardTitle}>{article.title}</CardTitle>
                   </CardHeader>
                   <CardContent className={ds.cardContent}>
@@ -204,9 +192,9 @@ export function BlogContent() {
                     <p className="mt-4 text-xs text-slate-500">{article.date}</p>
                   </CardContent>
                 </Card>
-              </motion.li>
+              </StaggerItem>
             ))}
-          </motion.ul>
+          </Stagger>
 
           {filtered.length === 0 ? (
             <p className="mt-10 text-center text-sm text-slate-500">
@@ -223,32 +211,72 @@ export function BlogContent() {
             <p className={ds.ctaEyebrow}>Newsletter</p>
             <h2 className={ds.ctaTitle}>Get product and engineering updates</h2>
             <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600">
-              Occasional insights on software, AI, cloud, and careers. No spam.
+              Occasional insights on software, AI, cloud, and careers. Duplicate
+              emails are rejected. Messages are stored locally for follow-up.
             </p>
             {subscribed ? (
               <p className="mt-6 text-sm font-medium text-emerald-700">
-                You&apos;re subscribed. Welcome aboard.
+                {feedback || "You are subscribed for occasional updates."}
               </p>
             ) : (
               <form
                 className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
-                onSubmit={(event) => {
+                onSubmit={async (event) => {
                   event.preventDefault();
-                  setSubscribed(true);
+                  setStatus("loading");
+                  setFeedback("");
+                  const form = event.currentTarget;
+                  const emailInput = form.elements.namedItem(
+                    "newsletter-email"
+                  ) as HTMLInputElement | null;
+                  const email = emailInput?.value.trim() || "";
+                  try {
+                    const response = await fetch("/api/newsletter", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email }),
+                    });
+                    const result = (await response.json()) as {
+                      message?: string;
+                      error?: string;
+                    };
+                    if (!response.ok) {
+                      setStatus("error");
+                      setFeedback(result.error || "Unable to subscribe.");
+                      return;
+                    }
+                    setSubscribed(true);
+                    setStatus("success");
+                    setFeedback(result.message || "Subscribed successfully.");
+                    form.reset();
+                  } catch {
+                    setStatus("error");
+                    setFeedback("Unable to subscribe right now.");
+                  }
                 }}
               >
                 <Input
+                  name="newsletter-email"
                   type="email"
                   required
-                  placeholder="you@company.com"
+                  placeholder="you@email.com"
                   className="h-11"
                   aria-label="Email for newsletter"
                 />
-                <Button type="submit" className={ds.btnPrimary}>
-                  Subscribe
+                <Button
+                  type="submit"
+                  className={ds.btnPrimary}
+                  disabled={status === "loading"}
+                >
+                  {status === "loading" ? "Saving…" : "Subscribe"}
                 </Button>
               </form>
             )}
+            {status === "error" ? (
+              <p role="alert" className="mt-3 text-sm text-red-700">
+                {feedback}
+              </p>
+            ) : null}
             <p className="mt-4 text-xs text-slate-500">
               Looking for training? Visit{" "}
               <Link href="/academy" className="underline underline-offset-2">

@@ -1,0 +1,17 @@
+# Vercel deploys the Next.js frontend only.
+backend
+backend/**
+**/.venv
+**/__pycache__
+*.pyc
+.git
+.gitignore
+*.md
+!README.md
+!README_DEPLOY.md
+AGENTS.md
+CLAUDE.md
+DEPLOYMENT_READINESS.md
+data/*.json
+.env*
+!.env.example

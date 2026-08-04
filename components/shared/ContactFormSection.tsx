@@ -1,178 +1,213 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
-import {
-  Clock3,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from "lucide-react";
+import { Building2, Clock3, Mail, Phone, Send } from "lucide-react";
 
+import { FadeIn } from "@/components/common/motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import { CONTACT, SOCIAL_LINKS } from "@/lib/constants";
-import { ds, fadeUp } from "@/lib/design-system";
+import { submitContactInquiry } from "@/lib/api/contact";
+import {
+  COMPANY_NAME,
+  CONTACT,
+  LEGAL,
+  formatGstinLabel,
+  formatRegisteredAddressLines,
+} from "@/lib/constants";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
-export function ContactFormSection() {
-  const [submitted, setSubmitted] = useState(false);
+const contactCard = cn(ds.card, "w-full p-8");
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+const contactHeading =
+  "mb-6 font-heading text-lg font-semibold tracking-tight text-[#0F172A]";
+
+const contactText = "text-sm leading-7 text-slate-600";
+
+const contactButton = cn(ds.btnPrimary, "h-11 w-full");
+
+const contactRow =
+  "flex items-start gap-3 text-sm leading-7 text-slate-600 transition-colors hover:text-[#2563EB]";
+
+const DEFAULT_SUBJECT = "Website contact inquiry";
+
+export function ContactFormSection() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [feedback, setFeedback] = useState("");
+  const addressLines = formatRegisteredAddressLines();
+  const phone = CONTACT.phone.trim();
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+    setStatus("loading");
+    setFeedback("");
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const company = String(data.get("company") || "").trim();
+
+    const result = await submitContactInquiry({
+      full_name: String(data.get("name") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      phone: String(data.get("phone") || "").trim(),
+      company: company || undefined,
+      subject: DEFAULT_SUBJECT,
+      message: String(data.get("message") || "").trim(),
+    });
+
+    if (!result.ok) {
+      setStatus("error");
+      setFeedback(result.message);
+      return;
+    }
+
+    setStatus("success");
+    setFeedback(result.message);
+    form.reset();
   }
 
-  const address =
-    [CONTACT.address.line1, CONTACT.address.city, CONTACT.address.country]
-      .filter(Boolean)
-      .join(", ") || "India";
-
   return (
-    <section className={cn(ds.section, ds.sectionWhite)}>
+    <section className={cn(ds.section, ds.sectionMuted)}>
       <div aria-hidden className={ds.divider} />
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-          >
-            <Card className={ds.card}>
-              <CardHeader className={ds.cardHeader}>
-                <CardTitle className={ds.cardTitle}>Send us a message</CardTitle>
-              </CardHeader>
-              <CardContent className={cn(ds.cardContent, "pb-7")}>
-                {submitted ? (
-                  <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-                    Thank you. Your message has been received. Our team will
-                    respond within one business day.
+        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2">
+          <FadeIn amount={0.2} className="h-full">
+            <article className={contactCard}>
+              <h2 className={contactHeading}>Contact form</h2>
+
+              {status === "success" ? (
+                <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm leading-7 text-emerald-800 whitespace-pre-line">
+                  {feedback}
+                </p>
+              ) : (
+                <form className="flex flex-1 flex-col gap-4" onSubmit={onSubmit}>
+                  <p className={contactText}>
+                    Submit this form to send a message to {CONTACT.email}. We
+                    aim to respond within one business day during {CONTACT.hours}.
                   </p>
-                ) : (
-                  <form className="space-y-4" onSubmit={onSubmit}>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <label className="block space-y-1.5 text-sm">
-                        <span className="font-medium text-slate-700">Name</span>
-                        <Input name="name" required placeholder="Your name" />
-                      </label>
-                      <label className="block space-y-1.5 text-sm">
-                        <span className="font-medium text-slate-700">Email</span>
-                        <Input
-                          name="email"
-                          type="email"
-                          required
-                          placeholder="you@company.com"
-                        />
-                      </label>
-                    </div>
+                  {status === "error" ? (
+                    <p
+                      role="alert"
+                      className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-7 text-red-800 whitespace-pre-line"
+                    >
+                      {feedback}
+                    </p>
+                  ) : null}
+                  <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block space-y-1.5 text-sm">
-                      <span className="font-medium text-slate-700">Company</span>
-                      <Input name="company" placeholder="Company name" />
+                      <span className="font-medium text-[#0F172A]">Name</span>
+                      <Input name="name" required autoComplete="name" />
                     </label>
                     <label className="block space-y-1.5 text-sm">
-                      <span className="font-medium text-slate-700">Message</span>
-                      <textarea
-                        name="message"
+                      <span className="font-medium text-[#0F172A]">Email</span>
+                      <Input
+                        name="email"
+                        type="email"
                         required
-                        rows={5}
-                        placeholder="Tell us about your project"
-                        className="w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+                        autoComplete="email"
                       />
                     </label>
-                    <Button type="submit" size="lg" className={ds.btnPrimary}>
-                      Send Message
+                  </div>
+                  <label className="block space-y-1.5 text-sm">
+                    <span className="font-medium text-[#0F172A]">Company</span>
+                    <Input name="company" autoComplete="organization" />
+                  </label>
+                  <label className="block space-y-1.5 text-sm">
+                    <span className="font-medium text-[#0F172A]">Phone</span>
+                    <Input name="phone" type="tel" autoComplete="tel" />
+                  </label>
+                  <label className="block space-y-1.5 text-sm">
+                    <span className="font-medium text-[#0F172A]">Message</span>
+                    <textarea
+                      name="message"
+                      required
+                      rows={5}
+                      minLength={10}
+                      className="w-full rounded-xl border border-[#E2E8F0] bg-white px-2.5 py-2 text-sm outline-none transition-[border-color,box-shadow] focus-visible:border-[#93C5FD] focus-visible:ring-3 focus-visible:ring-[#2563EB]/30"
+                    />
+                  </label>
+                  <div className="mt-auto pt-2">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className={contactButton}
+                      disabled={status === "loading"}
+                    >
+                      {status === "loading" ? "Loading..." : "Send Message"}
                       <Send data-icon="inline-end" className="size-4" />
                     </Button>
-                  </form>
+                  </div>
+                </form>
+              )}
+            </article>
+          </FadeIn>
+
+          <FadeIn amount={0.2} className="h-full">
+            <article className={contactCard}>
+              <h2 className={contactHeading}>Registered office</h2>
+              <div className="flex flex-1 flex-col gap-3">
+                <p className={cn(contactRow, "hover:text-slate-600")}>
+                  <Building2 className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                  <span>
+                    <span className="font-medium text-[#0F172A]">
+                      {COMPANY_NAME}
+                    </span>
+                    <br />
+                    {addressLines.map((line) => (
+                      <span key={line}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                    {LEGAL.cin ? (
+                      <>
+                        <br />
+                        CIN: {LEGAL.cin}
+                      </>
+                    ) : null}
+                    <>
+                      <br />
+                      GSTIN: {formatGstinLabel()}
+                    </>
+                  </span>
+                </p>
+                {phone ? (
+                  <a
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className={contactRow}
+                  >
+                    <Phone className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                    <span>{phone}</span>
+                  </a>
+                ) : (
+                  <p className={cn(contactRow, "hover:text-slate-600")}>
+                    <Phone className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                    <span>Phone number available on request via email</span>
+                  </p>
                 )}
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            className="space-y-5"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-          >
-            <Card className={ds.card}>
-              <CardHeader className={ds.cardHeader}>
-                <CardTitle className={ds.cardTitle}>Contact details</CardTitle>
-              </CardHeader>
-              <CardContent className={cn(ds.cardContent, "space-y-4 pb-7")}>
-                <a
-                  href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="flex items-start gap-3 text-sm text-slate-600 hover:text-slate-950"
-                >
-                  <Phone className="mt-0.5 size-4 text-slate-400" />
-                  {CONTACT.phone}
+                <a href={`mailto:${CONTACT.email}`} className={contactRow}>
+                  <Mail className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                  <span>{CONTACT.email}</span>
                 </a>
-                <a
-                  href={`mailto:${CONTACT.email}`}
-                  className="flex items-start gap-3 text-sm text-slate-600 hover:text-slate-950"
-                >
-                  <Mail className="mt-0.5 size-4 text-slate-400" />
-                  {CONTACT.email}
-                </a>
-                <p className="flex items-start gap-3 text-sm text-slate-600">
-                  <MapPin className="mt-0.5 size-4 text-slate-400" />
-                  {address}
+                {CONTACT.supportEmail !== CONTACT.email ? (
+                  <a
+                    href={`mailto:${CONTACT.supportEmail}`}
+                    className={contactRow}
+                  >
+                    <Mail className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                    <span>{CONTACT.supportEmail}</span>
+                  </a>
+                ) : null}
+                <p className={cn(contactRow, "hover:text-slate-600")}>
+                  <Clock3 className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                  <span>{CONTACT.hours}</span>
                 </p>
-                <p className="flex items-start gap-3 text-sm text-slate-600">
-                  <Clock3 className="mt-0.5 size-4 text-slate-400" />
-                  Mon–Sat · 10:00 AM – 7:00 PM IST
-                </p>
-              </CardContent>
-            </Card>
-
-            <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.2)]">
-              <div className="flex h-56 items-center justify-center bg-[linear-gradient(135deg,#e2e8f0,#f8fafc)] p-6 text-center">
-                <div>
-                  <p className="font-heading text-lg font-semibold text-slate-800">
-                    Google Map Placeholder
-                  </p>
-                  <p className="mt-2 text-sm text-slate-500">
-                    Interactive map embed can be connected here.
-                  </p>
-                </div>
               </div>
-            </div>
-
-            <Card className={ds.card}>
-              <CardHeader className={ds.cardHeader}>
-                <CardTitle className={ds.cardTitle}>Social media</CardTitle>
-              </CardHeader>
-              <CardContent className={cn(ds.cardContent, "pb-7")}>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { label: "LinkedIn", href: SOCIAL_LINKS.linkedin },
-                    { label: "GitHub", href: SOCIAL_LINKS.github },
-                    { label: "Twitter", href: SOCIAL_LINKS.twitter },
-                  ].map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600 transition-colors hover:text-slate-950"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+            </article>
+          </FadeIn>
         </div>
       </Container>
     </section>

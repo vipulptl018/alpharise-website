@@ -1,18 +1,16 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
-  Briefcase,
+  Brain,
+  Cloud,
+  Code2,
   GraduationCap,
   LayoutDashboard,
   Mic,
-  Users,
-  Globe,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
+import { FadeIn, Stagger, StaggerItem } from "@/components/common/motion";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,74 +22,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import { ds, fadeUp, staggerItem, staggerList } from "@/lib/design-system";
+import { homeProducts } from "@/lib/content/offerings";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
-type Product = {
-  title: string;
-  description: string;
-  cta: string;
-  href: string;
-  icon: LucideIcon;
-  gradient: string;
+const productIcons: Record<string, LucideIcon> = {
+  "TechRise Academy": GraduationCap,
+  "Social Voice Communication Platform": Mic,
+  "Software Development": Code2,
+  "Website Development": LayoutDashboard,
+  "Mobile Application Development": Code2,
+  "AI Solutions": Brain,
+  "Cloud Solutions": Cloud,
+  "API Development": Code2,
 };
 
-const products: Product[] = [
-  {
-    title: "TechRise Academy",
-    description:
-      "Industry-ready IT training with live projects, mock interviews and placement assistance.",
-    cta: "Explore Courses",
-    href: "/products/techrise-academy",
-    icon: GraduationCap,
-    gradient: "from-sky-500 to-cyan-400",
-  },
-  {
-    title: "Voice Communication Platform",
-    description:
-      "Real-time voice communication platform with coins, wallets, rankings and live interactions.",
-    cta: "View Product",
-    href: "/products/voice-platform",
-    icon: Mic,
-    gradient: "from-slate-800 to-slate-600",
-  },
-  {
-    title: "ERP Solution",
-    description:
-      "Manage HR, Finance, Inventory and Operations from one unified platform.",
-    cta: "Learn More",
-    href: "/products/erp",
-    icon: LayoutDashboard,
-    gradient: "from-emerald-500 to-teal-400",
-  },
-  {
-    title: "CRM Platform",
-    description:
-      "Customer relationship management with automation and analytics.",
-    cta: "Learn More",
-    href: "/products/crm",
-    icon: Users,
-    gradient: "from-amber-500 to-orange-400",
-  },
-  {
-    title: "HRMS",
-    description:
-      "Employee management, payroll, attendance and performance tracking.",
-    cta: "Learn More",
-    href: "/products/hrms",
-    icon: Briefcase,
-    gradient: "from-sky-600 to-cyan-400",
-  },
-  {
-    title: "Business Websites",
-    description:
-      "Premium corporate websites built with Next.js and modern UI.",
-    cta: "Get Started",
-    href: "/contact",
-    icon: Globe,
-    gradient: "from-slate-700 to-slate-500",
-  },
-];
+const productGradients: Record<string, string> = {
+  "TechRise Academy": "from-[#2563EB] to-[#3B82F6]",
+  "Social Voice Communication Platform": "from-slate-800 to-slate-600",
+  "Software Development": "from-[#1D4ED8] to-[#60A5FA]",
+  "Website Development": "from-emerald-500 to-teal-400",
+  "Mobile Application Development": "from-teal-500 to-emerald-400",
+  "AI Solutions": "from-amber-500 to-orange-400",
+  "Cloud Solutions": "from-slate-700 to-slate-500",
+  "API Development": "from-[#2563EB] to-[#93C5FD]",
+};
 
 export default function Products() {
   return (
@@ -102,47 +57,34 @@ export default function Products() {
       <div aria-hidden className={ds.divider} />
 
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn>
           <SectionTitle
             titleId="products-heading"
             title="Our Products"
-            description="Powerful digital products designed to accelerate business growth and digital transformation."
+            description="TechRise Academy, the Social Voice Communication Platform, enterprise suites, and core delivery capabilities—each with a clear description."
           />
-        </motion.div>
+        </FadeIn>
 
-        <motion.ul
-          className={cn(ds.grid, "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}
-          variants={staggerList}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+        <Stagger
+          className={cn("mt-12", ds.grid4)}
         >
-          {products.map(
-            ({ title, description, cta, href, icon: Icon, gradient }) => (
-              <motion.li key={title} variants={staggerItem} className="h-full">
+          {homeProducts.map(({ title, description, cta, href }) => {
+            const Icon = productIcons[title] ?? Code2;
+            const gradient = productGradients[title] ?? "from-slate-700 to-slate-500";
+            return (
+              <StaggerItem key={title} className="h-full">
                 <Card className={ds.card}>
                   <CardHeader className={ds.cardHeader}>
                     <div className={cn(ds.iconGradient, gradient)}>
-                      <Icon
-                        className="size-5"
-                        strokeWidth={1.75}
-                        aria-hidden
-                      />
+                      <Icon className="size-5" strokeWidth={1.75} aria-hidden />
                     </div>
                     <CardTitle className={ds.cardTitle}>{title}</CardTitle>
                   </CardHeader>
-
                   <CardContent className={ds.cardContent}>
                     <CardDescription className={ds.cardDescription}>
                       {description}
                     </CardDescription>
                   </CardContent>
-
                   <CardFooter className={ds.cardFooter}>
                     <Button
                       render={<Link href={href} />}
@@ -155,33 +97,27 @@ export default function Products() {
                     </Button>
                   </CardFooter>
                 </Card>
-              </motion.li>
-            )
-          )}
-        </motion.ul>
+              </StaggerItem>
+            );
+          })}
+        </Stagger>
 
-        <motion.div
-          className="mx-auto mt-16 max-w-2xl text-center sm:mt-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn className="mx-auto mt-16 max-w-2xl text-center sm:mt-20">
           <div className={cn(ds.ctaPanel, "text-center")}>
-            <p className={ds.ctaEyebrow}>Need a custom product?</p>
+            <p className={ds.ctaEyebrow}>Need a detailed briefing?</p>
             <h3 className={ds.ctaTitle}>
-              Let&apos;s build something amazing together.
+              Review full feature lists on the Products page.
             </h3>
             <Button
-              render={<Link href="/contact" />}
+              render={<Link href="/products" />}
               size="lg"
               className={cn("mt-7", ds.btnPrimary)}
             >
-              Talk to Our Team
+              View All Products
               <ArrowRight data-icon="inline-end" className="size-4" />
             </Button>
           </div>
-        </motion.div>
+        </FadeIn>
       </Container>
     </section>
   );

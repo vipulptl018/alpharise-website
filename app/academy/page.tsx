@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHero } from "@/components/shared/PageHero";
@@ -23,62 +22,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { LastUpdated } from "@/components/shared/LastUpdated";
+import { academyCourses } from "@/lib/content/academy-courses";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "TechRise Academy",
-  description:
-    "Industry-ready IT training with live projects, mentors, mock interviews, certificates, and placement assistance.",
-};
+  description: "Industry-ready IT training with live projects, mentors, mock interviews, certificates, and placement assistance.",
+  path: "/academy",
+});
 
-const courses = [
-  {
-    title: "Python Full Stack",
-    duration: "4–6 Months",
-    stack: ["Python", "Django", "React"],
-  },
-  {
-    title: "Java Full Stack",
-    duration: "5–6 Months",
-    stack: ["Java", "Spring", "React"],
-  },
-  {
-    title: ".NET Full Stack",
-    duration: "4–5 Months",
-    stack: ["C#", ".NET", "SQL"],
-  },
-  {
-    title: "React Development",
-    duration: "3–4 Months",
-    stack: ["React", "Next.js", "TS"],
-  },
-  {
-    title: "Flutter Development",
-    duration: "3–4 Months",
-    stack: ["Flutter", "Dart", "API"],
-  },
-  {
-    title: "Testing",
-    duration: "3–4 Months",
-    stack: ["Manual", "Selenium", "API"],
-  },
-  {
-    title: "Data Analytics",
-    duration: "3–4 Months",
-    stack: ["SQL", "Python", "Power BI"],
-  },
-  {
-    title: "Artificial Intelligence",
-    duration: "4–5 Months",
-    stack: ["ML", "OpenAI", "LangChain"],
-  },
-];
+const courses = academyCourses;
 
 const faqs = [
   {
     q: "Do you offer placement assistance?",
-    a: "Yes. We provide resume support, mock interviews, career guidance, and placement assistance.",
+    a: "Yes. We provide resume support, mock interviews, career guidance, and placement assistance. Assistance does not guarantee a job offer.",
   },
   {
     q: "Are projects included?",
@@ -97,12 +59,19 @@ const faqs = [
 export default function AcademyPage() {
   return (
     <>
+      <Breadcrumbs
+        items={[
+          { label: "Academy", href: "/academy" },
+          { label: "TechRise Academy" },
+        ]}
+      />
+      <LastUpdated date="August 4, 2026" />
       <PageHero
         eyebrow="TechRise Academy"
-        title="Industry-Ready IT Training"
-        description="Live projects, industry mentors, mock interviews, and placement assistance designed for real career outcomes."
+        title="Industry-Ready IT Training by ALPHARISE"
+        description="TechRise Academy delivers structured programs with live projects, mentors, mock interviews, and placement assistance. Placement assistance does not guarantee employment."
         primaryCta={{ label: "Explore Courses", href: "#courses" }}
-        secondaryCta={{ label: "Talk to Counselor", href: "/contact" }}
+        secondaryCta={{ label: "View Pricing", href: "/pricing" }}
       />
 
       <SectionShell
@@ -153,12 +122,7 @@ export default function AcademyPage() {
           <p className="mx-auto mt-4 max-w-2xl text-center text-base text-slate-600 sm:text-lg">
             Structured programs with defined duration and technology stacks.
           </p>
-          <ul
-            className={cn(
-              ds.grid,
-              "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-            )}
-          >
+          <ul className={cn("mt-12", ds.grid4)}>
             {courses.map((course) => (
               <li key={course.title} className="h-full">
                 <Card className={ds.card}>
@@ -182,7 +146,30 @@ export default function AcademyPage() {
                     <CardTitle className={ds.cardTitle}>{course.title}</CardTitle>
                   </CardHeader>
                   <CardContent className={ds.cardContent}>
-                    <div className="flex flex-wrap gap-1.5">
+                    <p className="text-sm leading-6 text-slate-600">
+                      {course.description}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      <span className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">
+                        {course.level}
+                      </span>
+                      {course.liveProjects ? (
+                        <span className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">
+                          Live Projects
+                        </span>
+                      ) : null}
+                      {course.certificate ? (
+                        <span className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">
+                          Certificate
+                        </span>
+                      ) : null}
+                      {course.placementAssistance ? (
+                        <span className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">
+                          Placement Assistance
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
                       {course.stack.map((tech) => (
                         <span
                           key={tech}
@@ -325,7 +312,13 @@ export default function AcademyPage() {
         title="Certificates"
         description="Recognize progress with completion certificates after evaluation."
       >
-        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-slate-200/90 bg-white/80 p-6 text-center shadow-[0_12px_40px_-28px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-8">
+        <div
+          className={cn(
+            "mx-auto mt-12 max-w-3xl text-center",
+            ds.surface,
+            ds.surfacePad
+          )}
+        >
           <p className="font-heading text-lg font-semibold text-slate-950">
             TechRise Certificate of Completion
           </p>
@@ -343,7 +336,7 @@ export default function AcademyPage() {
           <h2 className="font-heading text-center text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
             FAQ
           </h2>
-          <div className="mt-10 rounded-2xl border border-slate-200/90 bg-white/80 p-2 sm:p-4">
+          <div className={cn("mt-10", ds.accordionShell)}>
             <Accordion>
               {faqs.map((item, index) => (
                 <AccordionItem

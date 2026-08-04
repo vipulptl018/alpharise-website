@@ -1,66 +1,120 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 
 import { LegalPage } from "@/components/shared/LegalPage";
-import { COMPANY_NAME } from "@/lib/constants";
+import { COMPANY_NAME, CONTACT } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Refund Policy",
-  description: `Refund Policy for services and academy programs offered by ${COMPANY_NAME}.`,
-};
+  description: "Refund Policy for services, academy programs, and platform purchases from ALPHARISE INNOVATION PRIVATE LIMITED.",
+  path: "/refund-policy",
+});
 
 export default function RefundPolicyPage() {
   return (
     <LegalPage
       title="Refund Policy"
-      description="This policy outlines refund eligibility for consulting services and TechRise Academy programs."
-      lastUpdated="March 1, 2026"
+      description="This policy explains refund eligibility for consulting services, TechRise Academy enrollments, and Social Voice Communication Platform purchases."
+      lastUpdated="August 4, 2026"
       sections={[
         {
           heading: "1. Software & Consulting Services",
           body: (
             <p>
-              Project fees are generally non-refundable once discovery or
-              development work has started, except where a written agreement
-              specifies otherwise or where required by law.
+              Project and retainer fees are generally non-refundable once
+              discovery or delivery work has started, except where a written
+              agreement states otherwise or where mandatory consumer law
+              requires a refund.
             </p>
           ),
         },
         {
-          heading: "2. Academy Programs",
+          heading: "2. TechRise Academy Programs",
           body: (
             <p>
-              Course fees may be eligible for partial refunds if cancellation is
-              requested before the cohort start date, subject to administrative
-              charges. After a batch begins, refunds are evaluated case-by-case.
+              Course fees may be eligible for a partial refund if cancellation is
+              requested in writing before the cohort start date, subject to
+              administrative charges disclosed at enrollment. After a batch
+              begins, refunds are evaluated case-by-case based on attendance and
+              unused services.
             </p>
           ),
         },
         {
-          heading: "3. Refund Requests",
+          heading: "3. Product and Platform Fees",
           body: (
             <p>
-              To request a refund, email hello@alpharise.in with your full name,
-              program or project reference, payment details, and reason for the
-              request.
+              Fees for delivered software, website, or platform work are
+              typically non-refundable after activation or milestone acceptance,
+              unless a separate order form provides a cooling-off period.
+              Implementation fees for completed milestones are non-refundable.
             </p>
           ),
         },
         {
-          heading: "4. Processing Time",
+          heading: "4. Virtual Coins & Platform Purchases",
+          body: (
+            <p>
+              Virtual coin packs and consumable in-platform purchases are
+              generally non-refundable once credited to an account, except where
+              a verified technical failure prevented delivery, a duplicate charge
+              occurred, or applicable law requires otherwise. Coins have no cash
+              value outside the platform. See the{" "}
+              <Link
+                href="/virtual-coin-policy"
+                className="font-medium text-sky-700 underline underline-offset-2"
+              >
+                Virtual Coin Policy
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/pricing#virtual-coin-packages"
+                className="font-medium text-sky-700 underline underline-offset-2"
+              >
+                Pricing
+              </Link>{" "}
+              for package and usage rules.
+            </p>
+          ),
+        },
+        {
+          heading: "5. How to Request a Refund",
+          body: (
+            <p>
+              Email {CONTACT.supportEmail} or {CONTACT.email} with your full
+              name, order or enrollment reference, payment proof, and reason for
+              the request. Incomplete requests may delay review.
+            </p>
+          ),
+        },
+        {
+          heading: "6. Processing Time",
           body: (
             <p>
               Approved refunds are typically processed within 7–14 business days
-              to the original payment method, depending on payment provider
-              timelines.
+              to the original payment method, subject to payment provider
+              timelines and bank processing. Approval of a refund request is not
+              guaranteed and depends on the facts of each case and applicable
+              law.
             </p>
           ),
         },
         {
-          heading: "5. Contact",
+          heading: "7. Chargebacks",
           body: (
             <p>
-              For billing questions, contact {COMPANY_NAME} at
-              hello@alpharise.in.
+              Please contact support before filing a chargeback so we can
+              investigate. Confirmed fraud or policy abuse may result in account
+              restrictions in addition to reversing virtual balances.
+            </p>
+          ),
+        },
+        {
+          heading: "8. Contact",
+          body: (
+            <p>
+              Billing questions for {COMPANY_NAME} can be sent to{" "}
+              {CONTACT.supportEmail}.
             </p>
           ),
         },

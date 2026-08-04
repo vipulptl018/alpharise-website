@@ -1,7 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
-
+import { FadeIn } from "@/components/common/motion";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import {
   Accordion,
@@ -10,14 +7,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Container } from "@/components/layout/Container";
-import { ds, fadeUp } from "@/lib/design-system";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
 const faqs = [
   {
     question: "What services do you provide?",
     answer:
-      "We provide enterprise software development, website and mobile app development, AI solutions, cloud architecture, API development, UI/UX design, and ongoing maintenance and support.",
+      "We provide software development, website development, Android mobile application development (Flutter + Node.js), AI solutions, cloud solutions, enterprise software, TechRise Academy training, and a Social Voice Communication Platform for Android that is preparing for public release.",
   },
   {
     question: "How long does development take?",
@@ -27,27 +24,32 @@ const faqs = [
   {
     question: "Do you develop mobile apps?",
     answer:
-      "Yes. We build cross-platform Android and iOS applications using Flutter, with robust APIs and cloud infrastructure for production-ready delivery.",
+      "Yes. We develop Android applications using Flutter with a Node.js backend for secure APIs and production-ready delivery.",
   },
   {
     question: "Do you provide AI solutions?",
     answer:
-      "Absolutely. We design and implement generative AI features, chatbots, automation workflows, and intelligent business systems using modern AI stacks.",
+      "Yes. We design and implement generative AI features, chatbots, automation workflows, and intelligent business systems using modern AI stacks.",
   },
   {
-    question: "Do you build ERP systems?",
+    question: "Do you build custom business software?",
     answer:
-      "Yes. We develop custom ERP solutions covering HR, finance, inventory, and operations — tailored to your processes and scalable for growth.",
+      "Yes. We develop custom software covering operations, finance workflows, inventory, and related business processes — tailored to your requirements and scalable for growth.",
   },
   {
     question: "Do you offer placement assistance?",
     answer:
-      "Through TechRise Academy, we offer placement assistance including live projects, resume building, mock interviews, and career guidance for students.",
+      "Through TechRise Academy, we offer placement assistance including live projects, resume building, mock interviews, and career guidance. Placement assistance does not guarantee employment.",
+  },
+  {
+    question: "Where can I read Social Voice platform documentation?",
+    answer:
+      "Complete feature documentation for the Social Voice Communication Platform Android app—including registration, OTP, wallets, coins, gifting, host/creator programs, withdrawals, and safety tools—is published at /social-voice. The Android app is preparing for public release; availability will be announced on this website and Instagram.",
   },
   {
     question: "How can we contact you?",
     answer:
-      "You can reach us via the contact form, email us at hello@alpharise.in, or book a free consultation. Our team typically responds within one business day.",
+      "You can reach us via the contact form, email us at admin@alphariseinnovation.com, or call +91 9168020295. Our team typically responds within one business day during Monday–Saturday, 10:00 AM – 7:00 PM (IST).",
   },
   {
     question: "Do you provide maintenance?",
@@ -75,25 +77,17 @@ export default function Faq() {
       <div aria-hidden className={ds.divider} />
 
       <Container size="md">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn>
           <SectionTitle
             titleId="faq-heading"
             title="Frequently Asked Questions"
             description="Answers to common questions about our services, process, and support."
           />
-        </motion.div>
+        </FadeIn>
 
-        <motion.div
-          className="mt-14 rounded-2xl border border-slate-200/90 bg-white/80 p-2 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.25)] backdrop-blur-xl sm:mt-16 sm:p-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
+        <FadeIn
+          className={cn("mt-12", ds.accordionShell)}
+          amount={0.2}
         >
           <Accordion className="w-full">
             {faqs.map((faq, index) => (
@@ -111,7 +105,7 @@ export default function Faq() {
               </AccordionItem>
             ))}
           </Accordion>
-        </motion.div>
+        </FadeIn>
       </Container>
     </section>
   );

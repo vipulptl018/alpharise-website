@@ -1,7 +1,4 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import {
   Award,
@@ -21,12 +18,14 @@ import {
   Rocket,
   Route,
   Shield,
+  Smartphone,
   Target,
   Timer,
   Users,
   Wallet,
 } from "lucide-react";
 
+import { FadeIn, Stagger, StaggerItem } from "@/components/common/motion";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import {
   Card,
@@ -36,12 +35,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import {
-  ds,
-  fadeUp,
-  staggerItem,
-  staggerList,
-} from "@/lib/design-system";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
 export const iconMap = {
@@ -62,6 +56,7 @@ export const iconMap = {
   Rocket,
   Route,
   Shield,
+  Smartphone,
   Target,
   Timer,
   Users,
@@ -103,19 +98,14 @@ export function SectionShell({
     >
       <div aria-hidden className={ds.divider} />
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          variants={fadeUp}
-        >
+        <FadeIn amount={0.35}>
           <SectionTitle
             titleId={titleId}
             eyebrow={eyebrow}
             title={title}
             description={description}
           />
-        </motion.div>
+        </FadeIn>
         {children}
       </Container>
     </section>
@@ -136,24 +126,14 @@ type IconCardGridProps = {
 
 export function IconCardGrid({ items, columns = "3" }: IconCardGridProps) {
   const cols =
-    columns === "2"
-      ? "sm:grid-cols-2"
-      : columns === "4"
-        ? "sm:grid-cols-2 lg:grid-cols-4"
-        : "sm:grid-cols-2 lg:grid-cols-3";
+    columns === "2" ? ds.grid2 : columns === "4" ? ds.grid4 : ds.grid3;
 
   return (
-    <motion.ul
-      className={cn(ds.grid, "grid-cols-1", cols)}
-      variants={staggerList}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-    >
+    <Stagger className={cn("mt-12", cols)}>
       {items.map(({ title, description, icon, gradient }) => {
         const Icon = iconMap[icon];
         return (
-          <motion.li key={title} variants={staggerItem} className="h-full">
+          <StaggerItem key={title} className="h-full">
             <Card className={ds.card}>
               <CardHeader className={ds.cardHeader}>
                 <div
@@ -172,10 +152,10 @@ export function IconCardGrid({ items, columns = "3" }: IconCardGridProps) {
                 </CardDescription>
               </CardContent>
             </Card>
-          </motion.li>
+          </StaggerItem>
         );
       })}
-    </motion.ul>
+    </Stagger>
   );
 }
 
@@ -203,13 +183,54 @@ export function BulletCard({ title, items, icon: Icon }: BulletCardProps) {
               key={item}
               className="flex gap-2 text-sm leading-6 text-slate-600"
             >
-              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-500" />
+              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#2563EB]" />
               {item}
             </li>
           ))}
         </ul>
       </CardContent>
     </Card>
+  );
+}
+
+type WorkflowStepsProps = {
+  title: string;
+  steps: { title: string; description: string }[];
+};
+
+/** Numbered workflow using existing card styles — no new design tokens. */
+export function WorkflowSteps({ title, steps }: WorkflowStepsProps) {
+  return (
+    <div className="mt-10 sm:mt-12">
+      <h3 className="font-heading text-lg font-semibold tracking-tight text-slate-950 sm:text-xl">
+        {title}
+      </h3>
+      <ol className="mt-5 space-y-4">
+        {steps.map((step, index) => (
+          <li
+            key={step.title}
+            className="rounded-3xl border border-[#E2E8F0] bg-white p-5 shadow-xl shadow-slate-900/5 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-[#BFDBFE] hover:shadow-2xl hover:shadow-blue-500/10 sm:p-6"
+          >
+            <div className="flex gap-4">
+              <span
+                className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#EEF6FF] to-white text-sm font-semibold text-[#2563EB] ring-1 ring-[#BFDBFE]"
+                aria-hidden
+              >
+                {index + 1}
+              </span>
+              <div>
+                <h4 className="font-heading text-base font-semibold text-slate-950">
+                  {step.title}
+                </h4>
+                <p className="mt-1.5 text-sm leading-7 text-slate-600">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 
@@ -240,13 +261,7 @@ export function OfferingBlock({
     >
       <div aria-hidden className={ds.divider} />
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp}
-          className="max-w-3xl"
-        >
+        <FadeIn amount={0.3} className="max-w-3xl">
           <h2
             id={`${id}-heading`}
             className="font-heading text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl"
@@ -256,9 +271,9 @@ export function OfferingBlock({
           <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg sm:leading-8">
             {overview}
           </p>
-        </motion.div>
+        </FadeIn>
 
-        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className={cn("mt-10", ds.grid3)}>
           <BulletCard title="Features" items={features} />
           <BulletCard title="Benefits" items={benefits} />
           {technologies ? (

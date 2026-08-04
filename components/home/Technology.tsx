@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
 import {
   Brain,
   Cloud,
@@ -11,6 +7,7 @@ import {
   Workflow,
 } from "lucide-react";
 
+import { FadeIn, Stagger, StaggerItem } from "@/components/common/motion";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import {
   Card,
@@ -19,23 +16,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import { ds, fadeUp, staggerItem, staggerList } from "@/lib/design-system";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
-type TechCategory = {
-  title: string;
-  icon: LucideIcon;
-  accent: string;
-  border: string;
-  items: string[];
-};
-
-const categories: TechCategory[] = [
+const categories = [
   {
     title: "Frontend",
     icon: Layers,
-    accent: "from-sky-500 to-cyan-400",
-    border: "from-sky-400/70 via-cyan-300/40 to-transparent",
+    accent: "from-[#2563EB] to-[#3B82F6]",
+    border: "from-[#60A5FA]/70 via-[#93C5FD]/40 to-transparent",
     items: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
   },
   {
@@ -73,7 +62,7 @@ const categories: TechCategory[] = [
     border: "from-slate-600/60 via-cyan-400/40 to-transparent",
     items: ["OpenAI", "LangChain", "MCP", "Vector Database"],
   },
-];
+] as const;
 
 export default function Technology() {
   return (
@@ -84,28 +73,19 @@ export default function Technology() {
       <div aria-hidden className={ds.divider} />
 
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn>
           <SectionTitle
             titleId="technology-heading"
             title="Technology Stack"
             description="Modern technologies powering our software solutions."
           />
-        </motion.div>
+        </FadeIn>
 
-        <motion.ul
-          className={cn(ds.grid, "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}
-          variants={staggerList}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+        <Stagger
+          className={cn("mt-12", ds.grid3)}
         >
           {categories.map(({ title, icon: Icon, accent, border, items }) => (
-            <motion.li key={title} variants={staggerItem} className="h-full">
+            <StaggerItem key={title} className="h-full">
               <div
                 className={cn(
                   "group h-full rounded-2xl bg-gradient-to-br p-px transition-transform duration-300 ease-out",
@@ -141,9 +121,9 @@ export default function Technology() {
                   </CardContent>
                 </Card>
               </div>
-            </motion.li>
+            </StaggerItem>
           ))}
-        </motion.ul>
+        </Stagger>
       </Container>
     </section>
   );

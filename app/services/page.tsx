@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHero } from "@/components/shared/PageHero";
@@ -9,22 +8,23 @@ import { Container } from "@/components/layout/Container";
 import { servicesContent } from "@/lib/content/offerings";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Services",
-  description:
-    "Enterprise software, websites, mobile apps, AI solutions, cloud, APIs, UI/UX, and maintenance services from ALPHARISE.",
-};
+  description: "Software development, AI solutions, cloud solutions, APIs, UI/UX, websites, mobile apps, and maintenance from ALPHARISE INNOVATION PRIVATE LIMITED.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
     <>
       <PageHero
         eyebrow="Our Services"
-        title="Enterprise-Grade Digital Solutions"
-        description="We deliver secure, scalable software and digital products designed for startups, SMEs, and large organizations."
+        title="Software, AI, and Cloud Delivery"
+        description="ALPHARISE provides professional technology services for organizations that need secure software, practical AI, and production-ready cloud operations."
         primaryCta={{ label: "Schedule Consultation", href: "/contact" }}
-        secondaryCta={{ label: "View Products", href: "/products" }}
+        secondaryCta={{ label: "View Pricing", href: "/pricing" }}
       />
 
       <section className={cn(ds.section, ds.sectionWhite)}>

@@ -1,0 +1,7 @@
+﻿New career application
+Name: {{ application.full_name }}
+Email: {{ application.email }}
+Phone: {{ application.phone }}
+Role: {{ application.role_applied }}
+Resume: {{ application.resume_path }}
+Cover letter: {{ application.cover_letter or "N/A" }}

@@ -1,0 +1,9 @@
+﻿<!DOCTYPE html><html><body style="font-family:Arial,sans-serif">
+<h2>New career application</h2>
+<p><strong>Name:</strong> {{ application.full_name }}</p>
+<p><strong>Email:</strong> {{ application.email }}</p>
+<p><strong>Phone:</strong> {{ application.phone }}</p>
+<p><strong>Role:</strong> {{ application.role_applied }}</p>
+<p><strong>Resume:</strong> {{ application.resume_path }}</p>
+<p><strong>Cover letter:</strong> {{ application.cover_letter or "N/A" }}</p>
+</body></html>

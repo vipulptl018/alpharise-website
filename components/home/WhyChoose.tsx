@@ -1,8 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   Building,
@@ -13,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { FadeIn, Stagger, StaggerItem } from "@/components/common/motion";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,20 +20,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import { ds, fadeUp, staggerItem, staggerList } from "@/lib/design-system";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
-type Feature = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-};
-
-const features: Feature[] = [
+const features = [
   {
-    title: "Enterprise Software",
+    title: "Custom Software",
     description:
-      "Custom enterprise software built for scalability and performance.",
+      "Custom software built for scalability, security, and performance.",
     icon: Building,
   },
   {
@@ -65,11 +56,10 @@ const features: Feature[] = [
   },
   {
     title: "24×7 Support",
-    description:
-      "Continuous maintenance, monitoring and technical support.",
+    description: "Continuous maintenance, monitoring and technical support.",
     icon: Headphones,
   },
-];
+] as const;
 
 export default function WhyChoose() {
   return (
@@ -80,28 +70,20 @@ export default function WhyChoose() {
       <div aria-hidden className={ds.divider} />
 
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn>
           <SectionTitle
             titleId="why-choose-heading"
-            title="Why Choose Alpharise"
-            description="We combine technology, innovation and engineering excellence to deliver secure, scalable and future-ready digital products."
+            title="Why Choose ALPHARISE"
+            description="A professional technology company combining software engineering, AI, cloud delivery, and TechRise Academy under clear commercial and safety policies."
           />
-        </motion.div>
+        </FadeIn>
 
-        <motion.ul
-          className={cn(ds.grid, "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}
-          variants={staggerList}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.12 }}
+        <Stagger
+          className={cn("mt-12", ds.grid3)}
+          amount={0.12}
         >
           {features.map(({ title, description, icon: Icon }) => (
-            <motion.li key={title} variants={staggerItem} className="h-full">
+            <StaggerItem key={title} className="h-full">
               <Card className={ds.card}>
                 <CardHeader className={ds.cardHeader}>
                   <div className={ds.iconBox}>
@@ -115,21 +97,15 @@ export default function WhyChoose() {
                   </CardDescription>
                 </CardContent>
               </Card>
-            </motion.li>
+            </StaggerItem>
           ))}
-        </motion.ul>
+        </Stagger>
 
-        <motion.div
-          className="mx-auto mt-16 max-w-2xl text-center sm:mt-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn className="mx-auto mt-16 max-w-2xl text-center sm:mt-20">
           <div className={cn(ds.ctaPanel, "text-center")}>
             <p className={ds.ctaEyebrow}>Need a technology partner?</p>
             <h3 className={ds.ctaTitle}>
-              Build your next digital product with Alpharise.
+              Build your next digital product with ALPHARISE.
             </h3>
             <Button
               render={<Link href="/contact" />}
@@ -137,10 +113,10 @@ export default function WhyChoose() {
               className={cn("mt-7", ds.btnPrimary)}
             >
               Start Your Project
-              <ArrowRight data-icon="inline-end" className="size-4" />
+              <ArrowRight data-icon="inline-end" className="size-4 transition-transform duration-300 group-hover/button:translate-x-0.5" />
             </Button>
           </div>
-        </motion.div>
+        </FadeIn>
       </Container>
     </section>
   );

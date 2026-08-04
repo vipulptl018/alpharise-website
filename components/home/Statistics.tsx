@@ -1,8 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
 import {
   Award,
   Briefcase,
@@ -12,6 +7,8 @@ import {
   Smile,
 } from "lucide-react";
 
+import { CountUp } from "@/components/common/CountUp";
+import { FadeIn, Stagger, StaggerItem } from "@/components/common/motion";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import {
   Card,
@@ -21,124 +18,53 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
-import { ds, fadeUp, staggerItem, staggerList } from "@/lib/design-system";
+import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
-type Stat = {
-  value: number;
-  suffix: string;
-  label: string;
-  icon: LucideIcon;
-  gradient: string;
-};
-
-const stats: Stat[] = [
+const stats = [
   {
-    value: 50,
-    suffix: "+",
-    label: "Projects Delivered",
-    icon: Briefcase,
-    gradient: "from-sky-500 to-cyan-400",
+    value: 2026,
+    suffix: "",
+    label: "Incorporation Year",
+    icon: Award,
+    gradient: "from-[#2563EB] to-[#3B82F6]",
   },
   {
-    value: 100,
-    suffix: "+",
-    label: "Students Trained",
+    value: 19,
+    suffix: "",
+    label: "Academy Courses",
     icon: GraduationCap,
     gradient: "from-emerald-500 to-teal-400",
   },
   {
-    value: 20,
-    suffix: "+",
-    label: "Technologies",
+    value: 8,
+    suffix: "",
+    label: "Product Areas",
     icon: Layers,
     gradient: "from-amber-500 to-orange-400",
   },
   {
-    value: 15,
-    suffix: "+",
-    label: "Enterprise Clients",
-    icon: Code2,
+    value: 6,
+    suffix: "",
+    label: "Support Days / Week",
+    icon: Briefcase,
     gradient: "from-slate-700 to-slate-500",
   },
   {
-    value: 5,
-    suffix: "+",
-    label: "Years Experience",
-    icon: Award,
-    gradient: "from-cyan-600 to-sky-400",
+    value: 1,
+    suffix: "",
+    label: "Official Instagram Channel",
+    icon: Code2,
+    gradient: "from-[#2563EB] to-[#60A5FA]",
   },
   {
-    value: 98,
+    value: 100,
     suffix: "%",
-    label: "Client Satisfaction",
+    label: "Transparent Pricing Intent",
     icon: Smile,
-    gradient: "from-sky-600 to-blue-400",
+    gradient: "from-[#1D4ED8] to-[#60A5FA]",
   },
-];
-
-function useCountUp(target: number, enabled: boolean, duration = 1400) {
-  const [value, setValue] = useState(0);
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (!enabled) return;
-
-    if (reduceMotion) {
-      setValue(target);
-      return;
-    }
-
-    let frame = 0;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(target * eased));
-
-      if (progress < 1) {
-        frame = requestAnimationFrame(tick);
-      }
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [target, enabled, duration, reduceMotion]);
-
-  return value;
-}
-
-function StatCard({ value, suffix, label, icon: Icon, gradient }: Stat) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
-  const count = useCountUp(value, inView);
-
-  return (
-    <Card ref={ref} className={ds.card}>
-      <CardHeader className={ds.cardHeader}>
-        <div className={cn(ds.iconGradient, gradient)}>
-          <Icon className="size-5" strokeWidth={1.75} aria-hidden />
-        </div>
-        <CardTitle className="font-heading text-4xl font-semibold tracking-tight text-slate-950 tabular-nums sm:text-[2.5rem]">
-          <span aria-hidden>
-            {count}
-            {suffix}
-          </span>
-          <span className="sr-only">
-            {value}
-            {suffix} {label}
-          </span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className={ds.cardContent}>
-        <CardDescription className={ds.cardDescription} aria-hidden>
-          {label}
-        </CardDescription>
-      </CardContent>
-    </Card>
-  );
-}
+] as const;
 
 export default function Statistics() {
   return (
@@ -149,32 +75,41 @@ export default function Statistics() {
       <div aria-hidden className={ds.divider} />
 
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-        >
+        <FadeIn>
           <SectionTitle
             titleId="statistics-heading"
-            title="Our Impact"
-            description="Helping businesses and students grow through technology."
+            title="Company Snapshot"
+            description="Key facts about ALPHARISE offerings, academy coverage, and support hours."
           />
-        </motion.div>
+        </FadeIn>
 
-        <motion.ul
-          className={cn(ds.grid, "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}
-          variants={staggerList}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+        <Stagger
+          className={cn("mt-12", ds.grid3)}
         >
-          {stats.map((stat) => (
-            <motion.li key={stat.label} variants={staggerItem} className="h-full">
-              <StatCard {...stat} />
-            </motion.li>
+          {stats.map(({ value, suffix, label, icon: Icon, gradient }) => (
+            <StaggerItem key={label} className="h-full">
+              <Card className={ds.card}>
+                <CardHeader className={ds.cardHeader}>
+                  <div className={cn(ds.iconGradient, gradient)}>
+                    <Icon className="size-5" strokeWidth={1.75} aria-hidden />
+                  </div>
+                  <CardTitle className="font-heading text-4xl font-semibold tracking-tight text-slate-950 tabular-nums sm:text-[2.5rem]">
+                    <CountUp
+                      target={value}
+                      suffix={suffix}
+                      label={label}
+                    />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className={ds.cardContent}>
+                  <CardDescription className={ds.cardDescription} aria-hidden>
+                    {label}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </StaggerItem>
           ))}
-        </motion.ul>
+        </Stagger>
       </Container>
     </section>
   );

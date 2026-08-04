@@ -32,9 +32,7 @@ export function SectionTitle({
       )}
     >
       {eyebrow ? (
-        <p className="mb-4 text-sm font-medium tracking-wide text-sky-700">
-          {eyebrow}
-        </p>
+        <p className={cn(ds.eyebrow, "mb-4")}>{eyebrow}</p>
       ) : null}
 
       <h2 id={titleId} className={ds.title}>

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { LastUpdated } from "@/components/shared/LastUpdated";
 import { Container } from "@/components/layout/Container";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
@@ -15,6 +17,7 @@ type LegalPageProps = {
   description: string;
   lastUpdated: string;
   sections: LegalSection[];
+  breadcrumbLabel?: string;
 };
 
 export function LegalPage({
@@ -22,15 +25,17 @@ export function LegalPage({
   description,
   lastUpdated,
   sections,
+  breadcrumbLabel,
 }: LegalPageProps) {
   return (
     <>
+      <Breadcrumbs items={[{ label: breadcrumbLabel || title }]} />
+      <LastUpdated date={lastUpdated} />
       <PageHero title={title} description={description} />
       <section className={cn(ds.section, ds.sectionWhite)}>
         <div aria-hidden className={ds.divider} />
         <Container size="md">
-          <p className="text-sm text-slate-500">Last updated: {lastUpdated}</p>
-          <div className="mt-10 space-y-10">
+          <div className="space-y-10">
             {sections.map((section) => (
               <article key={section.heading}>
                 <h2 className="font-heading text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl">

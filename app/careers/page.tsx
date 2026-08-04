@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
+import { SectionTitle } from "@/components/common/SectionTitle";
 import { PageHero } from "@/components/shared/PageHero";
 import { PageCTA } from "@/components/shared/PageCTA";
 import {
@@ -17,14 +17,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Container } from "@/components/layout/Container";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Careers",
-  description:
-    "Join ALPHARISE — explore culture, benefits, open positions, and our hiring process.",
-};
+  description: "Join ALPHARISE — explore culture, benefits, open positions, and our hiring process.",
+  path: "/careers",
+});
 
 const roles = [
   {
@@ -43,7 +45,7 @@ const roles = [
     title: "Flutter Developer",
     type: "Full-time",
     location: "Hybrid / India",
-    description: "Ship polished cross-platform mobile experiences.",
+    description: "Ship polished Android mobile experiences with Flutter and Node.js.",
   },
   {
     title: "Technical Trainer",
@@ -129,50 +131,46 @@ export default function CareersPage() {
         className={cn(ds.section, ds.sectionWhite)}
       >
         <div aria-hidden className={ds.divider} />
-        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
-          <h2
-            id="positions-heading"
-            className="font-heading text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl"
-          >
-            Open Positions
-          </h2>
-          <p className="mt-4 text-base text-slate-600 sm:text-lg">
-            Current opportunities across engineering and academy teams.
-          </p>
-        </div>
-        <ul className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:gap-6">
-          {roles.map((role) => (
-            <li key={role.title}>
-              <Card className={ds.card}>
-                <CardHeader className={ds.cardHeader}>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="rounded-lg">
-                      {role.type}
-                    </Badge>
-                    <Badge variant="outline" className="rounded-lg">
-                      {role.location}
-                    </Badge>
-                  </div>
-                  <CardTitle className={ds.cardTitle}>{role.title}</CardTitle>
-                </CardHeader>
-                <CardContent className={ds.cardContent}>
-                  <CardDescription className={ds.cardDescription}>
-                    {role.description}
-                  </CardDescription>
-                </CardContent>
-                <CardFooter className={ds.cardFooter}>
-                  <Button
-                    render={<Link href="/contact" />}
-                    variant="outline"
-                    className={ds.btnCard}
-                  >
-                    Apply Now
-                  </Button>
-                </CardFooter>
-              </Card>
-            </li>
-          ))}
-        </ul>
+        <Container>
+          <SectionTitle
+            titleId="positions-heading"
+            title="Open Positions"
+            description="Current opportunities across engineering and academy teams."
+          />
+          <ul className={cn(ds.grid, "sm:grid-cols-2")}>
+            {roles.map((role) => (
+              <li key={role.title} className="h-full">
+                <Card className={ds.card}>
+                  <CardHeader className={ds.cardHeader}>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" className="rounded-lg">
+                        {role.type}
+                      </Badge>
+                      <Badge variant="outline" className="rounded-lg">
+                        {role.location}
+                      </Badge>
+                    </div>
+                    <CardTitle className={ds.cardTitle}>{role.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className={ds.cardContent}>
+                    <CardDescription className={ds.cardDescription}>
+                      {role.description}
+                    </CardDescription>
+                  </CardContent>
+                  <CardFooter className={ds.cardFooter}>
+                    <Button
+                      render={<Link href="/contact" />}
+                      variant="outline"
+                      className={ds.btnCard}
+                    >
+                      Apply Now
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </Container>
       </section>
 
       <SectionShell
