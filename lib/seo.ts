@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { COMPANY_NAME, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { COMPANY_NAME, SITE_NAME, getSiteUrl } from "@/lib/constants";
 
 type PageSeoInput = {
   title: string;
@@ -16,9 +16,10 @@ export function createPageMetadata({
   path,
   noIndex = false,
 }: PageSeoInput): Metadata {
+  const siteUrl = getSiteUrl();
   const url = path.startsWith("http")
     ? path
-    : `${SITE_URL}${path === "/" ? "" : path}`;
+    : `${siteUrl}${path === "/" ? "" : path}`;
 
   return {
     title,

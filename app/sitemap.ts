@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { SITE_URL } from "@/lib/constants";
+import { getSiteUrl } from "@/lib/constants";
 
 const routes = [
   "/",
@@ -27,9 +27,10 @@ const routes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
+  const siteUrl = getSiteUrl();
 
   return routes.map((path) => ({
-    url: `${SITE_URL}${path === "/" ? "" : path}`,
+    url: `${siteUrl}${path === "/" ? "" : path}`,
     lastModified,
     changeFrequency:
       path === "/" || path === "/blog" || path === "/support"

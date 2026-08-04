@@ -3,10 +3,10 @@ import {
   COMPANY_NAME,
   CONTACT,
   SITE_NAME,
-  SITE_URL,
   SOCIAL_LINKS,
   LEGAL,
   formatGstinLabel,
+  getSiteUrl,
 } from "@/lib/constants";
 import { virtualCoinPackages } from "@/lib/content/pricing";
 import { productsPageContent } from "@/lib/content/offerings";
@@ -14,6 +14,7 @@ import { socialVoiceFaqs } from "@/lib/content/social-voice";
 
 /** Organization + WebSite + LocalBusiness + Product + FAQ JSON-LD */
 export function OrganizationJsonLd() {
+  const SITE_URL = getSiteUrl();
   const postal = {
     "@type": "PostalAddress",
     streetAddress: [

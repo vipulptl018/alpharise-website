@@ -3,10 +3,30 @@ function envOr(name: string, fallback: string): string {
   return value ? value : fallback;
 }
 
-export const SITE_URL = envOr(
-  "NEXT_PUBLIC_SITE_URL",
-  "https://alphariseinnovation.com"
-).replace(/\/$/, "");
+const DEFAULT_SITE_URL = "https://alphariseinnovation.com";
+
+/** Safe public site origin — never returns env variable names or non-http values. */
+export function getSiteUrl(): string {
+  const url = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+  if (
+    !url ||
+    !url.startsWith("http") ||
+    url === "NEXT_PUBLIC_SITE_URL" ||
+    url === "NEXT_PUBLIC_API_URL"
+  ) {
+    return DEFAULT_SITE_URL;
+  }
+
+  return url.replace(/\/$/, "");
+}
+
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.startsWith("http") &&
+  process.env.NEXT_PUBLIC_SITE_URL !== "NEXT_PUBLIC_SITE_URL" &&
+  process.env.NEXT_PUBLIC_SITE_URL !== "NEXT_PUBLIC_API_URL"
+    ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")
+    : DEFAULT_SITE_URL;
 
 export const SITE_NAME = "ALPHARISE";
 

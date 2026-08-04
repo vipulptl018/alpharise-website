@@ -10,7 +10,7 @@ import {
   COMPANY,
   COMPANY_NAME,
   SITE_NAME,
-  SITE_URL,
+  getSiteUrl,
 } from "@/lib/constants";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
@@ -31,8 +31,15 @@ const geistMono = Geist_Mono({
   preload: false,
 });
 
+const SITE_URL = getSiteUrl();
+
+const metadataBase =
+  SITE_URL.startsWith("http")
+    ? new URL(SITE_URL)
+    : new URL("https://alphariseinnovation.com");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase,
   title: {
     default: `${SITE_NAME} | ${COMPANY_NAME}`,
     template: `%s | ${SITE_NAME}`,

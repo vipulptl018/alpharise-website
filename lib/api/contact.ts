@@ -31,9 +31,14 @@ const DEFAULT_SUCCESS_MESSAGE =
 
 function getApiBaseUrl(): string {
   const base = process.env.NEXT_PUBLIC_API_URL?.trim();
-  if (!base) {
+  if (
+    !base ||
+    !base.startsWith("http") ||
+    base === "NEXT_PUBLIC_API_URL" ||
+    base === "NEXT_PUBLIC_SITE_URL"
+  ) {
     throw new Error(
-      "NEXT_PUBLIC_API_URL is not configured. Set it in your environment."
+      "NEXT_PUBLIC_API_URL is not configured with a valid http(s) URL."
     );
   }
   return base.replace(/\/$/, "");
