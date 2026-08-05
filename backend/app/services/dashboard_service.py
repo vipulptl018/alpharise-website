@@ -13,7 +13,6 @@ from app.repositories.content_repository import (
 from app.repositories.newsletter_repository import NewsletterRepository
 from app.repositories.user_repository import UserRepository
 from app.schemas import DashboardStats, HealthComponent, HealthResponse
-from app.services.smtp_client import SmtpClient
 
 
 class DashboardService:
@@ -34,12 +33,20 @@ class DashboardService:
 
 
 class HealthService:
+    """Liveness/readiness for Render: app process + database only.
+
+    SMTP is never probed here — outbound SMTP can be blocked at boot on free
+    hosts and must not fail /health or prevent the service from becoming ready.
+    """
+
     def __init__(self, db: Session) -> None:
         self.db = db
         self.settings = get_settings()
 
     def check(self) -> HealthResponse:
-        components: list[HealthComponent] = []
+        components: list[HealthComponent] = [
+            HealthComponent(name="application", status="ok"),
+        ]
 
         try:
             self.db.execute(text("SELECT 1"))
@@ -49,32 +56,7 @@ class HealthService:
                 HealthComponent(name="database", status="error", detail=str(exc))
             )
 
-        if self.settings.redis_url:
-            try:
-                import redis
-
-                client = redis.from_url(self.settings.redis_url, socket_connect_timeout=2)
-                client.ping()
-                components.append(HealthComponent(name="redis", status="ok"))
-            except Exception as exc:
-                components.append(
-                    HealthComponent(name="redis", status="error", detail=str(exc))
-                )
-        else:
-            components.append(
-                HealthComponent(name="redis", status="disabled", detail="REDIS_URL not set")
-            )
-
-        smtp_ok = SmtpClient(self.settings).ping()
-        components.append(
-            HealthComponent(
-                name="smtp",
-                status="ok" if smtp_ok else "error",
-                detail=None if smtp_ok else "SMTP unreachable",
-            )
-        )
-
-        overall = "ok" if all(c.status in {"ok", "disabled"} for c in components) else "degraded"
+        overall = "ok" if all(c.status == "ok" for c in components) else "degraded"
         return HealthResponse(
             status=overall,
             version=self.settings.app_version,

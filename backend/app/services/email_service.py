@@ -14,11 +14,18 @@ TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "emails" / "templates"
 class EmailService:
     def __init__(self, settings: Settings | None = None) -> None:
         self.settings = settings or get_settings()
-        self.smtp = SmtpClient(self.settings)
+        self._smtp: SmtpClient | None = None
         self.env = Environment(
             loader=FileSystemLoader(str(TEMPLATE_DIR)),
             autoescape=select_autoescape(["html", "xml"]),
         )
+
+    @property
+    def smtp(self) -> SmtpClient:
+        """Create the SMTP client only when an email is sent (no connect at import/startup)."""
+        if self._smtp is None:
+            self._smtp = SmtpClient(self.settings)
+        return self._smtp
 
     def _render(self, template_name: str, context: dict) -> tuple[str, str]:
         html = self.env.get_template(template_name).render(**context)
