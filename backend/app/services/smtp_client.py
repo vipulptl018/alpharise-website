@@ -83,28 +83,13 @@ class SmtpClient:
                 self.settings.smtp_host,
             )
         except (smtplib.SMTPException, OSError, socket.error) as exc:
-            # Never log SMTP_PASSWORD; log exception type only.
-            logger.warning(
-                "SMTP unreachable while sending to=%s host=%s error=%s",
+            # Never log SMTP_PASSWORD. Log the failure; do not crash the process.
+            logger.exception(
+                "SMTP send failed to=%s host=%s",
                 to_email,
                 self.settings.smtp_host,
-                type(exc).__name__,
             )
             raise AppError(
                 "Email delivery failed. Please try again later.",
                 status_code=502,
             ) from exc
-
-    def ping(self) -> bool:
-        """Optional manual probe — not used by /health or startup."""
-        try:
-            with self._connection(timeout=5) as smtp:
-                smtp.noop()
-            return True
-        except Exception as exc:
-            logger.warning(
-                "SMTP probe failed host=%s error=%s",
-                self.settings.smtp_host,
-                type(exc).__name__,
-            )
-            return False
