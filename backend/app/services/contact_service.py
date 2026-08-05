@@ -1,16 +1,15 @@
 from sqlalchemy.orm import Session
 
-from app.core.exceptions import AppError
 from app.models.contact import ContactInquiry
 from app.repositories.contact_repository import ContactRepository
 from app.schemas import ContactCreate
-from app.services.email_service import EmailService
+from app.services.resend_service import ResendService
 
 
 class ContactService:
     def __init__(self, db: Session) -> None:
         self.repo = ContactRepository(db)
-        self.email = EmailService()
+        self.email = ResendService()
 
     def create(
         self,
@@ -31,10 +30,8 @@ class ContactService:
             status="new",
         )
         saved = self.repo.add(inquiry)
-        try:
-            self.email.send_contact_notification(saved)
-        except AppError:
-            raise
+        # Do not catch/replace Resend or AppError — preserve exact exception detail.
+        self.email.send_contact_notification(saved)
         return saved
 
     def list_for_admin(self, *, page: int, page_size: int) -> tuple[list[ContactInquiry], int]:

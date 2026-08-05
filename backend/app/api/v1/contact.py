@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Request, status
+from fastapi import APIRouter, HTTPException, Request, status
 
 from app.core.config import get_settings
-from app.core.exceptions import AppError, to_http_exception
+from app.core.exceptions import AppError
 from app.core.rate_limit import limiter
 from app.deps.auth import DbSession, StaffUser
 from app.schemas import ContactCreate, ContactRead, MessageResponse
@@ -33,10 +33,10 @@ async def create_contact(
             user_agent=get_user_agent(request),
         )
     except AppError as exc:
-        raise to_http_exception(exc) from exc
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
     return MessageResponse(
         success=True,
-        message="Thank you for contacting ALPHARISE. We will get back to you shortly.",
+        message="Message sent successfully.",
     )
 
 

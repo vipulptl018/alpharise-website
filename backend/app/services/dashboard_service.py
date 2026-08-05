@@ -33,11 +33,7 @@ class DashboardService:
 
 
 class HealthService:
-    """Liveness/readiness for Render: app process + database only.
-
-    SMTP is never probed here — outbound SMTP can be blocked at boot on free
-    hosts and must not fail /health or prevent the service from becoming ready.
-    """
+    """Liveness/readiness for Render: app process + database only."""
 
     def __init__(self, db: Session) -> None:
         self.db = db

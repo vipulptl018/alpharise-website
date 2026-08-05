@@ -81,7 +81,7 @@ function parseErrorMessage(
   }
 
   if (status >= 500) {
-    return "The server could not process your request. Please try again later.";
+    return `Server error (${status}). No error detail returned.`;
   }
 
   return "Unable to send your message. Please check your details and try again.";

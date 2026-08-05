@@ -1,8 +1,7 @@
 # Render Blueprint — ALPHARISE Contact API only
-# Dashboard Root Directory MUST be: backend
+# Root Directory on Render MUST be: backend
 #
-# Production stack: Render Free + Supabase PostgreSQL + Gmail SMTP
-# No Redis, Celery, VPS, Nginx, or Docker Compose.
+# Production: Render Free + Supabase PostgreSQL + Resend (HTTPS email)
 
 services:
   - type: web
@@ -33,26 +32,13 @@ services:
         value: https://alphariseinnovation.com,https://www.alphariseinnovation.com
       - key: CORS_ORIGIN_REGEX
         value: "https://.*\\.vercel\\.app"
-      - key: SMTP_HOST
-        value: smtp.gmail.com
-      - key: SMTP_PORT
-        value: "587"
-      - key: SMTP_USE_TLS
-        value: "true"
-      - key: SMTP_USE_SSL
-        value: "false"
-      - key: SMTP_USERNAME
-        value: alphariseinnovations@gmail.com
-      - key: SMTP_FROM
-        value: alphariseinnovations@gmail.com
-      - key: SMTP_FROM_NAME
-        value: ALPHARISE
+      - key: RESEND_FROM
+        value: ALPHARISE <noreply@alphariseinnovation.com>
       - key: CONTACT_NOTIFY_EMAIL
         value: admin@alphariseinnovation.com
-      # Secrets — set in Render Dashboard only
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
         sync: false
-      - key: SMTP_PASSWORD
+      - key: RESEND_API_KEY
         sync: false

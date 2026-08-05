@@ -15,7 +15,7 @@
 | Output | `.next` (default) |
 | Node.js | 20.x or newer |
 
-The Python `backend/` folder is excluded via `.vercelignore`. Deploy the FastAPI API separately and set `NEXT_PUBLIC_API_URL` to that origin.
+The Python `backend/` folder is excluded via `.vercelignore`. Deploy the FastAPI API on **Render** (see `backend/RENDER_DEPLOY.md`) and set `NEXT_PUBLIC_API_URL` to that origin.
 
 ## Environment variables (Vercel → Settings → Environment Variables)
 

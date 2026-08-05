@@ -125,24 +125,24 @@ def create_app() -> FastAPI:
 
     @application.exception_handler(SQLAlchemyError)
     async def db_handler(_: Request, exc: SQLAlchemyError) -> JSONResponse:
-        logger.exception("Database error: %s", exc)
+        logger.exception("Database error")
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={
                 "success": False,
-                "message": "A database error occurred. Please try again later.",
+                "message": f"Database error: {exc}",
                 "errors": None,
             },
         )
 
     @application.exception_handler(Exception)
     async def unhandled_handler(_: Request, exc: Exception) -> JSONResponse:
-        logger.exception("Unhandled error: %s", exc)
+        logger.exception("Unhandled error")
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={
                 "success": False,
-                "message": "An unexpected error occurred. Please try again later.",
+                "message": f"Unhandled error: {exc}",
                 "errors": None,
             },
         )

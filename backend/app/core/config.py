@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import AliasChoices, Field, field_validator, model_validator
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -46,17 +46,9 @@ class Settings(BaseSettings):
     rate_limit_auth: str = "10/minute"
     rate_limit_public: str = "20/minute"
 
-    smtp_host: str = "smtp.gmail.com"
-    smtp_port: int = 587
-    smtp_username: str = "alphariseinnovations@gmail.com"
-    smtp_password: str = ""
-    smtp_use_tls: bool = True
-    smtp_use_ssl: bool = False
-    smtp_from_email: str = Field(
-        default="alphariseinnovations@gmail.com",
-        validation_alias=AliasChoices("SMTP_FROM", "SMTP_FROM_EMAIL", "smtp_from_email"),
-    )
-    smtp_from_name: str = "ALPHARISE"
+    # Resend HTTPS email (Render Free compatible)
+    resend_api_key: str = ""
+    resend_from: str = "ALPHARISE <noreply@alphariseinnovation.com>"
     contact_notify_email: str = "admin@alphariseinnovation.com"
     hr_notify_email: str = "admin@alphariseinnovation.com"
 
@@ -68,6 +60,13 @@ class Settings(BaseSettings):
     bootstrap_admin_full_name: str = "ALPHARISE Admin"
 
     log_level: str = "INFO"
+
+    @field_validator("resend_api_key", "resend_from", "contact_notify_email", mode="before")
+    @classmethod
+    def strip_email_settings(cls, value: object) -> object:
+        if isinstance(value, str):
+            return value.strip()
+        return value
 
     @field_validator("cors_origins", mode="before")
     @classmethod
@@ -107,12 +106,6 @@ class Settings(BaseSettings):
             return None
         return value
 
-    @model_validator(mode="after")
-    def validate_smtp_transport(self) -> "Settings":
-        if self.smtp_use_tls and self.smtp_use_ssl:
-            raise ValueError("Set only one of SMTP_USE_TLS or SMTP_USE_SSL to true")
-        return self
-
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
@@ -126,11 +119,12 @@ class Settings(BaseSettings):
         return self.max_upload_size_mb * 1024 * 1024
 
     def __repr__(self) -> str:
-        """Never expose SMTP_PASSWORD (or other secrets) in repr/logs."""
+        """Never expose RESEND_API_KEY in repr/logs."""
+        key = self.resend_api_key or ""
+        masked = ("***" + key[-4:]) if len(key) > 4 else ("***" if key else "")
         return (
-            f"Settings(app_env={self.app_env!r}, smtp_host={self.smtp_host!r}, "
-            f"smtp_port={self.smtp_port}, smtp_username={self.smtp_username!r}, "
-            f"smtp_from={self.smtp_from_email!r}, smtp_password={'***' if self.smtp_password else ''})"
+            f"Settings(app_env={self.app_env!r}, resend_from={self.resend_from!r}, "
+            f"contact_notify={self.contact_notify_email!r}, resend_api_key={masked!r})"
         )
 
 
