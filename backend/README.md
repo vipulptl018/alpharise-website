@@ -1,52 +1,28 @@
-# ALPHARISE Production API
+# ALPHARISE API — Contact backend (Render Free)
 
-Enterprise FastAPI backend for **ALPHARISE INNOVATION PRIVATE LIMITED**.
+Lightweight FastAPI service for the corporate website **Contact Form** only.
 
-Powers:
+**Production:** Render Free + Supabase PostgreSQL + Gmail SMTP  
+**Not used:** Docker Compose, Nginx/VPS, Redis, Celery, Android APIs
 
-- Corporate website integrations
-- TechRise Academy leads
-- Careers / Host / Creator registrations
-- Blog CMS APIs
-- Admin dashboard analytics
-- Social Voice Phase 2 data model (calling deferred)
+## Deploy docs
 
-## Stack
+- **[FINAL_DEPLOYMENT_REPORT.md](./FINAL_DEPLOYMENT_REPORT.md)** — final status board
+- **[DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md)** — ordered checklist
+- **[SUPABASE_SETUP.md](./SUPABASE_SETUP.md)** — database URL
+- **[RENDER_SETUP.md](./RENDER_SETUP.md)** — Render Free steps + rollback
+- **[VERCEL_ENV_SETUP.md](./VERCEL_ENV_SETUP.md)** — frontend env wiring
 
-Python 3.13 · FastAPI · PostgreSQL · SQLAlchemy 2 · Alembic · Pydantic v2 · JWT · Redis (optional) · Docker · Nginx
+## Render settings
 
-## Architecture
+| Setting | Value |
+|---------|--------|
+| Root Directory | `backend` |
+| Runtime | Docker |
+| Health Check | `/health` |
+| Startup | `alembic upgrade head && gunicorn -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT app.main:app` |
 
-Clean architecture layers:
-
-- `app/api/v1` — HTTP adapters
-- `app/schemas` — Pydantic contracts
-- `app/services` — business logic
-- `app/repositories` — persistence
-- `app/models` — SQLAlchemy ORM
-- `app/core` — config, security, logging
-- `app/deps` — dependency injection
-
-## Quick start (Docker)
-
-```bash
-cd backend
-cp .env.example .env
-# edit SECRET_KEY and SMTP settings
-docker compose up --build
-```
-
-- API: http://localhost:8000  
-- Nginx: http://localhost:8080  
-- Swagger: http://localhost:8000/docs  
-- ReDoc: http://localhost:8000/redoc  
-
-Bootstrap admin (from `.env`):
-
-- Email: `BOOTSTRAP_ADMIN_EMAIL`
-- Password: `BOOTSTRAP_ADMIN_PASSWORD`
-
-## Local development
+## Local run (no Compose)
 
 ```bash
 python -m venv .venv
@@ -54,50 +30,18 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
+# Set SECRET_KEY, DATABASE_URL, SMTP_PASSWORD
 alembic upgrade head
 uvicorn app.main:app --reload --port 8000
-pytest
 ```
 
-## Key endpoints
+- API: http://localhost:8000  
+- Swagger: http://localhost:8000/docs  
+- Health: http://localhost:8000/health  
 
-| Method | Path | Auth |
-|--------|------|------|
-| POST | `/api/v1/contact` | Public |
-| POST | `/api/v1/newsletter` | Public |
-| POST | `/api/v1/academy/enquiries` | Public |
-| POST | `/api/v1/careers/applications` | Public (multipart) |
-| POST | `/api/v1/hosts/register` | Public |
-| POST | `/api/v1/creators/register` | Public |
-| GET/POST | `/api/v1/blog/*` | Public read / staff write |
-| POST | `/api/v1/auth/login` | Public |
-| GET | `/api/v1/dashboard/stats` | Staff |
-| GET | `/health` | Public |
-
-Website contact form expects:
+Website Contact Form expects:
 
 `POST ${NEXT_PUBLIC_API_URL}/api/v1/contact`
-
-CORS allows:
-
-- `http://localhost:3000`
-- `https://alphariseinnovation.com`
-- `https://www.alphariseinnovation.com`
-
-## Social Voice Phase 2
-
-Database models are ready for profiles, wallets, coin packages, transactions, gifts, leaderboard, notifications, reports, blocks, withdrawals, call history, and community reports.
-
-Calling functionality is intentionally not implemented yet. See `/api/v1/social-voice/status`.
-
-## Production checklist
-
-1. Set a long random `SECRET_KEY`
-2. Configure real SMTP credentials
-3. Change bootstrap admin password after first login
-4. Put TLS termination in front of Nginx
-5. Back up PostgreSQL regularly
-6. Keep `uploads/` on persistent volume
 
 ## License
 

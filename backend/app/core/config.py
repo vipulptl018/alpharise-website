@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import Field, field_validator
+from pydantic import AliasChoices, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,6 +10,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
+        populate_by_name=True,
     )
 
     app_name: str = "ALPHARISE API"
@@ -30,24 +31,31 @@ class Settings(BaseSettings):
     database_url: str = Field(
         default="postgresql+psycopg2://postgres:postgres@localhost:5432/alpharise"
     )
-    redis_url: str | None = "redis://localhost:6379/0"
+    # Optional — leave unset on Render Free (Contact-only stack does not need Redis)
+    redis_url: str | None = None
 
     cors_origins: str = (
         "http://localhost:3000,"
         "https://alphariseinnovation.com,"
         "https://www.alphariseinnovation.com"
     )
+    # Allows Vercel preview deployments: https://*.vercel.app
+    cors_origin_regex: str | None = r"https://.*\.vercel\.app"
 
     rate_limit_default: str = "60/minute"
     rate_limit_auth: str = "10/minute"
     rate_limit_public: str = "20/minute"
 
-    smtp_host: str = "smtp.example.com"
+    smtp_host: str = "smtp.gmail.com"
     smtp_port: int = 587
-    smtp_username: str = ""
+    smtp_username: str = "alphariseinnovations@gmail.com"
     smtp_password: str = ""
     smtp_use_tls: bool = True
-    smtp_from_email: str = "noreply@alphariseinnovation.com"
+    smtp_use_ssl: bool = False
+    smtp_from_email: str = Field(
+        default="alphariseinnovations@gmail.com",
+        validation_alias=AliasChoices("SMTP_FROM", "SMTP_FROM_EMAIL", "smtp_from_email"),
+    )
     smtp_from_name: str = "ALPHARISE"
     contact_notify_email: str = "admin@alphariseinnovation.com"
     hr_notify_email: str = "admin@alphariseinnovation.com"
@@ -68,6 +76,19 @@ class Settings(BaseSettings):
             return ",".join(str(item) for item in value)
         return str(value or "")
 
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def normalize_database_url(cls, value: object) -> object:
+        """Accept Supabase/Render postgres:// URLs; force psycopg2 driver."""
+        if not isinstance(value, str) or not value.strip():
+            return value
+        url = value.strip()
+        if url.startswith("postgres://"):
+            url = "postgresql://" + url[len("postgres://") :]
+        if url.startswith("postgresql://"):
+            url = "postgresql+psycopg2://" + url[len("postgresql://") :]
+        return url
+
     @field_validator("redis_url", mode="before")
     @classmethod
     def empty_redis_to_none(cls, value: object) -> object:
@@ -76,6 +97,21 @@ class Settings(BaseSettings):
         if isinstance(value, str) and not value.strip():
             return None
         return value
+
+    @field_validator("cors_origin_regex", mode="before")
+    @classmethod
+    def empty_cors_regex_to_none(cls, value: object) -> object:
+        if value is None:
+            return None
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
+
+    @model_validator(mode="after")
+    def validate_smtp_transport(self) -> "Settings":
+        if self.smtp_use_tls and self.smtp_use_ssl:
+            raise ValueError("Set only one of SMTP_USE_TLS or SMTP_USE_SSL to true")
+        return self
 
     @property
     def cors_origin_list(self) -> list[str]:
@@ -88,6 +124,14 @@ class Settings(BaseSettings):
     @property
     def max_upload_bytes(self) -> int:
         return self.max_upload_size_mb * 1024 * 1024
+
+    def __repr__(self) -> str:
+        """Never expose SMTP_PASSWORD (or other secrets) in repr/logs."""
+        return (
+            f"Settings(app_env={self.app_env!r}, smtp_host={self.smtp_host!r}, "
+            f"smtp_port={self.smtp_port}, smtp_username={self.smtp_username!r}, "
+            f"smtp_from={self.smtp_from_email!r}, smtp_password={'***' if self.smtp_password else ''})"
+        )
 
 
 @lru_cache

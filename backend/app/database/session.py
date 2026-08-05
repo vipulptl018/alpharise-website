@@ -7,12 +7,16 @@ from app.core.config import get_settings
 
 settings = get_settings()
 
+# Free-tier Supabase / Render: keep pool small to avoid connection exhaustion.
+_pool_size = 5 if settings.is_production else 10
+_max_overflow = 5 if settings.is_production else 20
+
 engine = create_engine(
     settings.database_url,
     pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20,
-    pool_recycle=1800,
+    pool_size=_pool_size,
+    max_overflow=_max_overflow,
+    pool_recycle=300 if settings.is_production else 1800,
 )
 
 SessionLocal = sessionmaker(

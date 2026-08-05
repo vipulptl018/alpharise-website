@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, FastAPI, Request, status
@@ -52,6 +53,9 @@ def bootstrap_admin() -> None:
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     logger.info("Starting %s v%s", settings.app_name, settings.app_version)
+    Path(settings.upload_dir).mkdir(parents=True, exist_ok=True)
+    for sub in ("resumes", "images", "documents"):
+        (Path(settings.upload_dir) / sub).mkdir(parents=True, exist_ok=True)
     bootstrap_admin()
     yield
     logger.info("Shutting down %s", settings.app_name)
@@ -90,6 +94,7 @@ def create_app() -> FastAPI:
     application.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origin_list,
+        allow_origin_regex=settings.cors_origin_regex,
         allow_credentials=True,
         allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         allow_headers=["*"],
