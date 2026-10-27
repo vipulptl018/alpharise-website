@@ -94,7 +94,7 @@ const g = (
   height = 844
 ): GalleryItem => ({ id, file: `screens/${id}.webp`, width, height, category });
 
-/** The one screen shown on each business-type page; titles are in the copy, keyed by id. */
+/** The screens shown on the business-type pages (two each); titles are in the copy, keyed by id. */
 export const gallery: GalleryItem[] = [
   g("ksk-pack-registers", "Registers"),
   g("ksk-stock-board", "Stock"),
@@ -104,6 +104,12 @@ export const gallery: GalleryItem[] = [
   g("irr-pipe-grid", "Stock"),
   g("irr-warranty", "Stock"),
   g("ksk-licences", "Registers"),
+  g("irr-irr-land", "Irrigation"),
+  g("irr-billing", "Billing"),
+  g("irr-gst", "Reports"),
+  g("ksk-todays-jobs", "Registers"),
+  g("sol-projects", "Stock"),
+  g("nur-lots", "Stock"),
 ];
 
 /**

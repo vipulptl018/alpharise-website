@@ -26,16 +26,16 @@ export const isDetailSlug = (value: string): value is DetailSlug =>
 export const detailPath = (lang: Lang, slug: DetailSlug) =>
   lang === "en" ? `/sinchan-mitra/for/${slug}` : `/sinchan-mitra/${lang}/for/${slug}`;
 
-/** The one screen (a gallery id) shown on each detail page. */
+/** The two screens (gallery ids) shown on each detail page. */
 export const detailScreens: Record<DetailSlug, string[]> = {
-  "krushi-seva-kendra": ["ksk-pack-registers"],
-  "fertilizer-dealer": ["ksk-stock-board"],
-  "seed-dealer": ["ksk-batches"],
-  "pesticide-dealer": ["ksk-regulated-sale"],
-  "irrigation-dealer": ["irr-irr-file"],
-  "pipe-pvc-store": ["irr-pipe-grid"],
-  "solar-dealer": ["irr-warranty"],
-  nursery: ["ksk-licences"],
+  "krushi-seva-kendra": ["ksk-pack-registers", "ksk-regulated-sale"],
+  "fertilizer-dealer": ["ksk-stock-board", "irr-billing"],
+  "seed-dealer": ["ksk-batches", "ksk-todays-jobs"],
+  "pesticide-dealer": ["ksk-regulated-sale", "ksk-licences"],
+  "irrigation-dealer": ["irr-irr-file", "irr-irr-land"],
+  "pipe-pvc-store": ["irr-pipe-grid", "irr-gst"],
+  "solar-dealer": ["irr-warranty", "sol-projects"],
+  nursery: ["ksk-licences", "nur-lots"],
 };
 
 export type DetailCopy = {

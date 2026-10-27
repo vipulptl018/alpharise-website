@@ -513,6 +513,8 @@ const en: Copy = {
       "ksk-licences": "Licences and reminders",
       "ksk-regulated-sale": "The app refuses a banned pesticide sale",
       "ksk-todays-jobs": "Reminders for licences and expiry",
+      "sol-projects": "Solar projects",
+      "nur-lots": "Plant lots and batches",
     },
   },
   download: {
@@ -1031,6 +1033,8 @@ const mr: Copy = {
       "ksk-licences": "परवाने आणि आठवण",
       "ksk-regulated-sale": "बंदी असलेल्या कीटकनाशकाची विक्री ॲप थांबवते",
       "ksk-todays-jobs": "परवाने आणि मुदतीची आठवण",
+      "sol-projects": "सोलर प्रकल्प",
+      "nur-lots": "रोपांचे लॉट आणि बॅच",
     },
   },
   download: {
@@ -1549,6 +1553,8 @@ const hi: Copy = {
       "ksk-licences": "लाइसेंस और याद",
       "ksk-regulated-sale": "प्रतिबंधित कीटनाशक की बिक्री ऐप रोकता है",
       "ksk-todays-jobs": "लाइसेंस और मियाद की याद",
+      "sol-projects": "सोलर प्रोजेक्ट",
+      "nur-lots": "पौधों के लॉट और बैच",
     },
   },
   download: {
