@@ -39,6 +39,13 @@ const nextConfig: NextConfig = {
       fallback: [],
     };
   },
+  // Short links for the Marathi and Hindi Sinchan Mitra pages.
+  async redirects() {
+    return [
+      { source: "/mr", destination: "/sinchan-mitra/mr", permanent: false },
+      { source: "/hi", destination: "/sinchan-mitra/hi", permanent: false },
+    ];
+  },
   async headers() {
     return [
       {
