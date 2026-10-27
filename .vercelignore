@@ -12,6 +12,5 @@ backend/**
 AGENTS.md
 CLAUDE.md
 DEPLOYMENT_READINESS.md
-data/*.json
 .env*
 !.env.example

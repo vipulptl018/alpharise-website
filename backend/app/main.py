@@ -130,7 +130,7 @@ def create_app() -> FastAPI:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={
                 "success": False,
-                "message": f"Database error: {exc}",
+                "message": "A database error occurred. Please try again later.",
                 "errors": None,
             },
         )
@@ -142,7 +142,7 @@ def create_app() -> FastAPI:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={
                 "success": False,
-                "message": f"Unhandled error: {exc}",
+                "message": "Something went wrong. Please try again later.",
                 "errors": None,
             },
         )

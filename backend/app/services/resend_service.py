@@ -14,6 +14,11 @@ from app.core.logging import get_logger
 
 logger = get_logger(__name__)
 
+# Shown to API clients; the real cause is only written to the server log.
+EMAIL_UNAVAILABLE_MESSAGE = (
+    "Email delivery is temporarily unavailable. Please try again later."
+)
+
 
 class ResendService:
     def __init__(self, settings: Settings | None = None) -> None:
@@ -22,10 +27,8 @@ class ResendService:
     def _configure(self) -> None:
         api_key = (self.settings.resend_api_key or "").strip()
         if not api_key:
-            raise AppError(
-                "Resend Error: RESEND_API_KEY is not configured.",
-                status_code=502,
-            )
+            logger.error("Resend Error: RESEND_API_KEY is not configured.")
+            raise AppError(EMAIL_UNAVAILABLE_MESSAGE, status_code=502)
         # Official SDK: Authorization: Bearer <api_key> → https://api.resend.com
         resend.api_key = api_key
 
@@ -47,15 +50,11 @@ class ResendService:
         reply = (reply_to or "").strip() or None
 
         if not from_addr:
-            raise AppError(
-                "Resend Error: RESEND_FROM is not configured.",
-                status_code=502,
-            )
+            logger.error("Resend Error: RESEND_FROM is not configured.")
+            raise AppError(EMAIL_UNAVAILABLE_MESSAGE, status_code=502)
         if not to_email:
-            raise AppError(
-                "Resend Error: CONTACT_NOTIFY_EMAIL / recipient is empty.",
-                status_code=502,
-            )
+            logger.error("Resend Error: CONTACT_NOTIFY_EMAIL / recipient is empty.")
+            raise AppError(EMAIL_UNAVAILABLE_MESSAGE, status_code=502)
 
         params: dict[str, Any] = {
             "from": from_addr,
@@ -78,14 +77,10 @@ class ResendService:
             result = resend.Emails.send(params)
         except ResendError as e:
             logger.exception("Resend email failed")
-            raise AppError(
-                f"Resend Error: {str(e)}", status_code=502
-            ) from e
+            raise AppError(EMAIL_UNAVAILABLE_MESSAGE, status_code=502) from e
         except Exception as e:
             logger.exception("Resend email failed")
-            raise AppError(
-                f"Resend Error: {str(e)}", status_code=502
-            ) from e
+            raise AppError(EMAIL_UNAVAILABLE_MESSAGE, status_code=502) from e
 
         logger.info("%s", result)
         if isinstance(result, dict):

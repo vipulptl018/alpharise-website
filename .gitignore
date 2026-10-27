@@ -47,7 +47,3 @@ backend/.env.*
 
 # vercel
 .vercel
-
-# local form / newsletter storage
-/data/*.json
-!/data/.gitkeep

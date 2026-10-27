@@ -12,12 +12,14 @@ After Render is live, point the Contact Form at the Render API URL.
 From Render → Web Service → copy the public URL, for example:
 
 ```text
-https://alpharise-api.onrender.com
+https://<your-render-service>.onrender.com
 ```
 
-No trailing slash.
+Use the exact URL Render shows. The service name in Render can differ from the `alpharise-api` name in `render.yaml`, so check it before pasting (a wrong name returns 404 with `x-render-routing: no-server`). No trailing slash.
 
-Optional later: custom domain `https://api.alphariseinnovation.com` (CNAME to Render).
+Do not use `https://api.alphariseinnovation.com` for this API unless you point that hostname (CNAME) at this Render service. Today it serves a different AlphaRise backend (Sinchan Mitra), which has no `/api/v1/contact` and rejects this site's CORS origin.
+
+Render Free sleeps when idle, so the first request after a pause can take up to about a minute. The site's forms wait 60 seconds before they report a timeout.
 
 ---
 
@@ -29,8 +31,8 @@ Optional later: custom domain `https://api.alphariseinnovation.com` (CNAME to Re
 
 | Name | Value |
 |------|--------|
-| `NEXT_PUBLIC_API_URL` | `https://alpharise-api.onrender.com` |
-| `NEXT_PUBLIC_SITE_URL` | `https://alphariseinnovation.com` |
+| `NEXT_PUBLIC_API_URL` | `https://<your-render-service>.onrender.com` |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.alphariseinnovation.com` |
 
 4. Confirm there is **no** trailing slash on `NEXT_PUBLIC_API_URL`.
 5. Confirm the value is a real URL — not the literal text `NEXT_PUBLIC_API_URL`.
@@ -42,16 +44,22 @@ Optional later: custom domain `https://api.alphariseinnovation.com` (CNAME to Re
 
 ## 3. What the frontend calls
 
-Contact Form posts to:
+The Contact form posts to:
 
 ```text
 ${NEXT_PUBLIC_API_URL}/api/v1/contact
 ```
 
+The Newsletter form on `/blog` posts to:
+
+```text
+${NEXT_PUBLIC_API_URL}/api/v1/newsletter
+```
+
 Example:
 
 ```text
-https://alpharise-api.onrender.com/api/v1/contact
+https://<your-render-service>.onrender.com/api/v1/contact
 ```
 
 ---
@@ -70,7 +78,7 @@ If you test from a Vercel preview URL, Contact should still work.
 
 ## 5. Verify from the live site
 
-1. Open https://alphariseinnovation.com/contact
+1. Open https://www.alphariseinnovation.com/contact
 2. Submit the form with a real test message.
 3. Expect success message in the UI.
 4. Confirm:

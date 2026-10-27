@@ -33,10 +33,7 @@ const geistMono = Geist_Mono({
 
 const SITE_URL = getSiteUrl();
 
-const metadataBase =
-  SITE_URL.startsWith("http")
-    ? new URL(SITE_URL)
-    : new URL("https://alphariseinnovation.com");
+const metadataBase = new URL(SITE_URL);
 
 export const metadata: Metadata = {
   metadataBase,

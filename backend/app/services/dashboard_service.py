@@ -2,6 +2,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
+from app.core.logging import get_logger
 from app.repositories.contact_repository import ContactRepository
 from app.repositories.content_repository import (
     AcademyRepository,
@@ -13,6 +14,8 @@ from app.repositories.content_repository import (
 from app.repositories.newsletter_repository import NewsletterRepository
 from app.repositories.user_repository import UserRepository
 from app.schemas import DashboardStats, HealthComponent, HealthResponse
+
+logger = get_logger(__name__)
 
 
 class DashboardService:
@@ -47,9 +50,13 @@ class HealthService:
         try:
             self.db.execute(text("SELECT 1"))
             components.append(HealthComponent(name="database", status="ok"))
-        except Exception as exc:
+        except Exception:
+            # /health is public: keep the driver error (host, user, SQL) in the log only.
+            logger.exception("Health check: database unreachable")
             components.append(
-                HealthComponent(name="database", status="error", detail=str(exc))
+                HealthComponent(
+                    name="database", status="error", detail="Database unavailable"
+                )
             )
 
         overall = "ok" if all(c.status == "ok" for c in components) else "degraded"

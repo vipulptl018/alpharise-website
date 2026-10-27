@@ -30,7 +30,8 @@ class ContactService:
             status="new",
         )
         saved = self.repo.add(inquiry)
-        # Do not catch/replace Resend or AppError — preserve exact exception detail.
+        # Not caught on purpose: a failed notification surfaces as a 502 to the caller
+        # (ResendService logs the real cause and returns a generic message).
         self.email.send_contact_notification(saved)
         return saved
 

@@ -26,12 +26,12 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   const siteUrl = getSiteUrl();
 
+  // No lastModified: every page would just report the build time, which is not
+  // a real change date and makes crawlers distrust the field.
   return routes.map((path) => ({
     url: `${siteUrl}${path === "/" ? "" : path}`,
-    lastModified,
     changeFrequency:
       path === "/" || path === "/blog" || path === "/support"
         ? "weekly"

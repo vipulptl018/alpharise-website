@@ -36,6 +36,7 @@ Lightweight Contact-only stack: **Vercel + Render Free + Supabase Free + Resend*
 
 - [ ] Root Directory = `backend`, Docker, Health = `/health`, Free
 - [ ] Env: `SECRET_KEY`, `DATABASE_URL`, `RESEND_API_KEY`, `RESEND_FROM`, `CONTACT_NOTIFY_EMAIL`, `APP_ENV=production`, `CORS_ORIGINS`
+- [ ] Env: `BOOTSTRAP_ADMIN_PASSWORD` set to a strong unique value (the code default `ChangeMeAdmin123!` is public in the repo)
 
 ---
 
@@ -44,4 +45,6 @@ Lightweight Contact-only stack: **Vercel + Render Free + Supabase Free + Resend*
 - [ ] `GET /health` → 200
 - [ ] `GET /docs` → 200
 - [ ] `POST /api/v1/contact` → 201 + email received
+- [ ] `POST /api/v1/newsletter` → 201 (second call with the same email → 409)
+- [ ] Error responses (500 / 502 / `/health` when the DB is down) show generic text only; details are in the Render logs
 - [ ] Vercel `NEXT_PUBLIC_API_URL` points to Render URL

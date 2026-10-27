@@ -3,7 +3,16 @@ function envOr(name: string, fallback: string): string {
   return value ? value : fallback;
 }
 
-const DEFAULT_SITE_URL = "https://alphariseinnovation.com";
+/** Canonical host. The bare domain 308-redirects to www on Vercel. */
+const DEFAULT_SITE_URL = "https://www.alphariseinnovation.com";
+
+/** Rewrites the bare production domain to www so canonical URLs never point at a redirect. */
+function toCanonicalHost(url: string): string {
+  return url.replace(
+    /^(https?:\/\/)alphariseinnovation\.com(?=[/:]|$)/i,
+    "$1www.alphariseinnovation.com"
+  );
+}
 
 /** Safe public site origin — never returns env variable names or non-http values. */
 export function getSiteUrl(): string {
@@ -18,15 +27,10 @@ export function getSiteUrl(): string {
     return DEFAULT_SITE_URL;
   }
 
-  return url.replace(/\/$/, "");
+  return toCanonicalHost(url.replace(/\/$/, ""));
 }
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.startsWith("http") &&
-  process.env.NEXT_PUBLIC_SITE_URL !== "NEXT_PUBLIC_SITE_URL" &&
-  process.env.NEXT_PUBLIC_SITE_URL !== "NEXT_PUBLIC_API_URL"
-    ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")
-    : DEFAULT_SITE_URL;
+export const SITE_URL = getSiteUrl();
 
 export const SITE_NAME = "ALPHARISE";
 

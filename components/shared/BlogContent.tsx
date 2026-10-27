@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
+import { submitNewsletterSubscription } from "@/lib/api/newsletter";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
@@ -212,7 +213,7 @@ export function BlogContent() {
             <h2 className={ds.ctaTitle}>Get product and engineering updates</h2>
             <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600">
               Occasional insights on software, AI, cloud, and careers. Duplicate
-              emails are rejected. Messages are stored locally for follow-up.
+              emails are rejected.
             </p>
             {subscribed ? (
               <p className="mt-6 text-sm font-medium text-emerald-700">
@@ -230,29 +231,16 @@ export function BlogContent() {
                     "newsletter-email"
                   ) as HTMLInputElement | null;
                   const email = emailInput?.value.trim() || "";
-                  try {
-                    const response = await fetch("/api/newsletter", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ email }),
-                    });
-                    const result = (await response.json()) as {
-                      message?: string;
-                      error?: string;
-                    };
-                    if (!response.ok) {
-                      setStatus("error");
-                      setFeedback(result.error || "Unable to subscribe.");
-                      return;
-                    }
-                    setSubscribed(true);
-                    setStatus("success");
-                    setFeedback(result.message || "Subscribed successfully.");
-                    form.reset();
-                  } catch {
+                  const result = await submitNewsletterSubscription(email);
+                  if (!result.ok) {
                     setStatus("error");
-                    setFeedback("Unable to subscribe right now.");
+                    setFeedback(result.message);
+                    return;
                   }
+                  setSubscribed(true);
+                  setStatus("success");
+                  setFeedback(result.message);
+                  form.reset();
                 }}
               >
                 <Input
