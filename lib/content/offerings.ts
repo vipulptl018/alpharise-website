@@ -1,7 +1,9 @@
 /**
  * Unified catalog for Products page — capabilities and platforms offered by ALPHARISE.
  */
-export const productsPageContent = [
+import { FEATURES } from "@/lib/features";
+
+const allProductsPageContent = [
   {
     id: "software-development",
     title: "Software Development",
@@ -171,6 +173,11 @@ export const productsPageContent = [
     technologies: ["Flutter", "Node.js", "Real-time audio", "Cloud infrastructure"],
   },
 ] as const;
+
+/** TechRise Academy stays in the data above but is not listed while FEATURES.academy is false. */
+export const productsPageContent = allProductsPageContent.filter(
+  (product) => FEATURES.academy || product.id !== "techrise-academy"
+);
 
 export const servicesContent = [
   {
@@ -381,7 +388,14 @@ export const homeServices = [
   },
 ] as const;
 
-export const homeProducts = [
+const allHomeProducts = [
+  {
+    title: "Sinchan Mitra",
+    description:
+      "AgriBusiness SaaS for agri-input shops and irrigation dealers: billing, stock, udhaar, reports, and irrigation files in Marathi, Hindi, and English.",
+    cta: "Open Sinchan Mitra",
+    href: "/sinchan-mitra",
+  },
   {
     title: "Software Development",
     description:
@@ -439,3 +453,7 @@ export const homeProducts = [
     href: "/social-voice",
   },
 ] as const;
+
+export const homeProducts = allHomeProducts.filter(
+  (product) => FEATURES.academy || product.href !== "/academy"
+);

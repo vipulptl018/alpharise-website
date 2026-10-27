@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { PageHero } from "@/components/shared/PageHero";
 import { PageCTA } from "@/components/shared/PageCTA";
@@ -26,6 +27,7 @@ import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { LastUpdated } from "@/components/shared/LastUpdated";
 import { academyCourses } from "@/lib/content/academy-courses";
 import { ds } from "@/lib/design-system";
+import { FEATURES } from "@/lib/features";
 import { cn } from "@/lib/utils";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -57,6 +59,9 @@ const faqs = [
 ];
 
 export default function AcademyPage() {
+  // Hidden from the public site; flip FEATURES.academy in lib/features.ts to show it again.
+  if (!FEATURES.academy) notFound();
+
   return (
     <>
       <Breadcrumbs
@@ -131,7 +136,7 @@ export default function AcademyPage() {
                       <div
                         className={cn(
                           ds.iconGradient,
-                          "from-sky-500 to-cyan-400"
+                          "from-violet-500 to-cyan-400"
                         )}
                       >
                         <span className="text-sm font-semibold">TR</span>

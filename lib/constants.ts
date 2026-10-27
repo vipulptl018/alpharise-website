@@ -1,3 +1,5 @@
+import { FEATURES } from "@/lib/features";
+
 function envOr(name: string, fallback: string): string {
   const value = process.env[name]?.trim();
   return value ? value : fallback;
@@ -40,7 +42,7 @@ export const COMPANY_NAME = envOr(
 );
 
 export const COMPANY_TAGLINE =
-  "Software development, AI solutions, cloud platforms, and TechRise Academy.";
+  "Software development, AI solutions, cloud platforms, and the Sinchan Mitra AgriBusiness SaaS.";
 
 export const LEGAL = {
   legalName: COMPANY_NAME,
@@ -72,10 +74,10 @@ export const COMPANY = {
   legalName: COMPANY_NAME,
   tagline: COMPANY_TAGLINE,
   description:
-    "ALPHARISE INNOVATION PRIVATE LIMITED provides software development, website development, mobile application development, AI solutions, cloud solutions, and IT training through TechRise Academy. The company is also developing a Social Voice Communication Platform for Android that is preparing for public release.",
+    "ALPHARISE INNOVATION PRIVATE LIMITED provides software development, website development, mobile application development, AI solutions, cloud solutions, and the Sinchan Mitra AgriBusiness SaaS for agri-input and irrigation shops. The company is also developing a Social Voice Communication Platform for Android that is preparing for public release.",
   foundedYear: 2026,
   overview:
-    "ALPHARISE INNOVATION PRIVATE LIMITED builds and delivers software, websites, Android mobile applications, AI solutions, and cloud systems for businesses. Through TechRise Academy we provide professional IT training, and we are preparing a Social Voice Communication Platform for public release on Android.",
+    "ALPHARISE INNOVATION PRIVATE LIMITED builds and delivers software, websites, Android mobile applications, AI solutions, and cloud systems for businesses. Through Sinchan Mitra we serve agri-input and irrigation shops, and we are preparing a Social Voice Communication Platform for public release on Android.",
 } as const;
 
 export const CONTACT = {
@@ -154,7 +156,13 @@ export const CTA = {
   },
 } as const;
 
-export const BUSINESS_DIVISIONS = [
+const ALL_BUSINESS_DIVISIONS = [
+  {
+    title: "Sinchan Mitra",
+    description:
+      "AgriBusiness SaaS for agri-input shops, irrigation dealers, and related shops: billing, stock, udhaar, reports, and irrigation files in Marathi, Hindi, and English.",
+    href: "/sinchan-mitra",
+  },
   {
     title: "Software Development",
     description:
@@ -204,3 +212,7 @@ export const BUSINESS_DIVISIONS = [
     href: "/academy",
   },
 ] as const;
+
+export const BUSINESS_DIVISIONS = ALL_BUSINESS_DIVISIONS.filter(
+  (division) => FEATURES.academy || division.href !== "/academy"
+);

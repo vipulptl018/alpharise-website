@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "What services do you provide?",
     answer:
-      "We provide software development, website development, Android mobile application development (Flutter + Node.js), AI solutions, cloud solutions, enterprise software, TechRise Academy training, and a Social Voice Communication Platform for Android that is preparing for public release.",
+      "We provide software development, website development, Android mobile application development (Flutter + Node.js), AI solutions, cloud solutions, enterprise software, the Sinchan Mitra AgriBusiness SaaS, and a Social Voice Communication Platform for Android that is preparing for public release.",
   },
   {
     question: "How long does development take?",
@@ -37,9 +37,9 @@ const faqs = [
       "Yes. We develop custom software covering operations, finance workflows, inventory, and related business processes — tailored to your requirements and scalable for growth.",
   },
   {
-    question: "Do you offer placement assistance?",
+    question: "What is Sinchan Mitra?",
     answer:
-      "Through TechRise Academy, we offer placement assistance including live projects, resume building, mock interviews, and career guidance. Placement assistance does not guarantee employment.",
+      "Sinchan Mitra (सिंचन मित्र) is our AgriBusiness SaaS for agri-input shops, irrigation dealers, and related shops: billing, stock, udhaar, reports, and irrigation files in Marathi, Hindi, and English. See /sinchan-mitra for screens and features.",
   },
   {
     question: "Where can I read Social Voice platform documentation?",

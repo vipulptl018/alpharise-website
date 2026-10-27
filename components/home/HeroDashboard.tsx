@@ -25,7 +25,7 @@ function GlassCard({
   return (
     <div
       className={cn(
-        "rounded-3xl border border-[#E2E8F0]/90 bg-white/90 shadow-xl shadow-blue-500/10 ring-1 ring-[#BFDBFE]/40 backdrop-blur-2xl transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-500/15",
+        "rounded-3xl border border-[#E2E8F0]/90 bg-white/90 shadow-xl shadow-violet-500/10 ring-1 ring-[#DDD6FE]/40 backdrop-blur-2xl transition-shadow duration-300 hover:shadow-2xl hover:shadow-violet-500/15",
         className
       )}
     >
@@ -49,7 +49,7 @@ function AnalyticsCard() {
           </p>
           <p className="mt-1 text-xs text-emerald-600">+18.2% this month</p>
         </div>
-        <div className="flex size-9 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#2563EB_0%,#3B82F6_100%)] text-white shadow-[0_8px_18px_-10px_rgba(37,99,235,0.55)]">
+        <div className="flex size-9 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#4F46E5_0%,#7C3AED_100%)] text-white shadow-[0_8px_18px_-10px_rgba(79,70,229,0.55)]">
           <Activity className="size-4" strokeWidth={1.75} />
         </div>
       </div>
@@ -58,7 +58,7 @@ function AnalyticsCard() {
         {bars.map((height, index) => (
           <m.div
             key={index}
-            className="flex-1 rounded-t-md bg-gradient-to-t from-[#1D4ED8] via-[#2563EB] to-[#93C5FD]"
+            className="flex-1 rounded-t-md bg-gradient-to-t from-[#4338CA] via-[#4F46E5] to-[#C4B5FD]"
             initial={{ height: 0 }}
             animate={{ height: `${height}%` }}
             transition={{
@@ -77,7 +77,7 @@ function AICard() {
   return (
     <GlassCard className="w-full p-5">
       <div className="flex items-center gap-3">
-        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#EEF6FF] to-[#DBEAFE] text-[#2563EB] ring-1 ring-[#BFDBFE]">
+        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] text-[#4F46E5] ring-1 ring-[#DDD6FE]">
           <BrainCircuit className="size-4" strokeWidth={1.75} />
         </div>
         <div>
@@ -102,7 +102,7 @@ function AICard() {
 
       <div className="mt-4 overflow-hidden rounded-xl bg-slate-950/[0.03] p-3">
         <div className="flex items-center gap-2 text-[11px] text-slate-500">
-          <Sparkles className="size-3.5 text-[#2563EB]" />
+          <Sparkles className="size-3.5 text-[#4F46E5]" />
           <span>Realtime reasoning active</span>
           <m.span
             className="ml-auto size-1.5 rounded-full bg-emerald-500"
@@ -120,7 +120,7 @@ function APICard() {
     <GlassCard className="w-full p-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#EEF6FF] to-white text-[#1D4ED8] ring-1 ring-[#DBEAFE]">
+        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5F3FF] to-white text-[#4338CA] ring-1 ring-[#EDE9FE]">
             <Terminal className="size-4" strokeWidth={1.75} />
           </div>
           <div>
@@ -135,7 +135,7 @@ function APICard() {
 
       <div className="mt-5 space-y-2.5 font-mono text-[11px]">
         <div className="flex items-center justify-between rounded-lg bg-slate-950/[0.03] px-3 py-2">
-          <span className="text-[#2563EB]">GET</span>
+          <span className="text-[#4F46E5]">GET</span>
           <span className="text-slate-600">/v1/projects</span>
           <span className="text-slate-400">42ms</span>
         </div>
@@ -153,7 +153,7 @@ function CloudCard() {
   return (
     <GlassCard className="w-full p-5">
       <div className="flex items-center gap-3">
-        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#EEF6FF] to-[#DBEAFE] text-[#2563EB] ring-1 ring-[#BFDBFE]">
+        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] text-[#4F46E5] ring-1 ring-[#DDD6FE]">
           <Cloud className="size-4" strokeWidth={1.75} />
         </div>
         <div>
@@ -192,7 +192,7 @@ export function HeroDashboard() {
     <div className="relative mx-auto h-[520px] w-full max-w-[560px] sm:h-[560px] lg:mx-0 lg:max-w-none xl:h-[600px]">
       <div
         aria-hidden
-        className="absolute top-1/2 left-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.24)_0%,transparent_70%)] blur-3xl"
+        className="absolute top-1/2 left-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(79,70,229,0.24)_0%,transparent_70%)] blur-3xl"
       />
 
       <Float

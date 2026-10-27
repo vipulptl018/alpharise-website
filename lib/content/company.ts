@@ -3,10 +3,10 @@ import type { IconName } from "@/components/shared/SectionBlocks";
 export const companyOverview = {
   title: "Company Overview",
   description:
-    "ALPHARISE INNOVATION PRIVATE LIMITED provides software development, website development, mobile application development, AI solutions, cloud solutions, enterprise software, and IT training through TechRise Academy.",
+    "ALPHARISE INNOVATION PRIVATE LIMITED provides software development, website development, mobile application development, AI solutions, cloud solutions, enterprise software, and the Sinchan Mitra AgriBusiness SaaS.",
   body: [
     "We partner with startups, SMEs, and enterprises to plan, build, and operate digital systems that support measurable business outcomes. Our delivery model combines product thinking, disciplined engineering, and transparent communication.",
-    "We are developing a Social Voice Communication Platform for Android that is preparing for public release, and we train industry-ready talent through TechRise Academy under clear product, safety, and support policies.",
+    "We are developing a Social Voice Communication Platform for Android that is preparing for public release, and we build Sinchan Mitra, an AgriBusiness SaaS for agri-input and irrigation shops, under clear product, safety, and support policies.",
   ],
 };
 

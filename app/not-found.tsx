@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <section className={cn(ds.section, ds.sectionWhite)}>
       <Container size="md" className="text-center">
-        <p className="text-sm font-medium tracking-wide text-sky-700 uppercase">
+        <p className="text-sm font-medium tracking-wide text-violet-700 uppercase">
           404
         </p>
         <h1 className="font-heading mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">

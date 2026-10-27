@@ -18,6 +18,7 @@ import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { submitNewsletterSubscription } from "@/lib/api/newsletter";
 import { ds } from "@/lib/design-system";
+import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 
 const categories = [
@@ -88,6 +89,7 @@ export function BlogContent() {
     "idle"
   );
   const [feedback, setFeedback] = useState("");
+  const hydrated = useHydrated();
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -254,7 +256,7 @@ export function BlogContent() {
                 <Button
                   type="submit"
                   className={ds.btnPrimary}
-                  disabled={status === "loading"}
+                  disabled={status === "loading" || !hydrated}
                 >
                   {status === "loading" ? "Saving…" : "Subscribe"}
                 </Button>
@@ -266,9 +268,9 @@ export function BlogContent() {
               </p>
             ) : null}
             <p className="mt-4 text-xs text-slate-500">
-              Looking for training? Visit{" "}
-              <Link href="/academy" className="underline underline-offset-2">
-                TechRise Academy
+              Looking for software for your agri shop? See{" "}
+              <Link href="/sinchan-mitra" className="underline underline-offset-2">
+                Sinchan Mitra
               </Link>
               .
             </p>

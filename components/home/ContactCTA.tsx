@@ -16,17 +16,17 @@ export default function ContactCTA() {
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <AmbientBlob
-          className="absolute -top-24 left-[10%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.4)_0%,transparent_68%)]"
+          className="absolute -top-24 left-[10%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(79,70,229,0.4)_0%,transparent_68%)]"
           animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <AmbientBlob
-          className="absolute right-[5%] bottom-[-10%] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.28)_0%,transparent_70%)]"
+          className="absolute right-[5%] bottom-[-10%] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.28)_0%,transparent_70%)]"
           animate={{ x: [0, -35, 0], y: [0, -25, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
         <AmbientBlob
-          className="absolute top-[35%] left-[45%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.16)_0%,transparent_70%)]"
+          className="absolute top-[35%] left-[45%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,rgba(196,181,253,0.16)_0%,transparent_70%)]"
           animate={{ scale: [1, 1.15, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -48,7 +48,7 @@ export default function ContactCTA() {
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg sm:leading-8">
               Partner with ALPHARISE for software development, AI solutions,
-              cloud delivery, or TechRise Academy.
+              cloud delivery, or Sinchan Mitra.
             </p>
 
             <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">

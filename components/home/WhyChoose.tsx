@@ -74,7 +74,7 @@ export default function WhyChoose() {
           <SectionTitle
             titleId="why-choose-heading"
             title="Why Choose ALPHARISE"
-            description="A professional technology company combining software engineering, AI, cloud delivery, and TechRise Academy under clear commercial and safety policies."
+            description="A professional technology company combining software engineering, AI, cloud delivery, and the Sinchan Mitra AgriBusiness SaaS under clear commercial and safety policies."
           />
         </FadeIn>
 

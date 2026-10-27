@@ -1,4 +1,5 @@
 import { academySearchItems } from "@/lib/content/academy-courses";
+import { FEATURES } from "@/lib/features";
 
 export type SearchCategory =
   | "Services"
@@ -101,6 +102,23 @@ const baseSearchIndex: SearchItem[] = [
     category: "Products",
   },
   {
+    title: "Sinchan Mitra (सिंचन मित्र)",
+    description:
+      "AgriBusiness SaaS for agri-input shops and irrigation dealers: billing, stock, udhaar, reports, irrigation files.",
+    href: "/sinchan-mitra",
+    category: "Products",
+    keywords: [
+      "agri",
+      "agribusiness",
+      "saas",
+      "krushi seva kendra",
+      "irrigation dealer",
+      "billing",
+      "gst",
+      "marathi",
+    ],
+  },
+  {
     title: "TechRise Academy",
     description: "IT training with live projects and placement assistance.",
     href: "/academy",
@@ -198,13 +216,13 @@ const baseSearchIndex: SearchItem[] = [
   },
   {
     title: "Refund Policy",
-    description: "Refund eligibility for services, academy, and coins.",
+    description: "Refund eligibility for services, subscriptions, and coins.",
     href: "/refund-policy",
     category: "Policies",
   },
   {
     title: "Pricing",
-    description: "Service, academy, and virtual coin package pricing.",
+    description: "Service, Sinchan Mitra, and virtual coin package pricing.",
     href: "/pricing",
     category: "Documentation",
   },
@@ -216,10 +234,9 @@ const baseSearchIndex: SearchItem[] = [
   },
 ];
 
-export const searchIndex: SearchItem[] = [
-  ...baseSearchIndex,
-  ...academySearchItems,
-];
+export const searchIndex: SearchItem[] = FEATURES.academy
+  ? [...baseSearchIndex, ...academySearchItems]
+  : baseSearchIndex.filter((item) => item.category !== "Academy");
 
 export function searchContent(query: string, limit = 12): SearchItem[] {
   const q = query.trim().toLowerCase();

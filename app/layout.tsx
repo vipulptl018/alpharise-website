@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { MotionProvider } from "@/components/common/MotionProvider";
+import { ScrollProgress } from "@/components/common/ScrollProgress";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -72,8 +73,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        {/* Applies a saved dark-mode choice before first paint (see ThemeToggle). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(localStorage.getItem("theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}',
+          }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-slate-950 focus:shadow-md"
@@ -82,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <OrganizationJsonLd />
         <MotionProvider>
+          <ScrollProgress />
           <Navbar />
           <main
             id="main-content"

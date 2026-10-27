@@ -1,7 +1,7 @@
 export const pricingIntro = {
   title: "Transparent pricing for services and products",
   description:
-    "ALPHARISE publishes commercial structures for consulting work, TechRise Academy programs, and Social Voice Communication Platform virtual coin packages. Formal quotes confirm taxes and final totals before payment.",
+    "ALPHARISE publishes commercial structures for consulting work, Sinchan Mitra subscriptions, and Social Voice Communication Platform virtual coin packages. Formal quotes confirm taxes and final totals before payment.",
 };
 
 export const servicePricing = [
@@ -134,7 +134,7 @@ export const productPricing = [
 export const pricingNotes = [
   "Prices are listed in Indian Rupees (INR) and are exclusive of applicable GST unless a quote states otherwise. GSTIN: Not Applicable.",
   "Virtual coins have no cash value outside the platform and are governed by the Virtual Coin Policy.",
-  "Formal invoices are issued for paid services and academy enrollments where applicable.",
+  "Formal invoices are issued for paid services and subscriptions where applicable.",
   "Refund eligibility follows the Refund Policy and the commercial agreement for each purchase.",
   "Package prices may be updated periodically; the amount shown at checkout or in a signed quote prevails.",
   "For custom project scope, contact admin@alphariseinnovation.com or visit Support.",

@@ -4,21 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none select-none focus-visible:border-[#93C5FD] focus-visible:ring-3 focus-visible:ring-[#2563EB]/35 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none select-none focus-visible:border-[#C4B5FD] focus-visible:ring-3 focus-visible:ring-[#4F46E5]/35 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-[linear-gradient(180deg,#2563EB_0%,#3B82F6_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-12px_rgba(37,99,235,0.55)] hover:bg-[linear-gradient(180deg,#1D4ED8_0%,#2563EB_100%)] hover:text-white hover:shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_16px_34px_-12px_rgba(37,99,235,0.6)]",
+          "border-transparent bg-[linear-gradient(180deg,#4F46E5_0%,#7C3AED_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-12px_rgba(79,70,229,0.55)] hover:bg-[linear-gradient(180deg,#4338CA_0%,#4F46E5_100%)] hover:text-white hover:shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_16px_34px_-12px_rgba(79,70,229,0.6)]",
         outline:
-          "border-[#CBD5E1] bg-white text-[#0F172A] shadow-sm hover:border-[#93C5FD] hover:bg-[#EEF6FF] hover:text-[#0F172A] hover:shadow-[0_10px_28px_-18px_rgba(37,99,235,0.3)] aria-expanded:bg-[#EEF6FF] aria-expanded:text-[#0F172A] dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border-[#CBD5E1] bg-white text-[#0F172A] shadow-sm hover:border-[#C4B5FD] hover:bg-[#F5F3FF] hover:text-[#0F172A] hover:shadow-[0_10px_28px_-18px_rgba(79,70,229,0.3)] aria-expanded:bg-[#F5F3FF] aria-expanded:text-[#0F172A] dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
-          "bg-[#EEF6FF] text-[#1D4ED8] shadow-sm hover:bg-[#DBEAFE] aria-expanded:bg-[#DBEAFE] aria-expanded:text-[#1D4ED8]",
+          "bg-[#F5F3FF] text-[#4338CA] shadow-sm hover:bg-[#EDE9FE] aria-expanded:bg-[#EDE9FE] aria-expanded:text-[#4338CA]",
         ghost:
-          "hover:bg-[#EEF6FF] hover:text-[#0F172A] aria-expanded:bg-[#EEF6FF] aria-expanded:text-[#0F172A] dark:hover:bg-muted/50",
+          "hover:bg-[#F5F3FF] hover:text-[#0F172A] aria-expanded:bg-[#F5F3FF] aria-expanded:text-[#0F172A] dark:hover:bg-muted/50",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-[#2563EB] underline-offset-4 hover:underline",
+        link: "text-[#4F46E5] underline-offset-4 hover:underline",
       },
       size: {
         default:

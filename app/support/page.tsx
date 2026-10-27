@@ -20,7 +20,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Support",
-  description: "Customer support for ALPHARISE INNOVATION PRIVATE LIMITED services, TechRise Academy, and the Social Voice Communication Platform.",
+  description: "Customer support for ALPHARISE INNOVATION PRIVATE LIMITED services, Sinchan Mitra, and the Social Voice Communication Platform.",
   path: "/support",
 });
 
@@ -70,9 +70,9 @@ const topics = [
       "Project status, change requests, maintenance, and technical incidents for client systems.",
   },
   {
-    title: "TechRise Academy",
+    title: "Sinchan Mitra",
     description:
-      "Course access, schedules, mentorship sessions, and placement-assistance questions.",
+      "Set-up for your business type, activation and renewal codes, backups and updates, and how-to questions about billing, stock, and reports.",
   },
   {
     title: "Social Voice Platform",
@@ -92,7 +92,7 @@ export default function SupportPage() {
       <PageHero
         eyebrow="Support"
         title="Customer Support"
-        description="Professional help for ALPHARISE services, products, TechRise Academy, and the Social Voice Communication Platform (Android app preparing for public release)."
+        description="Professional help for ALPHARISE services, products, Sinchan Mitra, and the Social Voice Communication Platform (Android app preparing for public release)."
         primaryCta={{ label: "Email Support", href: `mailto:${CONTACT.supportEmail}` }}
         secondaryCta={{ label: "Social Voice Docs", href: "/social-voice" }}
       />
@@ -119,7 +119,7 @@ export default function SupportPage() {
                   {href ? (
                     <a
                       href={href}
-                      className="mt-4 inline-flex text-sm font-medium text-sky-700 underline-offset-2 hover:underline"
+                      className="mt-4 inline-flex text-sm font-medium text-violet-700 underline-offset-2 hover:underline"
                     >
                       {value}
                     </a>

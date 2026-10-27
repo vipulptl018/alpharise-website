@@ -75,7 +75,7 @@ export default function Services() {
                     </CardDescription>
                     <Link
                       href={`/services#${id}`}
-                      className="mt-4 inline-flex text-sm font-medium text-[#2563EB] underline-offset-2 hover:underline"
+                      className="mt-4 inline-flex text-sm font-medium text-[#4F46E5] underline-offset-2 hover:underline"
                     >
                       View details
                     </Link>

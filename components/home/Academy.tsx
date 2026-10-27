@@ -86,7 +86,7 @@ export default function Academy() {
               <StaggerItem key={course.title} className="h-full">
                 <Card className={ds.card}>
                   <CardHeader className={ds.cardHeader}>
-                    <div className={cn(ds.iconGradient, "from-[#2563EB] to-[#3B82F6]")}>
+                    <div className={cn(ds.iconGradient, "from-[#4F46E5] to-[#7C3AED]")}>
                       <Icon className="size-5" strokeWidth={1.75} aria-hidden />
                     </div>
                     <CardTitle className={ds.cardTitle}>{course.title}</CardTitle>
@@ -121,7 +121,7 @@ export default function Academy() {
               key={label}
               className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600"
             >
-              <Icon className="size-4 text-[#2563EB]" aria-hidden />
+              <Icon className="size-4 text-[#4F46E5]" aria-hidden />
               {label}
             </div>
           ))}

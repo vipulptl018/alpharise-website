@@ -1,10 +1,12 @@
+import { FEATURES } from "@/lib/features";
+
 export type NavItem = {
   label: string;
   href: string;
   description?: string;
 };
 
-export const mainNavigation: NavItem[] = [
+const allMainNavigation: NavItem[] = [
   {
     label: "Home",
     href: "/",
@@ -23,7 +25,12 @@ export const mainNavigation: NavItem[] = [
   {
     label: "Products",
     href: "/products",
-    description: "Software, platform, and academy products",
+    description: "Software and platform products",
+  },
+  {
+    label: "Sinchan Mitra",
+    href: "/sinchan-mitra",
+    description: "AgriBusiness SaaS for agri-input and irrigation shops",
   },
   {
     label: "Social Voice",
@@ -52,18 +59,28 @@ export const mainNavigation: NavItem[] = [
   },
 ];
 
+/** Academy is hidden while FEATURES.academy is false (lib/features.ts). */
+export const mainNavigation: NavItem[] = allMainNavigation.filter(
+  (item) => FEATURES.academy || item.href !== "/academy"
+);
+
+const allFooterCompany = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
+  { label: "Sinchan Mitra", href: "/sinchan-mitra" },
+  { label: "Social Voice Docs", href: "/social-voice" },
+  { label: "Academy", href: "/academy" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Support", href: "/support" },
+  { label: "Careers", href: "/careers" },
+  { label: "Blog", href: "/blog" },
+] as const;
+
 export const footerNavigation = {
-  company: [
-    { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Products", href: "/products" },
-    { label: "Social Voice Docs", href: "/social-voice" },
-    { label: "Academy", href: "/academy" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Support", href: "/support" },
-    { label: "Careers", href: "/careers" },
-    { label: "Blog", href: "/blog" },
-  ],
+  company: allFooterCompany.filter(
+    (item) => FEATURES.academy || item.href !== "/academy"
+  ),
   platform: [
     { label: "Social Voice Documentation", href: "/social-voice" },
     { label: "Community Guidelines", href: "/community-guidelines" },

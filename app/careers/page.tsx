@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/layout/Container";
 import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
+import { FEATURES } from "@/lib/features";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -47,6 +48,9 @@ const roles = [
     location: "Hybrid / India",
     description: "Ship polished Android mobile experiences with Flutter and Node.js.",
   },
+];
+
+const academyRoles = [
   {
     title: "Technical Trainer",
     type: "Contract / Full-time",
@@ -54,6 +58,8 @@ const roles = [
     description: "Mentor TechRise Academy cohorts and review projects.",
   },
 ];
+
+const openRoles = FEATURES.academy ? [...roles, ...academyRoles] : roles;
 
 export default function CareersPage() {
   return (
@@ -135,10 +141,10 @@ export default function CareersPage() {
           <SectionTitle
             titleId="positions-heading"
             title="Open Positions"
-            description="Current opportunities across engineering and academy teams."
+            description="Current opportunities across our engineering teams."
           />
           <ul className={cn(ds.grid, "sm:grid-cols-2")}>
-            {roles.map((role) => (
+            {openRoles.map((role) => (
               <li key={role.title} className="h-full">
                 <Card className={ds.card}>
                   <CardHeader className={ds.cardHeader}>

@@ -64,8 +64,8 @@ export default function ServicesPage() {
         description="Tell us about your goals — we'll help you scope, design, and deliver."
         primaryLabel="Start Your Project"
         primaryHref="/contact"
-        secondaryLabel="Explore Academy"
-        secondaryHref="/academy"
+        secondaryLabel="Explore Sinchan Mitra"
+        secondaryHref="/sinchan-mitra"
         muted={false}
       />
     </>

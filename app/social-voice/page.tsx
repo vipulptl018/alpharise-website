@@ -74,7 +74,7 @@ export default function SocialVoiceDocsPage() {
                 href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Instagram
               </Link>{" "}
@@ -84,49 +84,49 @@ export default function SocialVoiceDocsPage() {
               Related policies:{" "}
               <Link
                 href="/community-guidelines"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Community Guidelines
               </Link>
               ,{" "}
               <Link
                 href="/host-policy"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Host Policy
               </Link>
               ,{" "}
               <Link
                 href="/creator-policy"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Creator Policy
               </Link>
               ,{" "}
               <Link
                 href="/user-policy"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 User Policy
               </Link>
               ,{" "}
               <Link
                 href="/virtual-coin-policy"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Virtual Coin Policy
               </Link>
               ,{" "}
               <Link
                 href="/privacy-policy"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Privacy Policy
               </Link>
               , and{" "}
               <Link
                 href="/terms"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Terms
               </Link>

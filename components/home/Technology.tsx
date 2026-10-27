@@ -23,8 +23,8 @@ const categories = [
   {
     title: "Frontend",
     icon: Layers,
-    accent: "from-[#2563EB] to-[#3B82F6]",
-    border: "from-[#60A5FA]/70 via-[#93C5FD]/40 to-transparent",
+    accent: "from-[#4F46E5] to-[#7C3AED]",
+    border: "from-[#A78BFA]/70 via-[#C4B5FD]/40 to-transparent",
     items: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
   },
   {
@@ -44,15 +44,15 @@ const categories = [
   {
     title: "Cloud",
     icon: Cloud,
-    accent: "from-slate-700 to-sky-500",
-    border: "from-slate-500/60 via-sky-400/40 to-transparent",
+    accent: "from-slate-700 to-violet-500",
+    border: "from-slate-500/60 via-violet-400/40 to-transparent",
     items: ["AWS", "Docker", "Cloudflare"],
   },
   {
     title: "DevOps",
     icon: Workflow,
-    accent: "from-cyan-600 to-sky-400",
-    border: "from-cyan-400/70 via-sky-300/40 to-transparent",
+    accent: "from-cyan-600 to-violet-400",
+    border: "from-cyan-400/70 via-violet-300/40 to-transparent",
     items: ["GitHub", "Git", "Linux", "CI/CD"],
   },
   {

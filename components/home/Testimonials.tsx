@@ -34,9 +34,9 @@ const engagementThemes = [
       "Practical AI integrations and cloud architecture, deployment, and monitoring for production workloads.",
   },
   {
-    title: "TechRise Academy training",
+    title: "Sinchan Mitra for agri shops",
     description:
-      "Career-focused IT training with live projects, mentorship, mock interviews, and placement assistance.",
+      "AgriBusiness SaaS for agri-input and irrigation shops: set-up by business type, Marathi, Hindi, and English screens, and support during roll-out.",
   },
   {
     title: "Social Voice platform operations",
@@ -58,7 +58,7 @@ export default function Testimonials() {
           <SectionTitle
             titleId="testimonials-heading"
             title="How We Engage"
-            description="Engagement themes across software, training, and the Social Voice Communication Platform."
+            description="Engagement themes across software, Sinchan Mitra, and the Social Voice Communication Platform."
           />
         </FadeIn>
 

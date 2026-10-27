@@ -69,7 +69,7 @@ export function TrustedBy() {
                   ds.surface,
                   "group flex h-28 flex-col items-center justify-center gap-3 px-4",
                   "transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  "hover:-translate-y-1.5 hover:border-[#BFDBFE] hover:shadow-2xl hover:shadow-blue-500/10"
+                  "hover:-translate-y-1.5 hover:border-[#DDD6FE] hover:shadow-2xl hover:shadow-violet-500/10"
                 )}
               >
                 <Icon

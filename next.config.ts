@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { FEATURES } from "./lib/features";
+
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
@@ -25,6 +27,17 @@ const nextConfig: NextConfig = {
   compress: true,
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+  // A hidden section must answer with a real 404. notFound() inside a prerendered page
+  // would still send HTTP 200 (a "soft 404"), so the path is rewritten to one that does not exist.
+  async rewrites() {
+    return {
+      beforeFiles: FEATURES.academy
+        ? []
+        : [{ source: "/academy", destination: "/hidden-section-academy" }],
+      afterFiles: [],
+      fallback: [],
+    };
   },
   async headers() {
     return [

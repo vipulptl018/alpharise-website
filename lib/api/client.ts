@@ -1,3 +1,5 @@
+import { CONTACT } from "@/lib/constants";
+
 export type ApiValidationError = {
   field?: string;
   message?: string;
@@ -129,7 +131,12 @@ export async function postToApi(
     }
 
     if (error instanceof Error && error.message.includes("NEXT_PUBLIC_API_URL")) {
-      return { ok: false, message: error.message };
+      // A visitor must never see a variable name: the real reason goes to the console only.
+      console.error(error.message);
+      return {
+        ok: false,
+        message: `This form is not available right now. Please email ${CONTACT.email} or call ${CONTACT.phone}.`,
+      };
     }
 
     return {

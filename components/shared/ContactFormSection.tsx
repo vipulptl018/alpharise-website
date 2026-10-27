@@ -16,6 +16,7 @@ import {
   formatRegisteredAddressLines,
 } from "@/lib/constants";
 import { ds } from "@/lib/design-system";
+import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 
 const contactCard = cn(ds.card, "w-full p-8");
@@ -28,7 +29,7 @@ const contactText = "text-sm leading-7 text-slate-600";
 const contactButton = cn(ds.btnPrimary, "h-11 w-full");
 
 const contactRow =
-  "flex items-start gap-3 text-sm leading-7 text-slate-600 transition-colors hover:text-[#2563EB]";
+  "flex items-start gap-3 text-sm leading-7 text-slate-600 transition-colors hover:text-[#4F46E5]";
 
 const DEFAULT_SUBJECT = "Website contact inquiry";
 
@@ -37,6 +38,7 @@ export function ContactFormSection() {
     "idle"
   );
   const [feedback, setFeedback] = useState("");
+  const hydrated = useHydrated();
   const addressLines = formatRegisteredAddressLines();
   const phone = CONTACT.phone.trim();
 
@@ -126,7 +128,7 @@ export function ContactFormSection() {
                       required
                       rows={5}
                       minLength={10}
-                      className="w-full rounded-xl border border-[#E2E8F0] bg-white px-2.5 py-2 text-sm outline-none transition-[border-color,box-shadow] focus-visible:border-[#93C5FD] focus-visible:ring-3 focus-visible:ring-[#2563EB]/30"
+                      className="w-full rounded-xl border border-[#E2E8F0] bg-white px-2.5 py-2 text-sm outline-none transition-[border-color,box-shadow] focus-visible:border-[#C4B5FD] focus-visible:ring-3 focus-visible:ring-[#4F46E5]/30"
                     />
                   </label>
                   <div className="mt-auto pt-2">
@@ -134,7 +136,7 @@ export function ContactFormSection() {
                       type="submit"
                       size="lg"
                       className={contactButton}
-                      disabled={status === "loading"}
+                      disabled={status === "loading" || !hydrated}
                     >
                       {status === "loading" ? "Loading..." : "Send Message"}
                       <Send data-icon="inline-end" className="size-4" />
@@ -150,7 +152,7 @@ export function ContactFormSection() {
               <h2 className={contactHeading}>Registered office</h2>
               <div className="flex flex-1 flex-col gap-3">
                 <p className={cn(contactRow, "hover:text-slate-600")}>
-                  <Building2 className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                  <Building2 className="mt-1 size-4 shrink-0 text-[#4F46E5]" />
                   <span>
                     <span className="font-medium text-[#0F172A]">
                       {COMPANY_NAME}
@@ -179,17 +181,17 @@ export function ContactFormSection() {
                     href={`tel:${phone.replace(/\s/g, "")}`}
                     className={contactRow}
                   >
-                    <Phone className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                    <Phone className="mt-1 size-4 shrink-0 text-[#4F46E5]" />
                     <span>{phone}</span>
                   </a>
                 ) : (
                   <p className={cn(contactRow, "hover:text-slate-600")}>
-                    <Phone className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                    <Phone className="mt-1 size-4 shrink-0 text-[#4F46E5]" />
                     <span>Phone number available on request via email</span>
                   </p>
                 )}
                 <a href={`mailto:${CONTACT.email}`} className={contactRow}>
-                  <Mail className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                  <Mail className="mt-1 size-4 shrink-0 text-[#4F46E5]" />
                   <span>{CONTACT.email}</span>
                 </a>
                 {CONTACT.supportEmail !== CONTACT.email ? (
@@ -197,12 +199,12 @@ export function ContactFormSection() {
                     href={`mailto:${CONTACT.supportEmail}`}
                     className={contactRow}
                   >
-                    <Mail className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                    <Mail className="mt-1 size-4 shrink-0 text-[#4F46E5]" />
                     <span>{CONTACT.supportEmail}</span>
                   </a>
                 ) : null}
                 <p className={cn(contactRow, "hover:text-slate-600")}>
-                  <Clock3 className="mt-1 size-4 shrink-0 text-[#2563EB]" />
+                  <Clock3 className="mt-1 size-4 shrink-0 text-[#4F46E5]" />
                   <span>{CONTACT.hours}</span>
                 </p>
               </div>

@@ -21,12 +21,13 @@ import {
   virtualCoinPackages,
 } from "@/lib/content/pricing";
 import { ds } from "@/lib/design-system";
+import { FEATURES } from "@/lib/features";
 import { cn } from "@/lib/utils";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Pricing",
-  description: "Pricing for ALPHARISE INNOVATION PRIVATE LIMITED services, TechRise Academy, and Social Voice Communication Platform virtual coin packages.",
+  description: "Pricing for ALPHARISE INNOVATION PRIVATE LIMITED services, Sinchan Mitra subscriptions, and Social Voice Communication Platform virtual coin packages.",
   path: "/pricing",
 });
 
@@ -54,7 +55,7 @@ export default function PricingPage() {
               <Card className={ds.card}>
                 <CardHeader className={ds.cardHeader}>
                   <CardTitle className={ds.cardTitle}>{tier.name}</CardTitle>
-                  <p className="text-sm font-medium text-sky-700">{tier.price}</p>
+                  <p className="text-sm font-medium text-violet-700">{tier.price}</p>
                 </CardHeader>
                 <CardContent className={ds.cardContent}>
                   <CardDescription className={ds.cardDescription}>
@@ -66,7 +67,7 @@ export default function PricingPage() {
                         key={item}
                         className="flex gap-2 text-sm leading-6 text-slate-600"
                       >
-                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-500" />
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-violet-500" />
                         {item}
                       </li>
                     ))}
@@ -88,6 +89,30 @@ export default function PricingPage() {
       </SectionShell>
 
       <SectionShell
+        id="sinchan-mitra-pricing"
+        title="Sinchan Mitra (AgriBusiness SaaS)"
+        description="Subscription plans for agri-input shops, irrigation dealers, and related shops. There is no public price list: contact us for pricing and a demo."
+        muted
+      >
+        <div className="mx-auto mt-12 flex max-w-2xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-center">
+          <Button
+            render={<Link href="/contact" />}
+            className={ds.btnPrimary}
+          >
+            Ask for pricing
+          </Button>
+          <Button
+            render={<Link href="/sinchan-mitra" />}
+            variant="outline"
+            className={ds.btnOutline}
+          >
+            See Sinchan Mitra
+          </Button>
+        </div>
+      </SectionShell>
+
+      {FEATURES.academy ? (
+      <SectionShell
         id="academy-pricing"
         title="TechRise Academy"
         description="Published starting fees for training programs. Exact track pricing is confirmed before enrollment."
@@ -99,7 +124,7 @@ export default function PricingPage() {
               <Card className={ds.card}>
                 <CardHeader className={ds.cardHeader}>
                   <CardTitle className={ds.cardTitle}>{tier.name}</CardTitle>
-                  <p className="text-sm font-medium text-sky-700">{tier.price}</p>
+                  <p className="text-sm font-medium text-violet-700">{tier.price}</p>
                 </CardHeader>
                 <CardContent className={ds.cardContent}>
                   <CardDescription className={ds.cardDescription}>
@@ -111,7 +136,7 @@ export default function PricingPage() {
                         key={item}
                         className="flex gap-2 text-sm leading-6 text-slate-600"
                       >
-                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-sky-500" />
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-violet-500" />
                         {item}
                       </li>
                     ))}
@@ -122,6 +147,7 @@ export default function PricingPage() {
           ))}
         </ul>
       </SectionShell>
+      ) : null}
 
       <SectionShell
         id="virtual-coin-packages"
@@ -136,12 +162,12 @@ export default function PricingPage() {
                   <div className="flex items-start justify-between gap-3">
                     <CardTitle className={ds.cardTitle}>{pack.name}</CardTitle>
                     {pack.badge ? (
-                      <span className="rounded-lg border border-sky-200 bg-sky-50 px-2 py-1 text-[10px] font-semibold tracking-wide text-sky-700 uppercase">
+                      <span className="rounded-lg border border-violet-200 bg-violet-50 px-2 py-1 text-[10px] font-semibold tracking-wide text-violet-700 uppercase">
                         {pack.badge}
                       </span>
                     ) : null}
                   </div>
-                  <p className="text-sm font-medium text-sky-700">{pack.price}</p>
+                  <p className="text-sm font-medium text-violet-700">{pack.price}</p>
                   <p className="text-xs font-medium tracking-wide text-slate-500 uppercase">
                     {pack.coins}
                   </p>
@@ -159,21 +185,21 @@ export default function PricingPage() {
           Purchases are also governed by the{" "}
           <Link
             href="/virtual-coin-policy"
-            className="font-medium text-sky-700 underline underline-offset-2"
+            className="font-medium text-violet-700 underline underline-offset-2"
           >
             Virtual Coin Policy
           </Link>{" "}
           and{" "}
           <Link
             href="/refund-policy"
-            className="font-medium text-sky-700 underline underline-offset-2"
+            className="font-medium text-violet-700 underline underline-offset-2"
           >
             Refund Policy
           </Link>
           . Feature documentation for wallets, gifting, and withdrawals is in the{" "}
           <Link
             href="/social-voice"
-            className="font-medium text-sky-700 underline underline-offset-2"
+            className="font-medium text-violet-700 underline underline-offset-2"
           >
             Social Voice Documentation
           </Link>
@@ -200,7 +226,7 @@ export default function PricingPage() {
                 key={note}
                 className="flex gap-2 text-sm leading-7 text-slate-600"
               >
-                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-sky-500" />
+                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-violet-500" />
                 {note}
               </li>
             ))}

@@ -7,6 +7,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   Mic,
+  Sprout,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -27,6 +28,7 @@ import { ds } from "@/lib/design-system";
 import { cn } from "@/lib/utils";
 
 const productIcons: Record<string, LucideIcon> = {
+  "Sinchan Mitra": Sprout,
   "TechRise Academy": GraduationCap,
   "Social Voice Communication Platform": Mic,
   "Software Development": Code2,
@@ -38,14 +40,15 @@ const productIcons: Record<string, LucideIcon> = {
 };
 
 const productGradients: Record<string, string> = {
-  "TechRise Academy": "from-[#2563EB] to-[#3B82F6]",
+  "Sinchan Mitra": "from-emerald-600 to-green-400",
+  "TechRise Academy": "from-[#4F46E5] to-[#7C3AED]",
   "Social Voice Communication Platform": "from-slate-800 to-slate-600",
-  "Software Development": "from-[#1D4ED8] to-[#60A5FA]",
+  "Software Development": "from-[#4338CA] to-[#A78BFA]",
   "Website Development": "from-emerald-500 to-teal-400",
   "Mobile Application Development": "from-teal-500 to-emerald-400",
   "AI Solutions": "from-amber-500 to-orange-400",
   "Cloud Solutions": "from-slate-700 to-slate-500",
-  "API Development": "from-[#2563EB] to-[#93C5FD]",
+  "API Development": "from-[#4F46E5] to-[#C4B5FD]",
 };
 
 export default function Products() {
@@ -61,7 +64,7 @@ export default function Products() {
           <SectionTitle
             titleId="products-heading"
             title="Our Products"
-            description="TechRise Academy, the Social Voice Communication Platform, enterprise suites, and core delivery capabilities—each with a clear description."
+            description="Sinchan Mitra, the Social Voice Communication Platform, enterprise suites, and core delivery capabilities—each with a clear description."
           />
         </FadeIn>
 

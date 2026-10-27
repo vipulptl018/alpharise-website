@@ -23,7 +23,7 @@ export function ContactCTADecor() {
       />
       <AmbientBlob
         aria-hidden
-        className="absolute bottom-10 left-8 size-10 rounded-full border border-[#93C5FD]/30 bg-[#3B82F6]/20"
+        className="absolute bottom-10 left-8 size-10 rounded-full border border-[#C4B5FD]/30 bg-[#7C3AED]/20"
         animate={{ y: [0, 10, 0], x: [0, 8, 0] }}
         transition={{
           duration: 6,

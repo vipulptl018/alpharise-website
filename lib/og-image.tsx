@@ -24,7 +24,7 @@ export function renderBrandImage() {
           padding: "72px 80px",
           color: "#FFFFFF",
           background:
-            "linear-gradient(135deg, #0F172A 0%, #1E3A8A 55%, #2563EB 100%)",
+            "linear-gradient(135deg, #0F172A 0%, #312E81 55%, #4F46E5 100%)",
         }}
       >
         <div
@@ -33,7 +33,7 @@ export function renderBrandImage() {
             fontSize: 30,
             fontWeight: 600,
             letterSpacing: 6,
-            color: "#93C5FD",
+            color: "#C4B5FD",
           }}
         >
           {COMPANY_NAME}
@@ -55,14 +55,14 @@ export function renderBrandImage() {
               marginTop: 16,
               fontSize: 36,
               lineHeight: 1.35,
-              color: "#DBEAFE",
+              color: "#EDE9FE",
               maxWidth: 900,
             }}
           >
             {COMPANY_TAGLINE}
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 28, color: "#BFDBFE" }}>
+        <div style={{ display: "flex", fontSize: 28, color: "#DDD6FE" }}>
           {host}
         </div>
       </div>

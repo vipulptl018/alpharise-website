@@ -44,7 +44,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Let's Discuss Your Next Project"
-        description="Reach out for software development, AI solutions, cloud platforms, or academy programs."
+        description="Reach out for software development, AI solutions, cloud platforms, or a Sinchan Mitra demo."
       />
 
       <ContactFormSection />

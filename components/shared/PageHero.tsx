@@ -42,11 +42,27 @@ export function PageHero({
       <div aria-hidden className="pointer-events-none absolute inset-0 premium-mesh" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.14),transparent_42%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(79,70,229,0.14),transparent_42%)]"
       />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="sm-drift absolute -top-24 -left-20 size-[26rem] rounded-full bg-violet-400/25 blur-3xl dark:bg-violet-500/15" />
+        <div
+          className="sm-drift absolute -right-24 top-4 size-[22rem] rounded-full bg-cyan-300/25 blur-3xl dark:bg-cyan-400/10"
+          style={{ animationDelay: "-7s" }}
+        />
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            backgroundImage: "radial-gradient(rgba(79,70,229,0.2) 0.65px, transparent 0.65px)",
+            backgroundSize: "24px 24px",
+            maskImage: "radial-gradient(ellipse 70% 80% at 50% 0%, black 15%, transparent 75%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 80% at 50% 0%, black 15%, transparent 75%)",
+          }}
+        />
+      </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#2563EB]/30 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#4F46E5]/30 to-transparent"
       />
 
       <Container className="relative">

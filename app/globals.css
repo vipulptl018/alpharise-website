@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./dark-theme.generated.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -49,79 +50,88 @@
 }
 
 :root {
-  --background: #f8fafc;
+  --background: #F8F7FF;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
-  --primary: #2563eb;
+  --primary: #4F46E5;
   --primary-foreground: #ffffff;
-  --secondary: #eef6ff;
-  --secondary-foreground: #1d4ed8;
-  --muted: #eef6ff;
+  --secondary: #F5F3FF;
+  --secondary-foreground: #4338CA;
+  --muted: #F5F3FF;
   --muted-foreground: #64748b;
-  --accent: #eef6ff;
-  --accent-foreground: #1d4ed8;
+  --accent: #F5F3FF;
+  --accent-foreground: #4338CA;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #2563eb;
-  --chart-1: #2563eb;
-  --chart-2: #3b82f6;
+  --ring: #4F46E5;
+  --chart-1: #4F46E5;
+  --chart-2: #7C3AED;
   --chart-3: #64748b;
   --chart-4: #0f172a;
-  --chart-5: #93c5fd;
+  --chart-5: #C4B5FD;
   --radius: 0.85rem;
-  --sidebar: #f8fafc;
+  --sidebar: #F8F7FF;
   --sidebar-foreground: #0f172a;
-  --sidebar-primary: #2563eb;
+  --sidebar-primary: #4F46E5;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eef6ff;
-  --sidebar-accent-foreground: #1d4ed8;
+  --sidebar-accent: #F5F3FF;
+  --sidebar-accent-foreground: #4338CA;
   --sidebar-border: #e2e8f0;
-  --sidebar-ring: #2563eb;
-  --brand-primary: #2563eb;
-  --brand-secondary: #3b82f6;
+  --sidebar-ring: #4F46E5;
+  --brand-primary: #4F46E5;
+  --brand-secondary: #7C3AED;
   --brand-ink: #0f172a;
   --brand-muted: #64748b;
-  --brand-alt: #eef6ff;
+  --brand-alt: #F5F3FF;
   --brand-footer: #0f172a;
-  --surface-glow: rgba(37, 99, 235, 0.12);
+  --surface-glow: rgba(79,70,229, 0.12);
 }
 
+/*
+ * Dark mode: the `dark` class is set on <html> by components/layout/ThemeToggle.tsx.
+ * The fixed light colours used across components get their dark twins from
+ * dark-theme.generated.css (scripts/gen-dark-theme.mjs); these variables cover the rest.
+ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  color-scheme: dark;
+  --background: oklch(0.17 0.02 280);
+  --foreground: oklch(0.95 0.01 280);
+  --card: oklch(0.25 0.02 280);
+  --card-foreground: oklch(0.95 0.01 280);
+  --popover: oklch(0.25 0.02 280);
+  --popover-foreground: oklch(0.95 0.01 280);
+  --primary: oklch(0.62 0.19 277);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.28 0.03 280);
+  --secondary-foreground: oklch(0.9 0.04 280);
+  --muted: oklch(0.28 0.03 280);
+  --muted-foreground: oklch(0.72 0.03 280);
+  --accent: oklch(0.28 0.03 280);
+  --accent-foreground: oklch(0.9 0.04 280);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --ring: oklch(0.62 0.19 277);
+  --chart-1: oklch(0.62 0.19 277);
+  --chart-2: oklch(0.7 0.14 280);
+  --chart-3: oklch(0.6 0.04 280);
+  --chart-4: oklch(0.9 0.02 280);
+  --chart-5: oklch(0.8 0.08 280);
+  --sidebar: oklch(0.25 0.02 280);
+  --sidebar-foreground: oklch(0.95 0.01 280);
+  --sidebar-primary: oklch(0.62 0.19 277);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.28 0.03 280);
+  --sidebar-accent-foreground: oklch(0.9 0.04 280);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.62 0.19 277);
+  --brand-ink: oklch(0.95 0.01 280);
+  --brand-muted: oklch(0.72 0.03 280);
+  --surface-glow: rgba(124,58,237, 0.16);
 }
 
 @layer base {
@@ -153,18 +163,119 @@
     border: 1px solid rgba(226, 232, 240, 0.9);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.85) inset,
-      0 20px 50px -28px rgba(37, 99, 235, 0.22);
+      0 20px 50px -28px rgba(79,70,229, 0.22);
     backdrop-filter: blur(18px);
   }
 
   .premium-mesh {
     background-image:
-      radial-gradient(ellipse 65% 55% at 15% 5%, rgba(37, 99, 235, 0.16), transparent 55%),
-      radial-gradient(ellipse 55% 45% at 90% 15%, rgba(59, 130, 246, 0.14), transparent 50%),
-      radial-gradient(ellipse 40% 35% at 50% 80%, rgba(37, 99, 235, 0.06), transparent 60%),
-      linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%);
+      radial-gradient(ellipse 65% 55% at 15% 5%, rgba(79,70,229, 0.16), transparent 55%),
+      radial-gradient(ellipse 55% 45% at 90% 15%, rgba(124,58,237, 0.14), transparent 50%),
+      radial-gradient(ellipse 40% 35% at 50% 80%, rgba(79,70,229, 0.06), transparent 60%),
+      linear-gradient(180deg, #F8F7FF 0%, #F5F3FF 100%);
   }
 }
+
+/* Dark twins of the two hero backgrounds above (they hold light colours the generated rules cannot reach). */
+.dark .premium-mesh {
+  background-image:
+    radial-gradient(ellipse 65% 55% at 15% 5%, rgba(124,58,237, 0.24), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 90% 15%, rgba(79,70,229, 0.2), transparent 50%),
+    radial-gradient(ellipse 40% 35% at 50% 80%, rgba(124,58,237, 0.1), transparent 60%),
+    linear-gradient(180deg, #0d0b20 0%, #14103a 100%);
+}
+.dark .premium-glass {
+  background: linear-gradient(180deg, rgba(30, 27, 62, 0.92) 0%, rgba(22, 19, 48, 0.85) 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 20px 50px -28px rgba(0, 0, 0, 0.6);
+}
+
+/* Colours of the Sinchan Mitra product page (components/sinchan-mitra); brand green from its logo. */
+.sm-root {
+  --sm-bg: #f3faf6;
+  --sm-bg2: #e6f5ec;
+  --sm-card: #ffffff;
+  --sm-ink: #0a1f16;
+  --sm-muted: #4a6357;
+  --sm-line: #d2e7da;
+  --sm-brand: #059669;
+  --sm-brand-2: #0d9488;
+  --sm-brand-ink: #047857;
+  --sm-sky: #0ea5e9;
+  --sm-grad-a: #047857;
+  --sm-grad-b: #0f766e;
+  --sm-deep: #052e22;
+  background-color: var(--sm-bg);
+  color: var(--sm-ink);
+}
+.dark .sm-root {
+  --sm-bg: #06130e;
+  --sm-bg2: #0a1e15;
+  --sm-card: #0e231a;
+  --sm-ink: #e6f4ec;
+  --sm-muted: #9dbbab;
+  --sm-line: #1a3a2a;
+  --sm-brand: #34d399;
+  --sm-brand-2: #2dd4bf;
+  --sm-brand-ink: #6ee7b7;
+  --sm-sky: #38bdf8;
+  --sm-deep: #031810;
+}
+
+/*
+ * The app screens on the Sinchan Mitra pages are small and watermarked. As one more hurdle for copying
+ * (it cannot stop a screenshot), the pictures cannot be dragged, selected or saved from the context menu / long-press.
+ */
+.sm-root img,
+.sm-protect img {
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+/* Motion used by the Sinchan Mitra page (components/sinchan-mitra). */
+@keyframes sm-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -12px, 0); }
+}
+@keyframes sm-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(40px, -30px, 0) scale(1.08); }
+  66% { transform: translate3d(-30px, 30px, 0) scale(0.95); }
+}
+@keyframes sm-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes sm-shine {
+  from { background-position: 200% center; }
+  to { background-position: -200% center; }
+}
+@keyframes sm-pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.55; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes sm-rise {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+.sm-rise { animation: sm-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.sm-float { animation: sm-float 6s ease-in-out infinite; }
+.sm-float-slow { animation: sm-float 9s ease-in-out infinite; }
+.sm-drift { animation: sm-drift 18s ease-in-out infinite; }
+.sm-marquee { animation: sm-marquee 38s linear infinite; }
+.sm-marquee:hover { animation-play-state: paused; }
+.sm-shine-text {
+  background-size: 200% auto;
+  animation: sm-shine 7s linear infinite;
+}
+.sm-pulse-ring { animation: sm-pulse-ring 2.4s ease-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

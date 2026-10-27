@@ -62,14 +62,14 @@ export default function RefundPolicyPage() {
               value outside the platform. See the{" "}
               <Link
                 href="/virtual-coin-policy"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Virtual Coin Policy
               </Link>{" "}
               and{" "}
               <Link
                 href="/pricing#virtual-coin-packages"
-                className="font-medium text-sky-700 underline underline-offset-2"
+                className="font-medium text-violet-700 underline underline-offset-2"
               >
                 Pricing
               </Link>{" "}

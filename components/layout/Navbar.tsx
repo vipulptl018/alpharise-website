@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Container } from "@/components/layout/Container";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { CTA, SITE_NAME } from "@/lib/constants";
 import { mainNavigation } from "@/lib/navigation";
 import { GlobalSearch } from "@/components/shared/GlobalSearch";
@@ -49,15 +50,21 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "border-b border-[#E2E8F0]/80 bg-white/80 shadow-[0_8px_30px_-20px_rgba(37,99,235,0.2)] backdrop-blur-xl"
+          ? "border-b border-[#E2E8F0]/80 bg-white/80 shadow-[0_8px_30px_-20px_rgba(79,70,229,0.2)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-heading text-lg font-semibold tracking-[-0.02em] text-[#0F172A] transition-colors hover:text-[#2563EB]"
+          className="font-heading group/logo flex items-center gap-2 text-lg font-semibold tracking-[-0.02em] text-[#0F172A] transition-colors"
         >
+          <span
+            aria-hidden
+            className="flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#4F46E5] via-[#7C3AED] to-[#0EA5E9] text-sm font-bold text-white shadow-lg shadow-violet-500/30 transition-transform duration-500 group-hover/logo:rotate-[-8deg] group-hover/logo:scale-110"
+          >
+            A
+          </span>
           {SITE_NAME}
         </Link>
 
@@ -77,9 +84,10 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   "rounded-lg px-2.5 py-2 text-sm font-medium transition-colors duration-200 xl:px-3",
+                  "relative",
                   isActive
-                    ? "bg-[#EEF6FF] text-[#1D4ED8]"
-                    : "text-[#64748B] hover:bg-[#EEF6FF]/70 hover:text-[#0F172A]"
+                    ? "bg-[#F5F3FF] text-[#4338CA] after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full after:bg-gradient-to-r after:from-[#4F46E5] after:to-[#7C3AED]"
+                    : "text-[#64748B] hover:bg-[#F5F3FF]/70 hover:text-[#0F172A]"
                 )}
               >
                 {item.label}
@@ -97,8 +105,11 @@ export function Navbar() {
           >
             {CTA.primary.label}
           </Button>
+          <ThemeToggle />
         </div>
 
+        <div className="flex items-center gap-1 lg:hidden">
+        <ThemeToggle />
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger
             render={
@@ -139,8 +150,8 @@ export function Navbar() {
                     className={cn(
                       "rounded-lg px-3 py-3 text-base font-medium transition-colors",
                       isActive
-                        ? "bg-[#EEF6FF] text-[#1D4ED8]"
-                        : "text-[#64748B] hover:bg-[#EEF6FF]/70 hover:text-[#0F172A]"
+                        ? "bg-[#F5F3FF] text-[#4338CA]"
+                        : "text-[#64748B] hover:bg-[#F5F3FF]/70 hover:text-[#0F172A]"
                     )}
                   >
                     {item.label}
@@ -159,6 +170,7 @@ export function Navbar() {
             </nav>
           </SheetContent>
         </Sheet>
+        </div>
       </Container>
     </header>
   );

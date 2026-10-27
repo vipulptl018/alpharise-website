@@ -19,15 +19,16 @@ import {
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
 import { ds } from "@/lib/design-system";
+import { FEATURES } from "@/lib/features";
 import { cn } from "@/lib/utils";
 
-const stats = [
+const allStats = [
   {
     value: 2026,
     suffix: "",
     label: "Incorporation Year",
     icon: Award,
-    gradient: "from-[#2563EB] to-[#3B82F6]",
+    gradient: "from-[#4F46E5] to-[#7C3AED]",
   },
   {
     value: 19,
@@ -55,16 +56,20 @@ const stats = [
     suffix: "",
     label: "Official Instagram Channel",
     icon: Code2,
-    gradient: "from-[#2563EB] to-[#60A5FA]",
+    gradient: "from-[#4F46E5] to-[#A78BFA]",
   },
   {
     value: 100,
     suffix: "%",
     label: "Transparent Pricing Intent",
     icon: Smile,
-    gradient: "from-[#1D4ED8] to-[#60A5FA]",
+    gradient: "from-[#4338CA] to-[#A78BFA]",
   },
 ] as const;
+
+const stats = allStats.filter(
+  (stat) => FEATURES.academy || stat.label !== "Academy Courses"
+);
 
 export default function Statistics() {
   return (
@@ -79,7 +84,7 @@ export default function Statistics() {
           <SectionTitle
             titleId="statistics-heading"
             title="Company Snapshot"
-            description="Key facts about ALPHARISE offerings, academy coverage, and support hours."
+            description="Key facts about ALPHARISE offerings and support hours."
           />
         </FadeIn>
 

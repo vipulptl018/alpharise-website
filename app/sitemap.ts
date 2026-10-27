@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 
 import { getSiteUrl } from "@/lib/constants";
+import { detailPath, detailSlugs } from "@/lib/content/sinchan-mitra-details";
+import { FEATURES } from "@/lib/features";
 
 const routes = [
   "/",
@@ -8,7 +10,11 @@ const routes = [
   "/services",
   "/products",
   "/social-voice",
-  "/academy",
+  "/sinchan-mitra",
+  "/sinchan-mitra/mr",
+  "/sinchan-mitra/hi",
+  ...detailSlugs.flatMap((slug) => (["en", "mr", "hi"] as const).map((lang) => detailPath(lang, slug))),
+  ...(FEATURES.academy ? (["/academy"] as const) : []),
   "/pricing",
   "/support",
   "/careers",

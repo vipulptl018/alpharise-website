@@ -84,7 +84,7 @@ const timeline = [
     year: "2026",
     title: "Services & Products Published",
     description:
-      "Public offerings cover software development, websites, Android mobile applications, AI solutions, cloud solutions, enterprise software, and TechRise Academy training.",
+      "Public offerings cover software development, websites, Android mobile applications, AI solutions, cloud solutions, enterprise software, and the Sinchan Mitra AgriBusiness SaaS.",
   },
   {
     year: "2026",
@@ -115,7 +115,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow={`About ${SITE_NAME}`}
         title="A Professional Technology Company"
-        description={`${COMPANY_NAME} provides software development, website development, Android mobile applications, AI solutions, cloud solutions, and IT training through TechRise Academy, and is developing a Social Voice Communication Platform for Android that is preparing for public release.`}
+        description={`${COMPANY_NAME} provides software development, website development, Android mobile applications, AI solutions, cloud solutions, and the Sinchan Mitra AgriBusiness SaaS, and is developing a Social Voice Communication Platform for Android that is preparing for public release.`}
         primaryCta={{ label: "Work With Us", href: "/contact" }}
         secondaryCta={{ label: "View Services", href: "/services" }}
       />
@@ -161,7 +161,9 @@ export default function AboutPage() {
                         ? "Users"
                         : division.title === "TechRise Academy"
                           ? "GraduationCap"
-                          : division.title === "Website Development"
+                          : division.title === "Sinchan Mitra"
+                            ? "Layers3"
+                            : division.title === "Website Development"
                             ? "Laptop"
                             : "Smartphone",
           }))}
@@ -171,7 +173,7 @@ export default function AboutPage() {
       <SectionShell
         id="mission-vision"
         title="Mission & Vision"
-        description="A clear purpose guides every engagement, product release, and training cohort."
+        description="A clear purpose guides every engagement, product release, and customer rollout."
       >
         <div className={cn("mt-12", ds.grid2)}>
           <Card className={ds.card}>
@@ -227,7 +229,7 @@ export default function AboutPage() {
         <div className="mt-8 flex justify-center">
           <Link
             href="/social-voice#fraud-prevention"
-            className="text-sm font-medium text-sky-700 underline underline-offset-2"
+            className="text-sm font-medium text-violet-700 underline underline-offset-2"
           >
             Open Social Voice safety documentation
           </Link>
@@ -254,7 +256,7 @@ export default function AboutPage() {
               key={item.title}
               className={cn(ds.surface, ds.surfacePadSm)}
             >
-              <p className="text-sm font-semibold text-sky-700">{item.year}</p>
+              <p className="text-sm font-semibold text-violet-700">{item.year}</p>
               <h3 className="font-heading mt-1 text-lg font-semibold text-slate-950">
                 {item.title}
               </h3>
@@ -293,7 +295,7 @@ export default function AboutPage() {
 
       <PageCTA
         title="Partner with ALPHARISE"
-        description="Discuss software development, AI, cloud solutions, or TechRise Academy."
+        description="Discuss software development, AI, cloud solutions, or Sinchan Mitra."
         primaryLabel="Contact Sales"
         primaryHref="/contact"
         secondaryLabel="Visit Support"

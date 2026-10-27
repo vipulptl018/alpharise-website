@@ -36,6 +36,15 @@ See `.env.example`.
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL, the www host (`https://www.alphariseinnovation.com`) |
 | `NEXT_PUBLIC_COMPANY_GSTIN` | Optional GSTIN override |
 
+## Feature switches and the Sinchan Mitra page
+
+- `lib/features.ts`: `FEATURES.academy` is `false`, so TechRise Academy (courses, internship, placement) is hidden from the menus, home, products, pricing, sitemap and search, and `/academy` answers 404 (rewrite in `next.config.ts`). Its code stays (`app/academy`, `components/home/Academy.tsx`, `lib/content/academy-courses.ts`); a few plain-text mentions were reworded.
+- `/sinchan-mitra` is the product page of the Sinchan Mitra AgriBusiness SaaS (content in `lib/content/sinchan-mitra.ts`, components in `components/sinchan-mitra/`). It is linked from the menu, footer, home spotlight and the AgriBusiness SaaS section of `/products`.
+- The page exists in three languages: English `/sinchan-mitra`, Marathi `/sinchan-mitra/mr`, Hindi `/sinchan-mitra/hi` (words in `lib/content/sinchan-mitra-copy.ts`, structure and images in `lib/content/sinchan-mitra.ts`; a language pill on the page switches between them, with hreflang links for search engines). Have a native reader check the Marathi and Hindi text before publishing.
+- Download buttons: set `NEXT_PUBLIC_SINCHAN_MITRA_WINDOWS_URL` and `NEXT_PUBLIC_SINCHAN_MITRA_ANDROID_URL` (Vercel env, read at build time). While empty, the page shows "coming soon" and an "ask for access" link.
+- Dark / light mode: one sun / moon icon in the top-right corner of the menu (`components/layout/ThemeToggle.tsx`), remembered in the browser. Components keep their fixed light colours; `app/dark-theme.generated.css` holds their dark twins and is produced by `node scripts/gen-dark-theme.mjs`: run it again after adding new colours. The product page uses its own `--sm-*` variables (`app/globals.css`).
+- Its screenshots are in `public/sinchan-mitra/`: real app screens with SAMPLE data, but deliberately SMALL (about 520-560 px wide, a few KB each, lightly watermarked "SINCHAN MITRA") so they cannot be used to rebuild the app, with no enlarged view, and with drag / save / long-press blocked in CSS (`.sm-protect`, `.sm-root img`). That only raises the effort: a screenshot of what is on screen cannot be prevented. Do not replace them with larger files. They were made from the app's marketing / brochure screenshots (WebP, shown with `unoptimized`); the sizes in `lib/content/sinchan-mitra.ts` are the picture's aspect ratio. No prices are published; plans are quoted on request.
+
 ## Scripts
 
 ```bash

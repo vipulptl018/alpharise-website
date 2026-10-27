@@ -9,11 +9,11 @@ export const ds = {
   pageTop: "pt-20 md:pt-24 lg:pt-28",
   section: "relative overflow-hidden py-12 sm:py-16 lg:py-20",
   sectionWhite:
-    "bg-[#F8FAFC] bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(37,99,235,0.08),transparent_60%)]",
+    "bg-[#F8F7FF] bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(79,70,229,0.08),transparent_60%)]",
   sectionMuted:
-    "bg-[#EEF6FF] bg-[radial-gradient(ellipse_60%_45%_at_80%_10%,rgba(59,130,246,0.14),transparent_55%)]",
+    "bg-[#F5F3FF] bg-[radial-gradient(ellipse_60%_45%_at_80%_10%,rgba(124,58,237,0.14),transparent_55%)]",
   divider:
-    "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2563EB]/35 to-transparent",
+    "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#4F46E5]/35 to-transparent",
   header: "mx-auto max-w-2xl text-center",
   title:
     "font-heading text-3xl font-semibold tracking-[-0.03em] text-[#0F172A] sm:text-4xl sm:tracking-[-0.035em]",
@@ -39,8 +39,8 @@ export const ds = {
     "shadow-xl shadow-slate-900/5",
     "transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
     "will-change-transform",
-    "hover:-translate-y-1.5 hover:border-[#BFDBFE] hover:shadow-2xl hover:shadow-blue-500/10",
-    "focus-within:border-[#93C5FD] focus-within:ring-2 focus-within:ring-[#2563EB]/20"
+    "hover:-translate-y-1.5 hover:border-[#DDD6FE] hover:shadow-2xl hover:shadow-violet-500/10",
+    "focus-within:border-[#C4B5FD] focus-within:ring-2 focus-within:ring-[#4F46E5]/20"
   ),
   cardHeader: "gap-4 p-6 pb-3 sm:p-7 sm:pb-3",
   cardContent: "flex-1 p-6 pt-0 sm:p-7 sm:pt-0",
@@ -50,52 +50,57 @@ export const ds = {
   cardDescription: "text-[0.9375rem] leading-7 text-[#64748B]",
   iconBox: cn(
     "flex size-11 shrink-0 items-center justify-center rounded-2xl",
-    "border border-[#DBEAFE] bg-gradient-to-br from-[#EEF6FF] to-white text-[#2563EB]",
+    "border border-[#EDE9FE] bg-gradient-to-br from-[#F5F3FF] to-white text-[#4F46E5]",
     "shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]",
     "transition-[border-color,background-color,color,box-shadow,transform] duration-300",
-    "group-hover/card:border-[#BFDBFE] group-hover/card:from-[#DBEAFE] group-hover/card:to-white",
-    "group-hover/card:text-[#1D4ED8] group-hover/card:shadow-[0_10px_22px_-12px_rgba(37,99,235,0.55)]",
+    "group-hover/card:border-[#DDD6FE] group-hover/card:from-[#EDE9FE] group-hover/card:to-white",
+    "group-hover/card:text-[#4338CA] group-hover/card:shadow-[0_10px_22px_-12px_rgba(79,70,229,0.55)]",
     "group-hover/card:scale-105"
   ),
   iconGradient: cn(
     "flex size-11 shrink-0 items-center justify-center rounded-2xl",
-    "bg-gradient-to-br text-white shadow-[0_12px_24px_-12px_rgba(37,99,235,0.65)]",
+    "bg-gradient-to-br text-white shadow-[0_12px_24px_-12px_rgba(79,70,229,0.65)]",
     "ring-1 ring-white/30 transition-transform duration-300 group-hover/card:scale-105"
   ),
   btnPrimary: cn(
+    // the light sweep over the button on hover
+    "relative overflow-hidden before:pointer-events-none before:absolute before:inset-y-0 before:-left-1/2 before:w-1/3 before:skew-x-[-20deg] before:bg-white/30 before:blur-md before:transition-all before:duration-700 hover:before:left-[130%]",
     "h-11 px-6 text-sm font-medium",
-    "border-transparent bg-[linear-gradient(180deg,#2563EB_0%,#3B82F6_100%)] text-white",
-    "shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-12px_rgba(37,99,235,0.55)]",
-    "hover:bg-[linear-gradient(180deg,#1D4ED8_0%,#2563EB_100%)] hover:text-white",
-    "hover:shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_16px_34px_-12px_rgba(37,99,235,0.6)]",
+    "border-transparent bg-[linear-gradient(180deg,#4F46E5_0%,#7C3AED_100%)] text-white",
+    "shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-12px_rgba(79,70,229,0.55)]",
+    "hover:bg-[linear-gradient(180deg,#4338CA_0%,#4F46E5_100%)] hover:text-white",
+    "hover:shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_16px_34px_-12px_rgba(79,70,229,0.6)]",
     "active:translate-y-px",
-    "focus-visible:border-[#93C5FD] focus-visible:ring-[#2563EB]/40"
+    "focus-visible:border-[#C4B5FD] focus-visible:ring-[#4F46E5]/40"
   ),
   btnOutline: cn(
     "h-11 border-[#CBD5E1] bg-white px-6 text-sm font-medium text-[#0F172A]",
     "shadow-sm",
-    "hover:border-[#93C5FD] hover:bg-[#EEF6FF] hover:text-[#0F172A]",
-    "hover:shadow-[0_10px_28px_-18px_rgba(37,99,235,0.35)]",
+    "hover:border-[#C4B5FD] hover:bg-[#F5F3FF] hover:text-[#0F172A]",
+    "hover:shadow-[0_10px_28px_-18px_rgba(79,70,229,0.35)]",
     "active:translate-y-px",
-    "focus-visible:border-[#93C5FD] focus-visible:ring-[#2563EB]/30"
+    "focus-visible:border-[#C4B5FD] focus-visible:ring-[#4F46E5]/30"
   ),
   btnCard: cn(
     "h-10 w-full border-[#E2E8F0] bg-white text-sm font-medium text-[#0F172A]",
-    "hover:border-[#93C5FD] hover:bg-[#EEF6FF]",
+    "hover:border-[#C4B5FD] hover:bg-[#F5F3FF]",
     "active:translate-y-px"
   ),
   ctaPanel: cn(
-    "rounded-3xl border border-[#DBEAFE]",
+    "rounded-3xl border border-[#EDE9FE]",
     "bg-white",
     "px-6 py-10 sm:px-10 sm:py-12",
-    "shadow-xl shadow-blue-500/5"
+    "shadow-xl shadow-violet-500/5"
   ),
   ctaEyebrow:
-    "text-sm font-medium tracking-[0.08em] text-[#2563EB] uppercase",
+    "text-sm font-medium tracking-[0.08em] text-[#4F46E5] uppercase",
   ctaTitle:
     "font-heading mt-3 text-2xl font-semibold tracking-[-0.03em] text-[#0F172A] sm:text-[1.75rem]",
-  eyebrow:
-    "text-sm font-medium tracking-[0.08em] text-[#2563EB] uppercase",
+  eyebrow: cn(
+    "inline-flex items-center gap-2 rounded-full border border-[#DDD6FE] bg-white/80 px-3.5 py-1",
+    "text-xs font-semibold tracking-[0.14em] text-[#4F46E5] uppercase shadow-sm backdrop-blur",
+    "before:size-1.5 before:rounded-full before:bg-gradient-to-br before:from-[#4F46E5] before:to-[#7C3AED] before:content-['']"
+  ),
 } as const;
 
 export const motionEase = [0.22, 1, 0.36, 1] as const;

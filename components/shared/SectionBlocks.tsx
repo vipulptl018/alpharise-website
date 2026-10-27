@@ -183,7 +183,7 @@ export function BulletCard({ title, items, icon: Icon }: BulletCardProps) {
               key={item}
               className="flex gap-2 text-sm leading-6 text-slate-600"
             >
-              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#2563EB]" />
+              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#4F46E5]" />
               {item}
             </li>
           ))}
@@ -209,11 +209,11 @@ export function WorkflowSteps({ title, steps }: WorkflowStepsProps) {
         {steps.map((step, index) => (
           <li
             key={step.title}
-            className="rounded-3xl border border-[#E2E8F0] bg-white p-5 shadow-xl shadow-slate-900/5 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-[#BFDBFE] hover:shadow-2xl hover:shadow-blue-500/10 sm:p-6"
+            className="rounded-3xl border border-[#E2E8F0] bg-white p-5 shadow-xl shadow-slate-900/5 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-[#DDD6FE] hover:shadow-2xl hover:shadow-violet-500/10 sm:p-6"
           >
             <div className="flex gap-4">
               <span
-                className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#EEF6FF] to-white text-sm font-semibold text-[#2563EB] ring-1 ring-[#BFDBFE]"
+                className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5F3FF] to-white text-sm font-semibold text-[#4F46E5] ring-1 ring-[#DDD6FE]"
                 aria-hidden
               >
                 {index + 1}

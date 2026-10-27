@@ -47,7 +47,11 @@ export function Footer() {
     <footer className="relative mt-auto overflow-hidden bg-[#0F172A] text-slate-300">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_15%_0%,rgba(37,99,235,0.22),transparent_55%),radial-gradient(ellipse_50%_40%_at_90%_100%,rgba(59,130,246,0.14),transparent_50%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_15%_0%,rgba(79,70,229,0.22),transparent_55%),radial-gradient(ellipse_50%_40%_at_90%_100%,rgba(124,58,237,0.14),transparent_50%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7C3AED] to-transparent"
       />
 
       <Container className="relative py-12 sm:py-16 lg:py-20">
@@ -55,7 +59,7 @@ export function Footer() {
           <div className="md:col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className="font-heading text-xl font-semibold tracking-[-0.02em] text-white transition-colors hover:text-[#93C5FD]"
+              className="font-heading text-xl font-semibold tracking-[-0.02em] text-white transition-colors hover:text-[#C4B5FD]"
             >
               {SITE_NAME}
             </Link>
@@ -73,7 +77,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="inline-flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3B82F6]/50 hover:bg-[#2563EB]/20 hover:text-white"
+                  className="inline-flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#7C3AED]/50 hover:bg-[#4F46E5]/20 hover:text-white"
                 >
                   <Icon className="size-4" />
                 </a>
@@ -137,14 +141,14 @@ export function Footer() {
                     href={`tel:${phone.replace(/\s/g, "")}`}
                     className={contactRow}
                   >
-                    <Phone className="mt-0.5 size-4 shrink-0 text-[#60A5FA]" />
+                    <Phone className="mt-0.5 size-4 shrink-0 text-[#A78BFA]" />
                     <span>{phone}</span>
                   </a>
                 </li>
               ) : null}
               <li>
                 <a href={`mailto:${CONTACT.email}`} className={contactRow}>
-                  <Mail className="mt-0.5 size-4 shrink-0 text-[#60A5FA]" />
+                  <Mail className="mt-0.5 size-4 shrink-0 text-[#A78BFA]" />
                   <span>{CONTACT.email}</span>
                 </a>
               </li>
@@ -154,7 +158,7 @@ export function Footer() {
                     href={`mailto:${CONTACT.supportEmail}`}
                     className={contactRow}
                   >
-                    <Mail className="mt-0.5 size-4 shrink-0 text-[#60A5FA]" />
+                    <Mail className="mt-0.5 size-4 shrink-0 text-[#A78BFA]" />
                     <span>{CONTACT.supportEmail}</span>
                   </a>
                 </li>
@@ -175,7 +179,7 @@ export function Footer() {
                 <span className="text-slate-200">{formatGstinLabel()}</span>
               </li>
               <li className="flex items-start gap-2.5 text-sm leading-6 text-slate-400">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-[#60A5FA]" />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-[#A78BFA]" />
                 <span>
                   <span className="text-slate-500">Registered Office</span>
                   <br />

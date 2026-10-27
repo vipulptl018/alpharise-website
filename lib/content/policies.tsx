@@ -15,7 +15,7 @@ function DocsLink() {
   return (
     <Link
       href="/social-voice"
-      className="font-medium text-sky-700 underline underline-offset-2"
+      className="font-medium text-violet-700 underline underline-offset-2"
     >
       Social Voice Documentation
     </Link>
