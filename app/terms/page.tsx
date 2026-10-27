@@ -31,11 +31,11 @@ export default function TermsPage() {
           heading: "2. Services and Products",
           body: (
             <p>
-              We provide software development, website development, Android
-              mobile application development, AI solutions, cloud solutions,
-              enterprise software, TechRise Academy training, and the Social
-              Voice Communication Platform for Android (preparing for public
-              release). Specific
+              We provide software development, website development, mobile and
+              desktop application development, AI solutions, cloud solutions,
+              business software for agribusiness, hospital and HomeCare, and the
+              Social Voice Communication Platform for Android (preparing for
+              public release). Specific
               deliverables, timelines, and fees are defined in proposals, product
               terms, or separate agreements.
             </p>

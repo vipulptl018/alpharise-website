@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      description="This policy explains how ALPHARISE collects, uses, and safeguards personal information across our website, services, academy, and platforms."
+      description="This policy explains how ALPHARISE collects, uses, and safeguards personal information across our website, software and app development services, business software, and platforms."
       lastUpdated="August 4, 2026"
       sections={[
         {
@@ -22,9 +22,11 @@ export default function PrivacyPolicyPage() {
           body: (
             <p>
               {COMPANY_NAME} (“ALPHARISE”, “we”, “us”) operates
-              alphariseinnovation.com and related products including TechRise
-              Academy programs and the Social Voice Communication Platform for
-              Android (preparing for public release).
+              alphariseinnovation.com and related services and products,
+              including website development, mobile and desktop app development,
+              business software for agribusiness, hospital and HomeCare, and the
+              Social Voice Communication Platform for Android (preparing for
+              public release).
             </p>
           ),
         },
@@ -47,7 +49,7 @@ export default function PrivacyPolicyPage() {
           body: (
             <p>
               Information is used to respond to inquiries, deliver contracted
-              services, authenticate accounts, process enrollments and support
+              services, authenticate accounts, process orders and support
               requests, issue invoices, operate platform features such as rooms
               and wallets, improve our website and app, communicate service
               updates, prevent fraud or abuse, and meet legal or accounting

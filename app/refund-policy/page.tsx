@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Refund Policy",
-  description: "Refund Policy for services, academy programs, and platform purchases from ALPHARISE INNOVATION PRIVATE LIMITED.",
+  description: "Refund Policy for software and app development services, business software, and platform purchases from ALPHARISE INNOVATION PRIVATE LIMITED.",
   path: "/refund-policy",
 });
 
@@ -14,7 +14,7 @@ export default function RefundPolicyPage() {
   return (
     <LegalPage
       title="Refund Policy"
-      description="This policy explains refund eligibility for consulting services, TechRise Academy enrollments, and Social Voice Communication Platform purchases."
+      description="This policy explains refund eligibility for website, mobile and desktop app development, business software, and Social Voice Communication Platform purchases."
       lastUpdated="August 4, 2026"
       sections={[
         {
@@ -29,14 +29,16 @@ export default function RefundPolicyPage() {
           ),
         },
         {
-          heading: "2. TechRise Academy Programs",
+          heading: "2. Website, App and Business Software Projects",
           body: (
             <p>
-              Course fees may be eligible for a partial refund if cancellation is
-              requested in writing before the cohort start date, subject to
-              administrative charges disclosed at enrollment. After a batch
-              begins, refunds are evaluated case-by-case based on attendance and
-              unused services.
+              Fees for website development, mobile and desktop app development,
+              and business software (agribusiness, hospital and HomeCare) may be
+              eligible for a partial refund if cancellation is requested in
+              writing before work begins, subject to administrative and
+              third-party charges disclosed in the proposal or order form. After
+              work begins, refunds are evaluated case-by-case based on the work
+              delivered and the milestones accepted.
             </p>
           ),
         },
@@ -82,7 +84,7 @@ export default function RefundPolicyPage() {
           body: (
             <p>
               Email {CONTACT.supportEmail} or {CONTACT.email} with your full
-              name, order or enrollment reference, payment proof, and reason for
+              name, order or project reference, payment proof, and reason for
               the request. Incomplete requests may delay review.
             </p>
           ),
