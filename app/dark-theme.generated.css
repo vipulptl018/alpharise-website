@@ -5,6 +5,7 @@
 .dark .aria-expanded\:text-\[\#4338CA\][aria-expanded="true"]{color:oklch(0.742 0.193 277.0)}
 .dark .bg-\[\#F5F3FF\]{background-color:oklch(0.213 0.020 280.0)}
 .dark .bg-\[\#F8F7FF\]{background-color:oklch(0.225 0.020 280.0)}
+.dark .bg-amber-50{background-color:oklch(0.234 0.020 280.0)}
 .dark .bg-emerald-100{background-color:oklch(0.190 0.026 163.1)}
 .dark .bg-emerald-50{background-color:oklch(0.225 0.020 280.0)}
 .dark .bg-red-50{background-color:oklch(0.215 0.020 280.0)}
@@ -21,6 +22,7 @@
 .dark .border-\[\#E2E8F0\]\/80{border-color:oklch(0.288 0.020 280.0 / 0.8)}
 .dark .border-\[\#E2E8F0\]\/90{border-color:oklch(0.288 0.020 280.0 / 0.9)}
 .dark .border-\[\#EDE9FE\]{border-color:oklch(0.283 0.020 280.0)}
+.dark .border-amber-200{border-color:oklch(0.290 0.072 95.7)}
 .dark .border-emerald-200{border-color:oklch(0.298 0.056 164.2)}
 .dark .border-emerald-300{border-color:oklch(0.322 0.086 165.0)}
 .dark .border-red-200{border-color:oklch(0.306 0.037 18.3)}
@@ -64,6 +66,8 @@
 .dark .text-\[\#4F46E5\]{color:oklch(0.715 0.207 277.0)}
 .dark .text-\[\#64748B\]{color:oklch(0.693 0.037 257.4)}
 .dark .text-amber-700{color:oklch(0.692 0.147 49.0)}
+.dark .text-amber-800{color:oklch(0.734 0.123 46.2)}
+.dark .text-amber-900{color:oklch(0.763 0.101 45.9)}
 .dark .text-emerald-600{color:oklch(0.672 0.131 163.2)}
 .dark .text-emerald-700{color:oklch(0.716 0.106 165.6)}
 .dark .text-emerald-800{color:oklch(0.754 0.086 166.9)}

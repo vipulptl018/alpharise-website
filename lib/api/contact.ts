@@ -15,7 +15,8 @@ const DEFAULT_SUCCESS_MESSAGE =
   "Thank you for contacting ALPHARISE. We will get back to you shortly.";
 
 export function submitContactInquiry(
-  payload: ContactApiPayload
+  payload: ContactApiPayload,
+  onSlow?: (message: string) => void
 ): Promise<ContactSubmitResult> {
-  return postToApi("/api/v1/contact", payload, DEFAULT_SUCCESS_MESSAGE);
+  return postToApi("/api/v1/contact", payload, DEFAULT_SUCCESS_MESSAGE, onSlow);
 }

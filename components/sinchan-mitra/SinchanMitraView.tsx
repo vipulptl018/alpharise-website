@@ -32,7 +32,6 @@ import {
   iconOf,
   iconTile,
 } from "@/components/sinchan-mitra/parts";
-import { ScreenGallery } from "@/components/sinchan-mitra/ScreenGallery";
 import { StepsTimeline } from "@/components/sinchan-mitra/StepsTimeline";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { COMPANY_NAME, CONTACT, getSiteUrl } from "@/lib/constants";
@@ -60,7 +59,6 @@ function SubNav({ lang, c }: { lang: Lang; c: Copy }) {
     ["why", c.subnav.why],
     ["steps", c.subnav.steps],
     ["features", c.subnav.features],
-    ["screens", c.subnav.screens],
     ["download", c.subnav.download],
     ["faq", c.subnav.faq],
   ];
@@ -121,7 +119,7 @@ function Hero({ lang, c }: { lang: Lang; c: Copy }) {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="sm-drift absolute -top-32 -left-24 size-[30rem] rounded-full bg-emerald-400/30 blur-3xl dark:bg-emerald-500/15" />
         <div
-          className="sm-drift absolute top-10 -right-20 size-[26rem] rounded-full bg-violet-400/25 blur-3xl dark:bg-violet-500/10"
+          className="sm-drift absolute top-10 -right-20 size-[26rem] rounded-full bg-sky-400/25 blur-3xl dark:bg-sky-500/10"
           style={{ animationDelay: "-6s" }}
         />
         <div
@@ -189,7 +187,7 @@ function Hero({ lang, c }: { lang: Lang; c: Copy }) {
                   {c.hero.ctaDownload}
                 </a>
                 <a
-                  href="#screens"
+                  href="#features"
                   className="inline-flex h-12 items-center px-2 text-sm font-semibold text-[var(--sm-brand-ink)] underline-offset-4 hover:underline"
                 >
                   {c.hero.ctaScreens}
@@ -215,7 +213,7 @@ function Hero({ lang, c }: { lang: Lang; c: Copy }) {
           <Rise delay={0.2} className="relative pb-6 lg:pb-10">
             <div
               aria-hidden
-              className="absolute inset-x-6 top-8 -bottom-2 -z-10 rounded-[2rem] bg-gradient-to-br from-emerald-400/40 via-teal-300/30 to-violet-400/40 blur-2xl dark:from-emerald-500/25 dark:via-teal-400/15 dark:to-violet-500/25"
+              className="absolute inset-x-6 top-8 -bottom-2 -z-10 rounded-[2rem] bg-gradient-to-br from-emerald-400/40 via-teal-300/30 to-sky-400/40 blur-2xl dark:from-emerald-500/25 dark:via-teal-400/15 dark:to-sky-500/25"
             />
             <div className="sm-float-slow">
               <BrowserFrame
@@ -225,9 +223,6 @@ function Hero({ lang, c }: { lang: Lang; c: Copy }) {
                 priority
                 className="lg:ml-auto lg:max-w-[540px]"
               />
-            </div>
-            <div className="sm-float absolute -bottom-3 -left-3 w-24 sm:-left-8 sm:w-32 lg:w-36">
-              <PhoneFrame shot={shots.phone} alt={c.ui.phoneAlt} sizes="160px" />
             </div>
             {floats.map(({ text, Icon, pos, delay }) => (
               <div
@@ -469,7 +464,7 @@ function Features({ c }: { c: Copy }) {
                 <FadeIn className={cn("relative", reversed && "lg:order-1")} amount={0.2}>
                   <div
                     aria-hidden
-                    className="absolute inset-4 -z-0 rounded-[2rem] bg-gradient-to-br from-emerald-400/30 to-violet-400/25 blur-2xl dark:from-emerald-500/15 dark:to-violet-500/10"
+                    className="absolute inset-4 -z-0 rounded-[2rem] bg-gradient-to-br from-emerald-400/30 to-sky-400/25 blur-2xl dark:from-emerald-500/15 dark:to-sky-500/10"
                   />
                   <div className={cn("relative mx-auto grid max-w-lg gap-5", twoImages && "sm:grid-cols-2")}>
                     {images.map(({ shot, frame }) =>
@@ -505,11 +500,7 @@ function Features({ c }: { c: Copy }) {
 }
 
 function LanguagesBlock({ c }: { c: Copy }) {
-  const windows = [
-    { shot: shots.homeMr, label: c.languages.mr },
-    { shot: shots.homeHi, label: c.languages.hi },
-    { shot: shots.homeEn, label: c.languages.en },
-  ];
+  const names = [c.languages.mr, c.languages.hi, c.languages.en];
   return (
     <Section muted>
       <SectionHead
@@ -517,24 +508,18 @@ function LanguagesBlock({ c }: { c: Copy }) {
         title={c.languages.title}
         description={c.languages.description}
       />
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
-        {windows.map(({ shot, label }) => (
-          <FadeIn key={label} amount={0.2}>
-            <figure>
-              <BrowserFrame
-                shot={shot}
-                alt={`${label}: ${c.ui.screenshotAlt}`}
-                sizes="(min-width: 768px) 360px, 100vw"
-              />
-              <figcaption className="mt-3 text-center text-sm font-semibold text-[var(--sm-ink)]">
-                {label}
-              </figcaption>
-            </figure>
-          </FadeIn>
+      <ul className="mt-12 flex flex-wrap justify-center gap-3">
+        {names.map((name) => (
+          <li
+            key={name}
+            className="rounded-full border border-[var(--sm-line)] bg-[var(--sm-card)] px-6 py-2.5 font-heading text-lg font-semibold text-[var(--sm-ink)] shadow-lg shadow-emerald-950/5"
+          >
+            {name}
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <div className="mt-16 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="mt-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <FadeIn amount={0.25}>
           <h3 className="font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sm-ink)] sm:text-3xl">
             {c.languages.counterTitle}
@@ -546,18 +531,12 @@ function LanguagesBlock({ c }: { c: Copy }) {
           </ul>
         </FadeIn>
         <FadeIn amount={0.2}>
-          <div className="flex items-start justify-center gap-5">
+          <div className="flex justify-center">
             <PhoneFrame
               shot={shots.phone}
               alt={c.ui.phoneAlt}
               sizes="200px"
-              className="sm-float w-36 sm:w-44"
-            />
-            <PhoneFrame
-              shot={shots.phoneDark}
-              alt={c.ui.phoneAlt}
-              sizes="200px"
-              className="sm-float-slow mt-10 w-36 sm:w-44"
+              className="sm-float w-40 sm:w-48"
             />
           </div>
         </FadeIn>
@@ -670,7 +649,7 @@ function DownloadBand({ c }: { c: Copy }) {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="sm-drift absolute -top-32 left-1/4 size-[28rem] rounded-full bg-emerald-500/25 blur-3xl" />
         <div
-          className="sm-drift absolute -right-20 bottom-0 size-[24rem] rounded-full bg-violet-500/15 blur-3xl"
+          className="sm-drift absolute -right-20 bottom-0 size-[24rem] rounded-full bg-sky-500/15 blur-3xl"
           style={{ animationDelay: "-8s" }}
         />
       </div>
@@ -824,16 +803,6 @@ export function SinchanMitraView({ lang }: { lang: Lang }) {
       <Features c={c} />
       <LanguagesBlock c={c} />
       <Inside c={c} />
-      <Section id="screens" muted>
-        <SectionHead
-          eyebrow={c.gallery.eyebrow}
-          title={c.gallery.title}
-          description={c.gallery.description}
-        />
-        <div className="mt-12">
-          <ScreenGallery copy={c.gallery} ui={c.ui} />
-        </div>
-      </Section>
       <DownloadBand c={c} />
       <Faq c={c} />
       <Cta c={c} />

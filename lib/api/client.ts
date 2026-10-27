@@ -17,8 +17,34 @@ export type ApiResult =
   | { ok: true; message: string }
   | { ok: false; message: string };
 
-// The API runs on Render Free, which sleeps when idle; a cold start can take ~50 s.
-const REQUEST_TIMEOUT_MS = 60_000;
+// The API runs on Render Free, which sleeps when idle and can take half a minute or more to wake.
+// A visitor must not stare at a spinner for a minute: after SLOW_NOTICE_MS a clear note appears
+// (the request keeps going), and after REQUEST_TIMEOUT_MS the form gives up with the contact details.
+const SLOW_NOTICE_MS = 6_000;
+const REQUEST_TIMEOUT_MS = 30_000;
+
+const contactHint = () => `email ${CONTACT.email} or call ${CONTACT.phone}`;
+
+const slowMessage = () =>
+  `Our server is waking up, which can take up to half a minute. You can wait here, or ${contactHint()}.`;
+const unreachableMessage = () =>
+  `Our server is not responding right now. Please email ${CONTACT.email} or call ${CONTACT.phone}; we reply within one business day.`;
+
+let wakeSent = false;
+
+/**
+ * Wakes a sleeping backend while the visitor is still filling in the form, so the submit itself
+ * does not have to wait for a cold start. Fire and forget: the answer is not used.
+ */
+export function wakeApi(): void {
+  if (wakeSent || typeof window === "undefined") return;
+  wakeSent = true;
+  try {
+    void fetch(`${getApiBaseUrl()}/health`, { mode: "no-cors", cache: "no-store" }).catch(() => {});
+  } catch {
+    /* no API URL configured: nothing to wake */
+  }
+}
 
 function getApiBaseUrl(): string {
   const base = process.env.NEXT_PUBLIC_API_URL?.trim();
@@ -87,13 +113,17 @@ async function readJsonSafe(response: Response): Promise<ApiResponse | null> {
 export async function postToApi(
   path: string,
   payload: unknown,
-  successMessage: string
+  successMessage: string,
+  onSlow?: (message: string) => void
 ): Promise<ApiResult> {
   const controller = new AbortController();
   const timeoutId = window.setTimeout(
     () => controller.abort(),
     REQUEST_TIMEOUT_MS
   );
+  const slowId = onSlow
+    ? window.setTimeout(() => onSlow(slowMessage()), SLOW_NOTICE_MS)
+    : 0;
 
   try {
     const response = await fetch(`${getApiBaseUrl()}${path}`, {
@@ -123,11 +153,7 @@ export async function postToApi(
     };
   } catch (error) {
     if (error instanceof DOMException && error.name === "AbortError") {
-      return {
-        ok: false,
-        message:
-          "The request timed out. Please check your connection and try again.",
-      };
+      return { ok: false, message: unreachableMessage() };
     }
 
     if (error instanceof Error && error.message.includes("NEXT_PUBLIC_API_URL")) {
@@ -135,16 +161,13 @@ export async function postToApi(
       console.error(error.message);
       return {
         ok: false,
-        message: `This form is not available right now. Please email ${CONTACT.email} or call ${CONTACT.phone}.`,
+        message: `This form is not available right now. Please ${contactHint()}.`,
       };
     }
 
-    return {
-      ok: false,
-      message:
-        "Unable to reach the server. Please check your connection and try again.",
-    };
+    return { ok: false, message: unreachableMessage() };
   } finally {
     window.clearTimeout(timeoutId);
+    if (slowId) window.clearTimeout(slowId);
   }
 }

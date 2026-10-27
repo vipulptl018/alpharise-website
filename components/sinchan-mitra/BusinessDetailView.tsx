@@ -179,7 +179,7 @@ export function BusinessDetailView({ lang, slug }: { lang: Lang; slug: DetailSlu
               <figure
                 className={cn(
                   "sm-protect overflow-hidden rounded-2xl border border-[var(--sm-line)] bg-[var(--sm-card)] shadow-xl shadow-emerald-950/10",
-                  screens.length % 2 === 1 && i === 0 && "md:col-span-2 md:mx-auto md:max-w-3xl"
+                  screens.length % 2 === 1 && i === 0 && "md:col-span-2 md:mx-auto md:max-w-xl"
                 )}
               >
                 <Image

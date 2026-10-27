@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Building2, Clock3, Mail, Phone, Send } from "lucide-react";
 
 import { FadeIn } from "@/components/common/motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Container } from "@/components/layout/Container";
+import { wakeApi } from "@/lib/api/client";
 import { submitContactInquiry } from "@/lib/api/contact";
 import {
   COMPANY_NAME,
@@ -39,6 +40,12 @@ export function ContactFormSection() {
   );
   const [feedback, setFeedback] = useState("");
   const hydrated = useHydrated();
+
+  // wake a sleeping backend while the visitor types, so sending does not wait for a cold start
+  useEffect(() => {
+    wakeApi();
+  }, []);
+
   const addressLines = formatRegisteredAddressLines();
   const phone = CONTACT.phone.trim();
 
@@ -51,14 +58,18 @@ export function ContactFormSection() {
     const data = new FormData(form);
     const company = String(data.get("company") || "").trim();
 
-    const result = await submitContactInquiry({
-      full_name: String(data.get("name") || "").trim(),
-      email: String(data.get("email") || "").trim(),
-      phone: String(data.get("phone") || "").trim(),
-      company: company || undefined,
-      subject: DEFAULT_SUBJECT,
-      message: String(data.get("message") || "").trim(),
-    });
+    const result = await submitContactInquiry(
+      {
+        full_name: String(data.get("name") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        phone: String(data.get("phone") || "").trim(),
+        company: company || undefined,
+        subject: DEFAULT_SUBJECT,
+        message: String(data.get("message") || "").trim(),
+      },
+      // still waiting after a few seconds: say why, and how else to reach us
+      (message) => setFeedback(message)
+    );
 
     if (!result.ok) {
       setStatus("error");
@@ -90,6 +101,14 @@ export function ContactFormSection() {
                     Submit this form to send a message to {CONTACT.email}. We
                     aim to respond within one business day during {CONTACT.hours}.
                   </p>
+                  {status === "loading" && feedback ? (
+                    <p
+                      role="status"
+                      className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-7 text-amber-900 whitespace-pre-line"
+                    >
+                      {feedback}
+                    </p>
+                  ) : null}
                   {status === "error" ? (
                     <p
                       role="alert"

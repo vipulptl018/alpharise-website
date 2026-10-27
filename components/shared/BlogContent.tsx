@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import Link from "next/link";
 
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
+import { wakeApi } from "@/lib/api/client";
 import { submitNewsletterSubscription } from "@/lib/api/newsletter";
 import { ds } from "@/lib/design-system";
 import { useHydrated } from "@/lib/use-hydrated";
@@ -90,6 +91,11 @@ export function BlogContent() {
   );
   const [feedback, setFeedback] = useState("");
   const hydrated = useHydrated();
+
+  // wake a sleeping backend while the visitor reads, so subscribing does not wait for a cold start
+  useEffect(() => {
+    wakeApi();
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -233,7 +239,9 @@ export function BlogContent() {
                     "newsletter-email"
                   ) as HTMLInputElement | null;
                   const email = emailInput?.value.trim() || "";
-                  const result = await submitNewsletterSubscription(email);
+                  const result = await submitNewsletterSubscription(email, (message) =>
+                    setFeedback(message)
+                  );
                   if (!result.ok) {
                     setStatus("error");
                     setFeedback(result.message);
@@ -262,6 +270,11 @@ export function BlogContent() {
                 </Button>
               </form>
             )}
+            {status === "loading" && feedback ? (
+              <p role="status" className="mt-3 text-sm text-amber-800">
+                {feedback}
+              </p>
+            ) : null}
             {status === "error" ? (
               <p role="alert" className="mt-3 text-sm text-red-700">
                 {feedback}
