@@ -4,7 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { Building2, Clock3, Mail, Phone, Send } from "lucide-react";
 
 import { FadeIn } from "@/components/common/motion";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Container } from "@/components/layout/Container";
 import { wakeApi } from "@/lib/api/client";
@@ -34,11 +34,33 @@ const contactRow =
 
 const DEFAULT_SUBJECT = "Website contact inquiry";
 
+type Draft = {
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  message: string;
+};
+
+/** The visitor's own mail app with the form already filled in, for when the server cannot take it. */
+function emailFallbackHref(draft: Draft): string {
+  const body = [
+    `Name: ${draft.name}`,
+    `Email: ${draft.email}`,
+    ...(draft.company ? [`Company: ${draft.company}`] : []),
+    ...(draft.phone ? [`Phone: ${draft.phone}`] : []),
+    "",
+    draft.message,
+  ].join("\n");
+  return `mailto:${CONTACT.email}?subject=${encodeURIComponent(DEFAULT_SUBJECT)}&body=${encodeURIComponent(body)}`;
+}
+
 export function ContactFormSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle"
   );
   const [feedback, setFeedback] = useState("");
+  const [draft, setDraft] = useState<Draft | null>(null);
   const hydrated = useHydrated();
 
   // wake a sleeping backend while the visitor types, so sending does not wait for a cold start
@@ -57,15 +79,23 @@ export function ContactFormSection() {
     const form = event.currentTarget;
     const data = new FormData(form);
     const company = String(data.get("company") || "").trim();
+    const entered: Draft = {
+      name: String(data.get("name") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      company,
+      phone: String(data.get("phone") || "").trim(),
+      message: String(data.get("message") || "").trim(),
+    };
+    setDraft(entered);
 
     const result = await submitContactInquiry(
       {
-        full_name: String(data.get("name") || "").trim(),
-        email: String(data.get("email") || "").trim(),
-        phone: String(data.get("phone") || "").trim(),
+        full_name: entered.name,
+        email: entered.email,
+        phone: entered.phone,
         company: company || undefined,
         subject: DEFAULT_SUBJECT,
-        message: String(data.get("message") || "").trim(),
+        message: entered.message,
       },
       // still waiting after a few seconds: say why, and how else to reach us
       (message) => setFeedback(message)
@@ -79,6 +109,7 @@ export function ContactFormSection() {
 
     setStatus("success");
     setFeedback(result.message);
+    setDraft(null);
     form.reset();
   }
 
@@ -116,6 +147,34 @@ export function ContactFormSection() {
                     >
                       {feedback}
                     </p>
+                  ) : null}
+                  {status === "error" && draft ? (
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <a
+                        href={emailFallbackHref(draft)}
+                        className={cn(
+                          buttonVariants({ size: "lg" }),
+                          ds.btnPrimary,
+                          "sm:flex-1"
+                        )}
+                      >
+                        <Mail data-icon="inline-start" className="size-4" />
+                        Send by email instead
+                      </a>
+                      {phone ? (
+                        <a
+                          href={`tel:${phone.replace(/\s/g, "")}`}
+                          className={cn(
+                            buttonVariants({ variant: "outline", size: "lg" }),
+                            ds.btnOutline,
+                            "sm:flex-1"
+                          )}
+                        >
+                          <Phone data-icon="inline-start" className="size-4" />
+                          Call {phone}
+                        </a>
+                      ) : null}
+                    </div>
                   ) : null}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block space-y-1.5 text-sm">
